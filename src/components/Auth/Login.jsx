@@ -2,6 +2,7 @@ import { useState } from "react";
 import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import { useCookies  } from "react-cookie";
+import { redirect } from "react-router-dom";
 
 
 const Login=()=>{
@@ -26,6 +27,7 @@ const Login=()=>{
         console.log("PPPPPPPPPPPPPP ",data)
         const token = data.token;
         setCookie('sociotoken',token);
+        // redirect('/feed')
     }
 
      
