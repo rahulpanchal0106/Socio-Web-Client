@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useIsVisible } from "../../utils/IsVisible";
 import './home.css'
 import Nav from "../Navbar/Nav";
-import { GiNextButton, GiOpeningShell } from "react-icons/gi";
-import { FcDown, FcOpenedFolder, FcRight } from "react-icons/fc";
-import { GoTab } from "react-icons/go";
-import { RiArrowRightFill, RiGhost2Line } from "react-icons/ri";
-import { BiDownArrow, BiRightArrow, BiRightIndent, BiRightTopArrowCircle } from "react-icons/bi";
-import { PiArrowElbowDownRightDuotone } from "react-icons/pi";
+// import { GiNextButton, GiOpeningShell } from "react-icons/gi";
+// import { FcDown, FcOpenedFolder, FcRight } from "react-icons/fc";
+// import { GoTab } from "react-icons/go";
+// import { RiArrowRightFill, RiGhost2Line } from "react-icons/ri";
+// import { BiDownArrow, BiRightArrow, BiRightIndent, BiRightTopArrowCircle } from "react-icons/bi";
+// import { PiArrowElbowDownRightDuotone } from "react-icons/pi";
 import { FaRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
