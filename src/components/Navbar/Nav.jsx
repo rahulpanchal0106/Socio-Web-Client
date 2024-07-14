@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const Nav=()=>{
     return(
-        <div className="navbar flex row width-full justify-between items-center px-10 py-5">
+        <div className="navbar flex row width-full justify-between items-center px-10 py-5 drop-shadow-2xl bg-yellow-50">
             <div className="logo text-4xl">
                 SOCIO
             </div>

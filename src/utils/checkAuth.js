@@ -4,7 +4,7 @@ const checkAuth=()=>{
     const token=getCookie('sociotoken');
     console.log('checking auth: ',token);
 
-    if(token){
+    if(token && token!=''){
         console.log(token)
         return true;
     }
