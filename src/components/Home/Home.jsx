@@ -38,7 +38,7 @@ const Home=()=>{
     
     },[])
     return(
-        <div >
+        <div id="bg" >
             <Nav/>
             <div className="h-screen w-full bg-yellow-200 text-black flex flex-col justify-center items-center px-12 py-0 transition-all ease-in duration-700">
                 <h1 className="text-shadow text-9xl">Make new Friends!</h1>
@@ -46,7 +46,7 @@ const Home=()=>{
                     <div ref={ref1} className="text-6xl flex flex-col justify-center items-center ">
                         Connect with people that are <b className="flex flex-row justify-evenly w-1/2 text-black"> <i>Just </i> <i>Like </i>  <i><i className="text-shadow">You</i></i></b> 
                     </div>
-                    <div className="ml-4 transition-all ease-in duration-300 text-6xl hover:ml-8">
+                    <div className="ml-4 transition-all ease-in duration-100 text-6xl hover:ml-12">
                         <Link to="/people">
                             <FaRightLong/>
                         </Link>
@@ -57,9 +57,9 @@ const Home=()=>{
                 <h1 className="text-9xl text-shadow">Make a Post!!</h1>
                 <div  className={`flex flex-row justify-center items-center  py-4 w-full transition-all ease-in duration-700 ${isVisible2 ? "opacity-100 h-1/2" : "opacity-0 h-0"}`}>
                     <div ref={ref2} className="text-6xl flex flex-col justify-center items-center ">
-                            Fill them in about <b className="flex flex-row justify-evenly w-9/12 text-black"> <i className="text-shadow">Your </i> <i >Life</i></b> 
+                    Talk about your day <b className="flex flex-row justify-evenly w-full text-black"> <i >With </i> <i className="text-shadow">Your </i> <i>People</i></b> 
                         </div>
-                        <div className="ml-8 transition-all ease-in duration-300 text-6xl hover:rotate-90">
+                        <div className="ml-8 transition-all ease-in duration-200 text-6xl hover:rotate-90">
                             <Link to="/post">
                                 <FaPlus/>
                             </Link>
@@ -77,14 +77,13 @@ const Home=()=>{
                 <div >
                     {
                         auth?
-                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:mt-10" to="/feed">
+                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:mt-12" to="/feed">
                             <GrDown/>
                         </Link>
                         :
-                        <div>
-                            <h1>Looks like you have'nt been Logged in yet</h1>
-                            <Login/>
-                        </div>
+                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:mt-12" to="/login">
+                            <GrDown />
+                        </Link>
                     }
                 </div>
                 

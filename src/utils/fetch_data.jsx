@@ -23,12 +23,12 @@ const fetchData = async (url, body, method) => {
 
         console.log(`Response Status: ${response.status}`);
         
+        
+        const feedData = await response.json();
         if (!response.ok) {
             console.error(`Error: ${response.statusText}`);
-            return ;
+            return feedData;
         }
-
-        const feedData = await response.json();
         console.log("Response Data: ", feedData);
         
         return feedData;

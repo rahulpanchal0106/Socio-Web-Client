@@ -8,6 +8,9 @@ import checkAuth from './utils/checkAuth'
 import {BrowserRouter, Routes, Route, Outlet, createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './components/Home/Home'
 import People from './components/People/People'
+import logout from './components/Auth/LogOut'
+import Signup from './components/Auth/Signup'
+
 
 
 
@@ -30,6 +33,14 @@ function App() {
       path:"/people",
       element:<People/>
     },
+    {
+      path:"/signup",
+      element:<Signup/>
+    },
+    // {
+    //   path:"/logout",
+    //   element:log
+    // },
   ])
 
   return (
