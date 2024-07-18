@@ -1,7 +1,7 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const [username, setUsername] = useState('');
@@ -61,6 +61,9 @@ const SignupForm = () => {
         {isLoading && <div>Loading...</div>}
         {error && <div className="error">{error}</div>}
       </form>
+      <div className="flex flex-row">
+        Are you new to this? Consider to <Link className="ml-2 text-shadow" to="/login">Log In</Link>!
+      </div>
     </div>
   );
 };

@@ -1,0 +1,7 @@
+#openLikes{
+    display: flex;
+    background-color: red;
+}
+#DontOpenLikes{
+    display: none;
+}

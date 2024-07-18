@@ -39,8 +39,8 @@ const Home=()=>{
     },[])
     return(
         <div id="bg" >
-            <Nav/>
             <div className="h-screen w-full bg-yellow-200 text-black flex flex-col justify-center items-center px-12 py-0 transition-all ease-in duration-700">
+            <Nav/>
                 <h1 className="text-shadow text-9xl">Make new Friends!</h1>
                 <div  className={`flex flex-row justify-center items-center py-4  w-full transition-all ease-in duration-700 ${isVisible1 ? "opacity-100 h-1/3" : "opacity-0 h-0"}`}>
                     <div ref={ref1} className="text-6xl flex flex-col justify-center items-center ">

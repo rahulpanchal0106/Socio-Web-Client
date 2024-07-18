@@ -51,7 +51,7 @@ const Login=()=>{
             </form>  
 
             <div className="flex flex-row">
-                Are you new to this? Consider <Link className="ml-2 text-shadow" to="/signup">Signing up</Link>!
+                Are you new to this? Consider to <Link className="ml-2 text-shadow" to="/signup">Sign Up</Link>!
 
             </div>
         </div>

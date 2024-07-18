@@ -10,6 +10,7 @@ import Home from './components/Home/Home'
 import People from './components/People/People'
 import logout from './components/Auth/LogOut'
 import Signup from './components/Auth/Signup'
+import Post from './components/Post/Post'
 
 
 
@@ -36,6 +37,10 @@ function App() {
     {
       path:"/signup",
       element:<Signup/>
+    },
+    {
+      path:"/post",
+      element:<Post/>
     },
     // {
     //   path:"/logout",
