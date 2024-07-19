@@ -38,8 +38,9 @@ const Post = () => {
             },
             metaData: {
                 author: userData.username,
-                date: new Date().toDateString()
-            }
+                date: new Date().toISOString()
+            },
+            comments:[]
         };
         
         const resp = await fetchData(url + '/post', body, 'POST');
