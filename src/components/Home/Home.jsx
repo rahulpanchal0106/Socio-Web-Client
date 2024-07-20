@@ -77,12 +77,12 @@ const Home=()=>{
                 <div >
                     {
                         auth?
-                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:mt-12" to="/feed">
-                            <GrDown/>
+                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/feed">
+                            <GrDown style={{rotate:"-90deg"}}/>
                         </Link>
                         :
-                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:mt-12" to="/login">
-                            <GrDown />
+                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/login">
+                            <GrDown style={{rotate:"-90deg"}}/>
                         </Link>
                     }
                 </div>

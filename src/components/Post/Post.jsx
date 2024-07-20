@@ -51,11 +51,11 @@ const Post = () => {
     return (
         <>
         <Nav/>
-        <div className="bg-yellow-200 flex flex-col w-full h-screen justify-center items-center">
-            <form onSubmit={handleSubmit} className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center">
-                <h1 className="mb-2 px-4 py-2 text-4xl mb-4">Make a <i className="text-shadow">POST!</i></h1>
-                <textarea required type="text" className="textarea px-4 py-2 rounded-lg drop-shadow-lg" placeholder="So... What you wanna say?" onChange={handleContent} ></textarea>
-                <button className="button px-4 py-2 rounded-lg drop-shadow-lg bg-red-200 hover:bg-red-500 transition-all duration-300 hover:text-white mt-4 " type="submit">Post</button>
+        <div className=" flex flex-col w-full h-fit mt-20 justify-center items-center">
+            <h1 className="mb-2 px-4 py-2 text-4xl mb-4">Make a <i className="text-shadow">POST!</i></h1>
+            <form onSubmit={handleSubmit} className="w-1/2 h-1/2 px-10 py-5 flex flex-row justify-center items-center">
+                <textarea required type="text" rows={2} style={{resize:"none"}} className="textarea flex justify-center items-center px-4 py-2 rounded-lg drop-shadow-lg" placeholder="So... What you wanna say?" onChange={handleContent} ></textarea>
+                <button className="button px-4 py-2 rounded-lg drop-shadow-lg bg-red-200 hover:bg-red-500 transition-all duration-300 hover:text-white ml-4 " type="submit">Post</button>
             </form>
         </div>
         </>
