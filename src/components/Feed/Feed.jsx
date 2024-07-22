@@ -141,7 +141,7 @@ const Feed = () => {
                                 <div className="middle-section flex flex-row w-80 break-all px-0 py-4" style={{whiteSpace:'pre-wrap'}}>
                                     {post.post.content}
                                 </div>
-                                <div className="bottom-bar mb-2 flex flex-row  justify-between">
+                                <div className="bottom-bar mb-2 flex flex-row  justify-end">
                                     <div className="flex py-2 flex-row items-center justify-center">
                                         <button
                                             onClick={() => handleLike(post._id)}
@@ -154,17 +154,14 @@ const Feed = () => {
                                         </button>
                                     </div>
                                     <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
-                                        <button className="px-1 w-8" >
+                                        <button className="" >
                                             {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
                                         </button>
-                                        <b>{post.post.comments.length}</b>
+                                        <p className="px-2">
+                                            {post.post.comments.length}
+                                        </p>
                                     </button>
-                                    <form action="" className="flex flex-row justify-between drop-shadow-lg items-center">
-                                        <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
-                                        <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>
-                                            <CommentAdd01Icon />
-                                        </button>
-                                    </form>
+                                    
                                 </div>
 
                                 <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ display: openPostLike ? "flex" : "none", top:"70px" }}>
@@ -177,13 +174,13 @@ const Feed = () => {
                                     </div>
                                 </ul>
 
-                                {showPostComments && <ul className="bg-white flex flex-col-reverse drop-shadow-lg px-2  rounded-lg" style={{paddingTop:"10px", paddingBottom:"10px"}}>
-                                    <div className="relative left-20  " style={{ bottom:"69rem" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
+                                {showPostComments && <ul className="bg-white flex flex-col-reverse drop-shadow-lg px-2  rounded-xl" style={{paddingTop:"10px", paddingBottom:"10px"}}>
+                                    
                                     {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                         const openCLike = openCLikeStates[el.comment_id] || false;
                                         console.log(el);
                                         const cisLiked = el.likedBy.some(like => like.username === userData.username);
-
+                                        
                                         const handleCLike = async (e) => {
                                             e.preventDefault();
                                             await fetchData(url + "/comment", { post_id: post.upid, comment_id: el.comment_id }, "POST");
@@ -197,7 +194,7 @@ const Feed = () => {
                                         }
 
                                         return (
-                                            <div className="flex flex-col mb-4 drop-shadow-lg w-96 px-2 py-4 border border-solid border-gray-200 rounded-lg" key={i}>
+                                            <div className="flex flex-col mb-4 drop-shadow-lg w-96 px-2 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                 <div className="w-full flex flex-row justify-between">
                                                     <div className="flex flex-col">
                                                         <b>@{el.commentBy || "aiyen?!"}</b>
@@ -208,7 +205,7 @@ const Feed = () => {
                                                     <div className="flex flex-col justify-center items-center">
                                                         <div className="flex flex-row justify-center items-center">
                                                             <button className="flex flex-row" onClick={handleCLike}>
-                                                                {cisLiked ? <BiSolidHeart /> : <BiHeart />}
+                                                                {cisLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
                                                             </button>
                                                             <button onClick={() => toggleOpenCLike(el.comment_id)} className="px-2">
                                                                 <b>{el.likedBy.length}</b>
@@ -240,6 +237,14 @@ const Feed = () => {
                                             </div>
                                         );
                                     }) : <p className="px-1 py-2" >No comments </p>}
+                                    <p className="text-sm text-gray-300 mb-2">Comments</p>
+                                    <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
+                                    <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
+                                        <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
+                                        <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>
+                                            <CommentAdd01Icon />
+                                        </button>
+                                    </form>
                                 </ul>}
                             </div>
                         );

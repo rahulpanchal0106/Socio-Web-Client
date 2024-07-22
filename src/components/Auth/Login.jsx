@@ -32,6 +32,7 @@ const Login=()=>{
         // console.log("PPPPPPPPPPPPPP ",data)
         const token = data?data.token:null;
         setCookie('sociotoken',token);
+        setCookie('socio-user',uname)
         if(token){
             // console.log("**********************************")
             // window.location.reload()

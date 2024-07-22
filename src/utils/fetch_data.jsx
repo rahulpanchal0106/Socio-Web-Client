@@ -33,7 +33,7 @@ const fetchData = async (url, body, method) => {
         
         return feedData;
     } catch (e) {
-        console.error(`Error fetching ${url || "url"}: `, e);
+        console.error(`Error fetching ${url || "url"} `, e);
         return null;
     }
 };

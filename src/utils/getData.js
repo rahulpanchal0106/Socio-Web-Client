@@ -15,6 +15,8 @@ const getData = async () => {
         const userData = await fetchData(url+'/getData',{token:''},'POST') ;
 
         console.log("🟢🟢🟢🟢🟢🟢 ",userData);
+
+        
         return userData.data;
     } catch (error) {
         console.error('Failed to decode token:', error);
