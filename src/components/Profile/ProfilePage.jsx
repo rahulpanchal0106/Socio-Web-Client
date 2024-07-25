@@ -23,8 +23,6 @@ const ProfilePage = () => {
     const [formData, setFormData] = useState({ bio: "" });
     const [uname, setUname] = useState('');
     const [bio, setBio] = useState('');
-    const [followings, setFollowings] = useState(0);
-    const [followers, setFollowers] = useState(0);
     const [myPosts, setMyPosts] = useState([]);
     const [myTrash, setMyTrash] = useState([]);
     const [openMyPosts, setOpenMyPosts] = useState(true)
@@ -34,8 +32,10 @@ const ProfilePage = () => {
     const [openCLikeStates, setOpenCLikeStates] = useState({});
     const [openPostLikeStates, setOpenPostLikeStates] = useState({});
     const [showComments, setShowComments] = useState({});
-
+    const [followers, setFollowers] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
+    const [profile_data, setProfileData] = useState({})
+
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
@@ -115,18 +115,16 @@ const ProfilePage = () => {
     const getMyData = async () => {
         const resp = await fetchData(url + '/person', { username: username }, 'POST');
         console.log("🟡🟡🟡🟡🟡🟡 RESP ", resp, username);
+        setProfileData(resp)
+        // res&&(res.followers.length>0)&&(res.followers)?()=>setFollowers(res.followers.length):console.log("NO FOLLOWER PRM")
         const resp1 = await fetchData(url+'/myPosts',{username:username}, 'POST');
         setMyPosts(resp1);
         var resp2=[];
         username==getCookie('socio-user')?
         resp2 = await fetchData(url+'/myTrash',null, 'GET')
         :null
-        setMyTrash(resp2);
 
-        const resp3 = await fetchData(url+'/myPosts',{username:username}, 'POST');
-        setFollowings(resp3);
-        const resp4 = await fetchData(url+'/myPosts',{username:username}, 'POST');
-        setFollowers(resp4);
+        setMyTrash(resp2);
         setMyPosts(resp1);
         setUname(resp.username ? resp.username : "nouname");
         setBio(resp.bio ? resp.bio : "no bio :(");
@@ -200,23 +198,16 @@ const ProfilePage = () => {
             :
             <div className="flex flex-col justify-between items-center px-4 py-4">
                 <div className="w-full flex justify-end px-20 "> 
-                    {username === getCookie('socio-user') && (
-                            <button className="bg-pink-200 rounded-lg px-3 py-1" onClick={() => setUpdateMode(!updateMode)}>Update Profile</button>
-                        )}
+                    {username === getCookie('socio-user') && (<button className="bg-pink-200 rounded-lg px-3 py-1" onClick={() => setUpdateMode(!updateMode)}>Update Profile</button>)}
                 </div>
                 <div className="drop-shadow-lg flex flex-row px-5  justify-evenly items-center rounded-lg w-2/3">
                     <img src="/d-prof.jpg" className="rounded-full" width={200} height={200} alt="Profile" />
                     <div>
                         <p className="text-5xl"><b>{uname}</b></p>
                         <p style={{whiteSpace:"pre-wrap"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-all">{bio}</p>
-                        <div className="flex w-full px-0 py-2 flex-row justify-between items-center">
-                            <button  >Following {followings}</button>
-                            <button>Followers {followers}</button>
-                            
-                        </div>
-                        <div className="flex w-full px-0 py-2 flex-row justify-between items-center">
-                            <button>Follow</button>
-                            <button>Message</button>
+                        <div className="flex flex-row w-full justify-between">
+                            <p>Followers {profile_data.followers?profile_data.followers.length:0}</p>
+                            <p>Followings</p>
                         </div>
                     </div>
                 </div>
@@ -250,7 +241,7 @@ const ProfilePage = () => {
                             }
                             const openPostLike = openPostLikeStates[post._id] || false;
                             const showPostComments = showComments[post._id] || false;
-                                console.log("))))))))))0 ",post)
+                                // console.log("))))))))))0 ",post)
                                 return(
                                     <div key={i} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg" style={{width:"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
@@ -404,7 +395,7 @@ const ProfilePage = () => {
                                 }
                                 const openPostLike = openPostLikeStates[post._id] || false;
                                 const showPostComments = showComments[post._id] || false;
-                                    console.log("))))))))))0 ",post)
+                                    // console.log("))))))))))0 ",post)
                                     return(
                                         <div key={i} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg" style={{width:"432px"}}>
                                         <div className="top-bar author flex flex-row justify-between items-center">
