@@ -23,6 +23,8 @@ const ProfilePage = () => {
     const [formData, setFormData] = useState({ bio: "" });
     const [uname, setUname] = useState('');
     const [bio, setBio] = useState('');
+    const [followings, setFollowings] = useState(0);
+    const [followers, setFollowers] = useState(0);
     const [myPosts, setMyPosts] = useState([]);
     const [myTrash, setMyTrash] = useState([]);
     const [openMyPosts, setOpenMyPosts] = useState(true)
@@ -119,8 +121,12 @@ const ProfilePage = () => {
         username==getCookie('socio-user')?
         resp2 = await fetchData(url+'/myTrash',null, 'GET')
         :null
-
         setMyTrash(resp2);
+
+        const resp3 = await fetchData(url+'/myPosts',{username:username}, 'POST');
+        setFollowings(resp3);
+        const resp4 = await fetchData(url+'/myPosts',{username:username}, 'POST');
+        setFollowers(resp4);
         setMyPosts(resp1);
         setUname(resp.username ? resp.username : "nouname");
         setBio(resp.bio ? resp.bio : "no bio :(");
@@ -203,7 +209,15 @@ const ProfilePage = () => {
                     <div>
                         <p className="text-5xl"><b>{uname}</b></p>
                         <p style={{whiteSpace:"pre-wrap"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-all">{bio}</p>
-                    
+                        <div className="flex w-full px-0 py-2 flex-row justify-between items-center">
+                            <button  >Following {followings}</button>
+                            <button>Followers {followers}</button>
+                            
+                        </div>
+                        <div className="flex w-full px-0 py-2 flex-row justify-between items-center">
+                            <button>Follow</button>
+                            <button>Message</button>
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-1/2 px-2 py-4">
