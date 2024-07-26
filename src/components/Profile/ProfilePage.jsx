@@ -16,9 +16,10 @@ import 'hugeicons-react';
 import { CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
+import AddFollower from "../Post_actions/addFollower.js"
 
 const ProfilePage = () => {
-    const { username } = useParams(); 
+    const { username,uidTo } = useParams(); 
     const [updateMode, setUpdateMode] = useState(false);
     const [formData, setFormData] = useState({ bio: "" });
     const [uname, setUname] = useState('');
@@ -35,7 +36,7 @@ const ProfilePage = () => {
     const [followers, setFollowers] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [profile_data, setProfileData] = useState({})
-
+    const [isFollowing, setisFollowing] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
@@ -124,6 +125,11 @@ const ProfilePage = () => {
         resp2 = await fetchData(url+'/myTrash',null, 'GET')
         :null
 
+        resp.followers && resp.followers.find((user)=>{
+            user.username==username;
+            setisFollowing(true);
+        })
+        
         setMyTrash(resp2);
         setMyPosts(resp1);
         setUname(resp.username ? resp.username : "nouname");
@@ -207,7 +213,15 @@ const ProfilePage = () => {
                         <p style={{whiteSpace:"pre-wrap"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-all">{bio}</p>
                         <div className="flex flex-row w-full justify-between">
                             <p>Followers {profile_data.followers?profile_data.followers.length:0}</p>
-                            <p>Followings</p>
+                            <p>Followings {profile_data.following?profile_data.following.length:0}</p>
+                        </div>
+                        <div className="py-2">
+                            <button className="px-2 py-2" style={{
+                                background:isFollowing?"#fef08a":"#fef08a"
+                            }} onClick={()=>{
+                                AddFollower(profile_data.uid)
+                                setisFollowing(true);
+                            }}>{isFollowing?"Following":"Follow"}</button>
                         </div>
                     </div>
                 </div>

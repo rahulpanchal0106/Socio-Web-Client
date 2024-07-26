@@ -41,7 +41,7 @@ function App() {
             element: <Post />,
         },
         {
-            path: '/profile/:username',
+            path: '/profile/:username/:uidTo',
             element: <ProfilePage />,
         },
     ]);

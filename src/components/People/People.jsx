@@ -47,7 +47,7 @@ const People = () => {
                             </div>
                             <div className="flex flex-row w-full justify-evenly itmes-center px-2 py-1">
                                 <button className=" bg-pink-200 px-2 py-1 rounded-lg text-xs border border-solid border-pink-300">
-                                    <Link to={`/profile/${p.username}`}>
+                                    <Link to={`/profile/${p.username}/${p.uid}`}>
                                             Profile
                                     </Link>
                                 </button>
