@@ -9,7 +9,8 @@ const LogOut=()=>{
     // console.log("%%%%%%%%%%%%%%%%%%%%%%%%55")
     useEffect(()=>{
         if(checkAuth){
-            ()=>removeCookie('sociotoken')
+            ()=>removeCookie('sociotoken');
+            ()=>removeCookie('socio-user')
         }
     },[])
     console.log("NO TOKEN");

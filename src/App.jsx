@@ -11,6 +11,7 @@ import Post from './components/Post/Post';
 import ProfilePage from './components/Profile/ProfilePage';
 import getData from './utils/getData';
 import getCookie from './utils/getCookie';
+import '../fonts/WEB/css/chillax.css';
 
 function App() {
     const [username, setUsername] = useState('');

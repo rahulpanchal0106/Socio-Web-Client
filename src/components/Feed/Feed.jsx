@@ -7,7 +7,7 @@ import { BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownA
 import LikePost from "../Post_actions/LikePost";
 import Nav from "../Navbar/Nav";
 import './feed.css';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaRegCommentDots, FaTrashCan } from "react-icons/fa6";
 import { FaCommentAlt, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
@@ -121,8 +121,10 @@ const Feed = () => {
                             <div key={index} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg" style={{width:"432px"}}>
                                 <div className="top-bar author flex flex-row justify-between items-center">
                                     <div className="left flex flex-row items-center justify-evenly w-11">
-                                        <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
-                                        <b>{post.metaData.author}</b>
+                                        <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-evenly w-11">
+                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
+                                            <b>{post.metaData.author}</b>
+                                        </Link>
                                     </div>
                                     <div className="right flex flex-row">
                                         {post.metaData.author === userData.username ? (
@@ -138,7 +140,7 @@ const Feed = () => {
                                 <p className="text-xs text-gray-600">
                                     <TimeAgo date={post.metaData.date} />
                                 </p>
-                                <div className="middle-section flex flex-row w-80 break-all px-0 py-4" style={{whiteSpace:'pre-wrap'}}>
+                                <div className="middle-section flex flex-row w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
                                     {post.post.content}
                                 </div>
                                 <div className="bottom-bar mb-2 flex flex-row  justify-end">
@@ -169,12 +171,16 @@ const Feed = () => {
                                     <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                     <div className="max-h-50 overflow-y-scroll">
                                         {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
-                                            <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>@{el.username}</li>
+                                            <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                                <Link to={`/profile/${el.username}/${el.uid}`}>
+                                                    @ {el.username}    
+                                                </Link>
+                                            </li>
                                         )) : <p className="px-1 py-2" >No one :(</p>}
                                     </div>
                                 </ul>
 
-                                {showPostComments && <ul className="bg-white flex flex-col-reverse drop-shadow-lg px-2  rounded-xl" style={{paddingTop:"10px", paddingBottom:"10px"}}>
+                                {showPostComments && <ul className=" flex flex-col-reverse  px-2  rounded-xl " style={{paddingTop:"10px", paddingBottom:"10px"}}>
                                     
                                     {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                         const openCLike = openCLikeStates[el.comment_id] || false;
@@ -194,10 +200,13 @@ const Feed = () => {
                                         }
 
                                         return (
-                                            <div className="flex flex-col mb-4 drop-shadow-lg w-96 px-2 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
-                                                <div className="w-full flex flex-row justify-between">
+                                            <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                                <div className="w-full flex flex-row justify-between ">
                                                     <div className="flex flex-col">
-                                                        <b>@{el.commentBy || "aiyen?!"}</b>
+                                                        <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-evenly w-11">
+                                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
+                                                            <b>{el.commentBy || "aiyen?!"}</b>
+                                                        </Link>
                                                         <p className="text-xs text-gray-600">
                                                             <TimeAgo date={el.date} />
                                                         </p>
@@ -217,13 +226,17 @@ const Feed = () => {
                                                             <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
                                                             <div className="max-h-50 overflow-y-scroll"> 
                                                                 {el.likedBy.length>0?el.likedBy.map((like, i) => (
-                                                                    <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">@{like.username}</li>
+                                                                    <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">
+                                                                        <Link to={`/profile/${like.username}/${like.uid}`}>
+                                                                            @ {like.username}    
+                                                                        </Link>
+                                                                    </li>
                                                                 )):<p className="px-1 py-2" >No one :(</p>}
                                                             </div>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div className="flex w-3/4 py-2 break-all" style={{whiteSpace:"pre-wrap"}} >
+                                                <div className="flex w-3/4 px-2 py-3 break-words" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} >
                                                     {el.comment}
                                                 </div>
                                                 {(el.commentBy || "aiyen?!") === userData.username ? (
@@ -237,7 +250,7 @@ const Feed = () => {
                                             </div>
                                         );
                                     }) : <p className="px-1 py-2" >No comments </p>}
-                                    <p className="text-sm text-gray-300 mb-2">Comments</p>
+                                    <p className="text-sm text-gray-500 mb-2">Comments</p>
                                     <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
                                     <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
                                         <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>

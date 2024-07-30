@@ -1,19 +1,19 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import getCookie from "../../utils/getCookie";
 import DelPost from "../Post_actions/DelPost";
 import LikePost from "../Post_actions/LikePost";
 
-import { BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiHeart, BiLeftArrow, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash } from "react-icons/bi";
+import { BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiHeart, BiLeftArrow, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
-import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaRegCommentDots, FaTrashCan } from "react-icons/fa6";
-import { FaCommentAlt, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
+import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
+import { FaCommentAlt, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
+import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, LeftToRightListDashIcon, MessageCancel02Icon, PreviousIcon, Share08Icon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
@@ -37,6 +37,8 @@ const ProfilePage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [profile_data, setProfileData] = useState({})
     const [isFollowing, setisFollowing] = useState(false);
+    const [openFollowers,setOpenFollowers] = useState(false);
+    const [openFollowing,setOpenFollowing] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
@@ -207,27 +209,72 @@ const ProfilePage = () => {
                     {username === getCookie('socio-user') && (<button className="bg-pink-200 rounded-lg px-3 py-1" onClick={() => setUpdateMode(!updateMode)}>Update Profile</button>)}
                 </div>
                 <div className="drop-shadow-lg flex flex-row px-5  justify-evenly items-center rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={200} height={200} alt="Profile" />
-                    <div>
+                    <img src="/d-prof.jpg" className="rounded-full" width={150} height={150} alt="Profile" />
+                    <div className="px-2 py-3 flex flex-col justify-center items-start">
                         <p className="text-5xl"><b>{uname}</b></p>
-                        <p style={{whiteSpace:"pre-wrap"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-all">{bio}</p>
-                        <div className="flex flex-row w-full justify-between">
-                            <p>Followers {profile_data.followers?profile_data.followers.length:0}</p>
-                            <p>Followings {profile_data.following?profile_data.following.length:0}</p>
+                        <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >{bio}</p>
+                        <div className="flex flex-row w-full justify-between items-center my-4">
+                            <button className="flex flex-col-reverse justify-evenly items-center w-1/3 text-sm" >
+                                {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:0}</p>
+                            </button>
+                            <p className="text-xs" >|</p>
+                            <button className="flex flex-col-reverse justify-evenly items-center w-1/2 text-sm" onClick={()=>{
+                                setOpenFollowers(!openFollowers)
+                                setOpenFollowing(false)
+                            }} >
+                                {profile_data.followers&&profile_data.followers.length>1?"Followers":"Follower"} <p className="text-xl">{profile_data.followers?profile_data.followers.length:0}</p>
+                            </button>
+                            <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ display: openFollowers ? "flex" : "none", top:"70px" }}>
+                                <p className="text-xs text-gray-400 py-2 ">Followed by</p>
+                                <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
+                                <div className="max-h-50 overflow-y-scroll">
+                                    {openFollowers && profile_data.followers.length > 0 ? profile_data.followers.map((el, i) => (
+                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                            <Link to={`/profile/${el.username}/${el.uid}`}>
+                                                @ {el.username}    
+                                            </Link>
+                                        </li>
+                                    )) : <p className="px-1 py-2" >No one :(</p>}
+                                </div>
+                            </ul>
+                            <p className="text-xs" >|</p>
+                            <button className="flex flex-col-reverse justify-evenly items-center w-1/2 text-sm" onClick={()=>{
+                                setOpenFollowing(!openFollowing)
+                                setOpenFollowers(false)
+                            }}>
+                                {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:0}</p>
+                            </button>
+                            <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ display: openFollowing ? "flex" : "none", top:"70px" }}>
+                                <p className="text-xs text-gray-400 py-2 ">Following </p>
+                                <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
+                                <div className="max-h-50 overflow-y-scroll">
+                                    {openFollowing && profile_data.following.length > 0 ? profile_data.following.map((el, i) => (
+                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                            <Link to={`/profile/${el.username}/${el.uid}`}>
+                                                @ {el.username}    
+                                            </Link>
+                                        </li>
+                                    )) : <p className="px-1 py-2" >No one :(</p>}
+                                </div>
+                            </ul>
+                            {/* <p>Followers {profile_data.followers?profile_data.followers.length:0}</p>
+                            <p>Followings {profile_data.following?profile_data.following.length:0}</p> */}
                         </div>
-                        <div className="py-2">
-                            <button className="px-2 py-2" style={{
-                                background:isFollowing?"#fef08a":"#fef08a"
-                            }} onClick={()=>{
-                                AddFollower(profile_data.uid)
-                                setisFollowing(true);
+                        <div className="py-2  rounded-lg ">
+                            <button className="px-3 bg-blue-200 rounded-lg py-2 transition-all duration-3000 hover:bg-blue-100" style={{
+                                backgroundColor:isFollowing?"#dbeafe":"#bfdbfe "
+                                // transition:"all 0.3s ease"
+                            }} onClick={async ()=>{
+                                const addf=await AddFollower(profile_data.uid)
+                                addf.message=="You cannot follow yourself"?setisFollowing(false):setisFollowing(true);
+                                
                             }}>{isFollowing?"Following":"Follow"}</button>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-1/2 px-2 py-4">
 
-                    <button className="px-2 py-2 transition-all duration-300 rounded-lg" onClick={()=>setOpenMyPosts(true)} style={{
+                    <button className="px-2 py-2  transition-all duration-300 rounded-lg" onClick={()=>setOpenMyPosts(true)} style={{
                         background: openMyPosts?"#fbcfe8":'white',
                         fontWeight: openMyPosts?"600":'100'
                     }} >Posts by {username==getCookie('socio-user')?"you":username}</button>
@@ -277,7 +324,7 @@ const ProfilePage = () => {
                                     <p className="text-xs text-gray-600">
                                         <TimeAgo date={post.metaData.date} />
                                     </p>
-                                    <div className="middle-section flex flex-row w-80 break-all px-0 py-4" style={{whiteSpace:'pre-wrap'}}>
+                                    <div className="middle-section flex flex-row w-80 break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:"anywhere"}}>
                                         {post.post.content}
                                     </div>
                                     <div className="bottom-bar mb-2 flex flex-row  justify-end">
@@ -362,7 +409,7 @@ const ProfilePage = () => {
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div className="flex w-3/4 py-2 break-all" style={{whiteSpace:"pre-wrap"}} >
+                                                    <div className="flex w-3/4 py-2 break-words" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} >
                                                         {el.comment}
                                                     </div>
                                                     {(el.commentBy || "aiyen?!") === userData.username ? (
@@ -388,6 +435,14 @@ const ProfilePage = () => {
                                 </div>
                                 )
                             })
+                        }
+                        {
+                            openMyPosts&&!myPosts.length>0?
+                            <div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                                    <CancelCircleIcon size={100} color="lightgray" className="mb-2"/>
+                                    No Posts Yet
+                                </div>
+                            :""
                         }
                     </div>
                     
@@ -431,7 +486,7 @@ const ProfilePage = () => {
                                         <p className="text-xs text-gray-600">
                                             <TimeAgo date={post.metaData.date} />
                                         </p>
-                                        <div className="middle-section flex flex-row w-80 break-all px-0 py-4" style={{whiteSpace:'pre-wrap'}}>
+                                        <div className="middle-section flex flex-row w-80 break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:"anywhere"}}>
                                             {post.post.content}
                                         </div>
                                         <div className="bottom-bar mb-2 flex flex-row  justify-end">
@@ -516,7 +571,7 @@ const ProfilePage = () => {
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        <div className="flex w-3/4 py-2 break-all" style={{whiteSpace:"pre-wrap"}} >
+                                                        <div className="flex w-3/4 py-2 break-words" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} >
                                                             {el.comment}
                                                         </div>
                                                         {(el.commentBy || "aiyen?!") === userData.username ? (
@@ -543,8 +598,22 @@ const ProfilePage = () => {
                                     )
                                 })
                             }
+                            {
+                                !openMyPosts&&!myTrash.length>0?
+                                <div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                                    <FaRegTrashCan size={100} color="lightgray" className="mb-2"/>
+                                    
+                                    No Trash Yet
+                                </div>
+                                :""
+                            }
                         </div>
-                    :null} 
+                    :
+                    !openMyPosts&&<div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                        <BiShieldX size={100} color="lightgray" className="mb-2"/>
+                        Private
+                    </div>
+                    } 
                 </div>
             </div>
             }

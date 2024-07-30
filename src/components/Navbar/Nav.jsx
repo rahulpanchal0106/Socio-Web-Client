@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import checkAuth from "../../utils/checkAuth";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BiDotsVerticalRounded, BiExit } from "react-icons/bi";
 import getCookie from "../../utils/getCookie";
 import getPerson from "../../utils/getPerson";
+import { UserIcon } from "hugeicons-react";
 
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +75,10 @@ const Nav = () => {
                         <div className="relative" ref={dropdownRef}>
                             <button onClick={handleToggle} className="flex items-center">
                                 {auth ? (
-                                    <img src="/d-prof.jpg" alt="profile" width="40" height="40" className="rounded-full" />
+                                    <div className="flex flex-row w-20 justify-evenly items-center ">
+                                        <img src="/d-prof.jpg" alt="profile" width="30" height="30" className="rounded-full" />
+                                        {getCookie('socio-user')}
+                                    </div>
                                 ) : (
                                     <BiDotsVerticalRounded />
                                 )}
@@ -84,9 +88,9 @@ const Nav = () => {
                                     <Link to={`/profile/${getCookie('socio-user')}/${uid}`}>
                                         <button
                                             onClick={() => setIsOpen(false)}
-                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            className=" flex flex-row w-full justify-between items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         >
-                                            Profile
+                                            Profile <UserIcon size={17} />
                                         </button>
                                     </Link>
                                     <button
@@ -96,7 +100,13 @@ const Nav = () => {
                                         }}
                                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
-                                        {auth ? "Logout" : "Login"}
+                                        {auth ? 
+                                            <button
+                                            className=" flex flex-row w-full justify-between items-center w-full text-left text-red-600"
+                                        >
+                                            Log Out <BiExit size={17}  />
+                                        </button>
+                                        : "Login"}
                                     </button>
                                 </div>
                             )}
