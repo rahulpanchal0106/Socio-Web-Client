@@ -8,7 +8,9 @@
 *{
   scroll-behavior: smooth;
   font-family: 'Chillax-Regular';
+  transition: all 0.3s ease !important;
 }
+
 /* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
