@@ -13,10 +13,11 @@ import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, 
 import { FaCommentAlt, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, LeftToRightListDashIcon, MessageCancel02Icon, PreviousIcon, Share08Icon } from "hugeicons-react";
+import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, LeftToRightListDashIcon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
+import './style.css'
 
 const ProfilePage = () => {
     const { username,uidTo } = useParams(); 
@@ -128,8 +129,9 @@ const ProfilePage = () => {
         :null
 
         resp.followers && resp.followers.find((user)=>{
-            user.username==username;
-            setisFollowing(true);
+            if(user.username==getCookie('socio-user')){
+                setisFollowing(true);
+            }
         })
         
         setMyTrash(resp2);
@@ -172,8 +174,8 @@ const ProfilePage = () => {
             
             {updateMode ?
             <form className="flex flex-col justify-between items-center px-4 py-4" onSubmit={handleProfileUpdate}>
-                <div className="flex flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={200} height={200} alt="Profile" />
+                <div className="flex flex-col lg:flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
+                    <img src="/d-prof.jpg" className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" />
                     <div className="flex flex-col">
                         <label htmlFor="username">Username</label>
                         <input 
@@ -205,14 +207,12 @@ const ProfilePage = () => {
             </form>
             :
             <div className="flex flex-col justify-between items-center px-4 py-4">
-                <div className="w-full flex justify-end px-20 "> 
-                    {username === getCookie('socio-user') && (<button className="bg-pink-200 rounded-lg px-3 py-1" onClick={() => setUpdateMode(!updateMode)}>Update Profile</button>)}
-                </div>
+                
                 <div className="drop-shadow-lg flex flex-row px-5  justify-evenly items-center rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={150} height={150} alt="Profile" />
+                    <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" />
                     <div className="px-2 py-3 flex flex-col justify-center items-start">
-                        <p className="text-5xl"><b>{uname}</b></p>
-                        <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >{bio}</p>
+                        <p className="px-2 text-2xl lg:text-5xl"><b>{uname}</b></p>
+                        <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-2 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >{bio}</p>
                         <div className="flex flex-row w-full justify-between items-center my-4">
                             <button className="flex flex-col-reverse justify-evenly items-center w-1/3 text-sm" >
                                 {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:0}</p>
@@ -260,16 +260,34 @@ const ProfilePage = () => {
                             {/* <p>Followers {profile_data.followers?profile_data.followers.length:0}</p>
                             <p>Followings {profile_data.following?profile_data.following.length:0}</p> */}
                         </div>
-                        <div className="py-2  rounded-lg ">
-                            <button className="px-3 bg-blue-200 rounded-lg py-2 transition-all duration-3000 hover:bg-blue-100" style={{
-                                backgroundColor:isFollowing?"#dbeafe":"#bfdbfe "
+                        
+                        {username != getCookie('socio-user') && ( <button className="px-3 w-36 bg-blue-200 rounded-lg py-2 transition-all duration-300 hover:rounded-2xl hover:drop-shadow-lg" id="follow_btn" style={{
+                                backgroundColor:isFollowing?"rgb(59 130 246 / 0.5)":"rgb(59, 130, 246)",
+                                color:isFollowing?"black":"white"
                                 // transition:"all 0.3s ease"
                             }} onClick={async ()=>{
                                 const addf=await AddFollower(profile_data.uid)
-                                addf.message=="You cannot follow yourself"?setisFollowing(false):setisFollowing(true);
+                                addf.status==400?setisFollowing(false):setisFollowing(true);
+                                addf.status==201?setisFollowing(true):setisFollowing(false);
                                 
-                            }}>{isFollowing?"Following":"Follow"}</button>
-                        </div>
+                            }}>{isFollowing?
+                                <p className="flex flex-row w-full justify-evenly items-center">
+                                    Following <UserCheck01Icon size={20}/>
+                                </p>
+                                :<p className="flex flex-row w-full justify-evenly items-center">
+                                    Follow <UserAdd01Icon size={20}/>
+                                </p>}
+                            </button>)
+                        }
+
+                        {
+                            username == getCookie('socio-user') && (
+                                <div className="w-full flex justify-end px-20 "> 
+                                    {username === getCookie('socio-user') && (<button className="bg-pink-200 rounded-lg px-3 py-1" onClick={() => setUpdateMode(!updateMode)}>Update Profile</button>)}
+                                </div>
+                            )
+                        }
+                        
                     </div>
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-1/2 px-2 py-4">

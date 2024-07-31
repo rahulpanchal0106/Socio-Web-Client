@@ -41,22 +41,22 @@ const Home=()=>{
         <div id="bg" >
             <div className="h-screen w-full bg-yellow-200 text-black flex flex-col justify-center items-center px-12 py-0 transition-all ease-in duration-700">
             <Nav/>
-                <h1 className="text-shadow text-9xl">Make new Friends!</h1>
+                <h1 className="text-shadow text-6xl lg:text-9xl" id="mnf">Make new Friends!</h1>
                 <div  className={`flex flex-row justify-center items-center py-4  w-full transition-all ease-in duration-700 ${isVisible1 ? "opacity-100 h-1/3" : "opacity-0 h-0"}`}>
-                    <div ref={ref1} className="text-6xl flex flex-col justify-center items-center ">
+                    <div ref={ref1} className="text-xl flex flex-col justify-center items-center lg:text-6xl">
                         Connect with people that are <b className="flex flex-row justify-evenly w-1/2 text-black"> <i>Just </i> <i>Like </i>  <i><i className="text-shadow">You</i></i></b> 
                     </div>
-                    <div className="ml-4 transition-all ease-in duration-100 text-6xl hover:ml-12">
+                    <div className="ml-4 transition-all ease-in duration-100 text-2xl lg:text-6xl hover:ml-12">
                         <Link to="/people">
-                            <FaRightLong/>
+                            <FaRightLong />
                         </Link>
                     </div>
                 </div>
             </div>
             <div className="h-screen w-full bg-purple-200 text-black flex flex-col justify-center items-center px-12 py-0">
-                <h1 className="text-9xl text-shadow">Make a Post!!</h1>
+                <h1 className="text-6xl lg:text-9xl text-shadow">Make a Post!!</h1>
                 <div  className={`flex flex-row justify-center items-center  py-4 w-full transition-all ease-in duration-700 ${isVisible2 ? "opacity-100 h-1/2" : "opacity-0 h-0"}`}>
-                    <div ref={ref2} className="text-6xl flex flex-col justify-center items-center ">
+                    <div ref={ref2} className="text-xl lg:text-6xl flex flex-col justify-center items-center ">
                     Talk about your day <b className="flex flex-row justify-evenly w-full text-black"> <i >With </i> <i className="text-shadow">Your </i> <i>People</i></b> 
                         </div>
                         <div className="ml-8 transition-all ease-in duration-200 text-6xl hover:rotate-90">
@@ -67,9 +67,9 @@ const Home=()=>{
                 </div>
             </div>
             <div className="h-screen w-full bg-red-200 text-black flex flex-col justify-center items-center px-12 py-0">
-                <h1 className="text-9xl text-shadow">Watch Feed!</h1>
+                <h1 className="text-6xl lg:text-9xl text-shadow">Watch Feed!</h1>
                 <div  className={`flex flex-row justify-center items-center  py-4 w-full transition-all ease-in duration-700 ${isVisible3 ? "opacity-100 h-1/2" : "opacity-0 h-0"}`}>
-                        <div ref={ref3} className="text-6xl flex flex-col justify-center items-center ">
+                        <div ref={ref3} className="text-xl lg:text-6xl flex flex-col justify-center items-center ">
                             Let's See What's going on with <b className="flex flex-row justify-evenly w-full text-black"> <i className="text-shadow">Your </i> <i >Friends</i> <i>&</i> <i>The World</i></b> 
                         </div>
                     

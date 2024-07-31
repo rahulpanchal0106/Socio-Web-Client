@@ -118,7 +118,7 @@ const Feed = () => {
                         const showPostComments = showComments[post._id] || false;
 
                         return (
-                            <div key={index} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg" style={{width:"432px"}}>
+                            <div key={index} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                 <div className="top-bar author flex flex-row justify-between items-center">
                                     <div className="left flex flex-row items-center justify-evenly w-11">
                                         <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-evenly w-11">
@@ -166,7 +166,11 @@ const Feed = () => {
                                     
                                 </div>
 
-                                <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ display: openPostLike ? "flex" : "none", top:"70px" }}>
+                                <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                        display: openPostLike ? "flex" : "none",
+                                        top:"70px",  
+                                        right: window.innerWidth<766?"30%":"100%"
+                                    }}>
                                     <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
                                     <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                     <div className="max-h-50 overflow-y-scroll">
@@ -180,7 +184,10 @@ const Feed = () => {
                                     </div>
                                 </ul>
 
-                                {showPostComments && <ul className=" flex flex-col-reverse  px-2  rounded-xl " style={{paddingTop:"10px", paddingBottom:"10px"}}>
+                                {showPostComments && <ul className=" flex flex-col-reverse  px-2  rounded-xl " style={{
+                                        paddingTop:"10px", 
+                                        paddingBottom:"10px",
+                                    }}>
                                     
                                     {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                         const openCLike = openCLikeStates[el.comment_id] || false;
@@ -200,7 +207,7 @@ const Feed = () => {
                                         }
 
                                         return (
-                                            <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                            <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                 <div className="w-full flex flex-row justify-between ">
                                                     <div className="flex flex-col">
                                                         <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-evenly w-11">
@@ -221,7 +228,7 @@ const Feed = () => {
                                                             </button>
                                                             
                                                         </div>
-                                                        <ul style={{ display: openCLike ? "flex" : "none" }} className="flex flex-col w-1/2 absolute left-full bg-white px-4 py-2 rounded-lg drop-shadow-sm">
+                                                        <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white px-4 py-2 rounded-lg drop-shadow-lg">
                                                             <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div>
                                                             <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
                                                             <div className="max-h-50 overflow-y-scroll"> 
