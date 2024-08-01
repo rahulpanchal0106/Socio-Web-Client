@@ -169,7 +169,8 @@ const Feed = () => {
                                 <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                         display: openPostLike ? "flex" : "none",
                                         top:"70px",  
-                                        right: window.innerWidth<766?"30%":"100%"
+                                        right: window.innerWidth<766?"30%":"100%",
+                                        zIndex:10
                                     }}>
                                     <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
                                     <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
@@ -258,7 +259,7 @@ const Feed = () => {
                                         );
                                     }) : <p className="px-1 py-2" >No comments </p>}
                                     <p className="text-sm text-gray-500 mb-2">Comments</p>
-                                    <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
+                                    {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                     <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
                                         <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
                                         <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>

@@ -30,7 +30,7 @@ const People = () => {
     return (
         <>
             <Nav />
-            <div className="mt-20 flex flex-col justify-center items-center bg-white h-12/11 overflow-scroll">
+            <div className="lg:mt-20 flex flex-col justify-center items-center bg-white h-12/11 overflow-scroll">
                 <h1 className="text-6xl mb-4 mt-5">People</h1>
                 {data ? data.map((p, i) => {
                     console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p.username, " = ", userData);

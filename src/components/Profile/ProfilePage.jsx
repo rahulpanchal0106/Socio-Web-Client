@@ -6,7 +6,7 @@ import getCookie from "../../utils/getCookie";
 import DelPost from "../Post_actions/DelPost";
 import LikePost from "../Post_actions/LikePost";
 
-import { BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiHeart, BiLeftArrow, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
+import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
 import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
@@ -18,6 +18,9 @@ import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
 import './style.css'
+import { GrClose } from "react-icons/gr";
+import LogOut from "../Auth/LogOut.js";
+import { useCookies } from "react-cookie";
 
 const ProfilePage = () => {
     const { username,uidTo } = useParams(); 
@@ -42,11 +45,17 @@ const ProfilePage = () => {
     const [openFollowing,setOpenFollowing] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
-
+    const [cookie, setCookie, removeCookie] = useCookies(['sociotoken']);
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsOpen(false);
         }
+    };
+
+
+    const logout = () => {
+        removeCookie('sociotoken');
+        window.location.pathname = "/";
     };
 
     useEffect(() => {
@@ -168,9 +177,6 @@ const ProfilePage = () => {
     return (
         <>
             <Nav/>
-            <br />
-            <br />
-            <br />
             
             {updateMode ?
             <form className="flex flex-col justify-between items-center px-4 py-4" onSubmit={handleProfileUpdate}>
@@ -208,8 +214,8 @@ const ProfilePage = () => {
             :
             <div className="flex flex-col justify-between items-center px-4 py-4">
                 
-                <div className="drop-shadow-lg flex flex-row px-5  justify-evenly items-center rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" />
+                <div className="drop-shadow-lg flex flex-row px-5 lg:mt-12 justify-evenly items-start lg:items:center rounded-lg w-2/3">
+                    <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" />
                     <div className="px-2 py-3 flex flex-col justify-center items-start">
                         <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
                         <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-5 py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >{bio}</p>
@@ -229,7 +235,8 @@ const ProfilePage = () => {
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%"
                                         }}>
-                                <p className="text-xs text-gray-400 py-2 ">Followed by</p>
+                                <p className="text-xs text-gray-400 py-2 ">Followed by </p>
+                                <button onClick={()=>setOpenFollowers(false)} className="absolute right-2" ><GrClose/></button>
                                 <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                 <div className="max-h-50 overflow-y-scroll">
                                     {openFollowers && profile_data.followers.length > 0 ? profile_data.followers.map((el, i) => (
@@ -251,8 +258,10 @@ const ProfilePage = () => {
                             <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowing ? "flex" : "none",
                                             top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%"
+                                            right: window.innerWidth<766?"30%":"100%",
+                                            zIndex:10
                                         }}>
+                                <button onClick={()=>setOpenFollowing(false)} className="absolute right-2" ><GrClose/></button>
                                 <p className="text-xs text-gray-400 py-2 ">Following </p>
                                 <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                 <div className="max-h-50 overflow-y-scroll">
@@ -291,8 +300,14 @@ const ProfilePage = () => {
 
                         {
                             username == getCookie('socio-user') && (
-                                <div className=""> 
+                                <div className="flex flex-row justify-evenly w-full itmes-center"> 
                                     {username === getCookie('socio-user') && (<button className="bg-gray-200 transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}><UserEdit01Icon/></button>)}
+                                    <button
+                                        className=" flex flex-row w-full justify-between items-center w-full text-left text-red-600"
+                                        onClick={()=>logout()}
+                                    >
+                                        <BiExit />
+                                    </button>
                                 </div>
                             )
                         }
@@ -382,7 +397,8 @@ const ProfilePage = () => {
                                     <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
                                             top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%"
+                                            right: window.innerWidth<766?"30%":"100%",
+                                            zIndex:10
                                         }}>
                                         <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
                                         <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
@@ -457,7 +473,7 @@ const ProfilePage = () => {
                                             );
                                         }) : <p className="px-1 py-2" >No comments </p>}
                                         <p className="text-sm text-gray-300 mb-2">Comments</p>
-                                        <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
+                                        {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                         <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
                                             <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
                                             <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>
@@ -548,7 +564,8 @@ const ProfilePage = () => {
                                         <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
                                             top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%"
+                                            right: window.innerWidth<766?"30%":"100%",
+                                            zIndex:10
                                         }}>
                                             <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
                                             <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
@@ -567,6 +584,7 @@ const ProfilePage = () => {
                                         {showPostComments && <ul className=" flex flex-col-reverse  px-2  rounded-xl " style={{
                                                 paddingTop:"10px", 
                                                 paddingBottom:"10px",
+                                                zIndex:10
                                             }}>
                                             
                                             {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
@@ -634,7 +652,7 @@ const ProfilePage = () => {
                                                 );
                                             }) : <p className="px-1 py-2" >No comments </p>}
                                             <p className="text-sm text-gray-300 mb-2">Comments</p>
-                                            <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div>
+                                            {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                             <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
                                                 <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
                                                 <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>

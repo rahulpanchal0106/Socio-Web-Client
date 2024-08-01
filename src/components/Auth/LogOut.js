@@ -1,22 +1,22 @@
-import { useCookies } from "react-cookie"
-import checkAuth from "../../utils/checkAuth"
-import { redirect, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import checkAuth from "../../utils/checkAuth";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const LogOut=()=>{
-    const [cookie, setCookie, removeCookie] = useCookies(['sociotoken']);
-    const navigate = useNavigate()    
-    // console.log("%%%%%%%%%%%%%%%%%%%%%%%%55")
-    useEffect(()=>{
-        if(checkAuth){
-            ()=>removeCookie('sociotoken');
-            ()=>removeCookie('socio-user')
-        }
-    },[])
-    console.log("NO TOKEN");
-    navigate("/")
-    
-    return;
-}
+const LogOut = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['sociotoken', 'socio-user']);
+    const navigate = useNavigate();
 
-export default LogOut
+    useEffect(() => {
+        if (checkAuth()) {
+            removeCookie('sociotoken');
+            removeCookie('socio-user');
+            console.log("NO TOKEN");
+            navigate("/");
+        }
+    }, [removeCookie, navigate]);
+
+    return null;
+};
+
+export default LogOut;
