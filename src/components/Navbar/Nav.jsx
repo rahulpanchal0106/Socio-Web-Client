@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import checkAuth from "../../utils/checkAuth";
 import { BiCross, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiPlus } from "react-icons/bi";
@@ -10,16 +10,17 @@ import { FaBurger, FaPeopleGroup, FaPerson, FaScrollTorah } from "react-icons/fa
 import { GrAction, GrClose, GrGroup, GrHome, GrLogin, GrMultiple } from "react-icons/gr";
 import { FaHome, FaScroll } from "react-icons/fa";
 import feather from 'feather-icons';
+import "./Nav.css"
 
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
+    const location = useLocation();
     const [auth, setAuth] = useState(false);
     const [openBurger, setBurger] = useState(false);
     const [cookie, setCookie, removeCookie] = useCookies(['sociotoken']);
     const [uid, setUID] = useState('');
-    
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
@@ -60,119 +61,80 @@ const Nav = () => {
 
     useEffect(() => {
         feather.replace();
-      }, []);
+    }, []);
+
+    const getActiveClass = (path) => {
+        return location.pathname === path ? 'active' : '';
+    };
 
     return (
         <div className="navbar z-30 fixed flex w-screen top-0 justify-between items-center px-10 py-5 drop-shadow-2xl bg-transparent" style={{
-            bottom:window.innerWidth<766?"0":"",
-            top:window.innerWidth<766?"auto":"0"
+            bottom: window.innerWidth < 766 ? "0" : "",
+            top: window.innerWidth < 766 ? "auto" : "0"
         }}>
             <div className="logo text-4xl none lg:flex">
-                {window.innerWidth<766?"":"SOCIO"}
+                {window.innerWidth < 766 ? "" : "SOCIO"}
             </div>
-            {/* <button onClick={()=>setBurger(!openBurger)} className="transition transition-all duration-300 rounded-lg py-2 px-3 border border-solid border-white hover:border-black flex justify-center items-center" style={{
-                display:window.innerWidth<766?"flex":"none"
-            }}>
-                <Menu01Icon/>
-            </button> */}
             <ul className="flex flex-row w-full justify-evenly items-center fixed bg-white bottom-0 left-0 h-full fixed" style={{
-                    display:window.innerWidth<766?"flex":"none"
-                }}>
-                    {/* <button onClick={()=>setBurger(!openBurger)} className="absolute top-5 right-10 transition transition-all duration-300 rounded-lg py-2 px-3 border border-solid border-white hover:border-black flex justify-center items-center" style={{
-                        display:window.innerWidth<766?"flex":"none"
-                    }}>
-                        <GrClose/>
-                    </button> */}
-                    <li>
-                        <Link to="/"><i data-feather="home" ></i></Link>
-                    </li>
-                    <li>
-                        <Link to="/people"><i data-feather="users" ></i></Link>
-                    </li>
-                    <li>
-                        <Link to="/post"><i data-feather="plus" ></i></Link>
-                    </li>
-                    <li>
-                        <Link to="/feed"><i data-feather="globe" ></i></Link>
-                    </li>
-                    {
-                        auth?
-                        <li>
-                            <Link to={`/profile/${getCookie('socio-user')}/${uid}`}>
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className=" flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm text-gray-700"
-                                >
-                                    <UserSettings01Icon color="black"/>
-                                </button>
-                            </Link>
-                        </li>:
-                        <li>
-                            <button onClick={()=>navigate('/login')} >
-                                <i data-feather="log-in" ></i>
-                            </button>
-                        </li>
-                        
-                    }
-                    {/* <li>
-                        <button
-                            onClick={() => {
-                                setIsOpen(false);
-                                auth ? LogOut() : navigate('/login');
-                            }}
-                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 "
-                        >
-                            {auth ? 
-                                <button
-                                className=" flex flex-row w-full justify-between items-center w-full text-left text-red-600"
+                display: window.innerWidth < 766 ? "flex" : "none"
+            }}>
+                <li id="nav-links" className={getActiveClass("/")}>
+                    <Link to="/"><i data-feather="home" ></i></Link>
+                    <div className="dot"></div>
+                </li>
+                <li id="nav-links" className={getActiveClass("/people")}>
+                    <Link to="/people"><i data-feather="users" ></i></Link>
+                    <div className="dot"></div>
+                </li>
+                <li id="nav-links" className={getActiveClass("/post")}>
+                    <Link to="/post"><i data-feather="plus" ></i></Link>
+                    <div className="dot"></div>
+                </li>
+                <li id="nav-links" className={getActiveClass("/feed")}>
+                    <Link to="/feed"><i data-feather="globe" ></i></Link>
+                    <div className="dot"></div>
+                </li>
+                {auth ? (
+                    <li id="nav-links" className={getActiveClass(`/profile/${getCookie('socio-user')}/${uid}`)}>
+                        <Link to={`/profile/${getCookie('socio-user')}/${uid}`}>
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm text-gray-700"
                             >
-                                <BiExit />
+                                <UserSettings01Icon color="black" />
                             </button>
-                            : "Login"}
+                        </Link>
+                        <div className="dot"></div>
+                    </li>
+                ) : (
+                    <li id="nav-links" className={getActiveClass("/login")}>
+                        <button onClick={() => navigate('/login')} >
+                            <i data-feather="log-in" ></i>
                         </button>
-                    </li> */}
-                    {/* <li>
-                        <div className="relative" ref={dropdownRef}>
-                            <button onClick={handleToggle} className="flex items-center">
-                                {auth ? (
-                                    <div className="flex flex-row w-20 justify-evenly items-center ">
-                                        <img src="/d-prof.jpg" alt="profile" width="30" height="30" className="rounded-full" />
-                                        {getCookie('socio-user')}
-                                    </div>
-                                ) : (
-                                    <BiDotsVerticalRounded />
-                                )}
-                            </button>
-                            {isOpen && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                                    
-                                   
-                                </div>
-                            )}
-                        </div>
-                    </li> */}
+                        <div className="dot"></div>
+                    </li>
+                )}
             </ul>
             <div className="navlinks w-1/2" style={{
-                display:window.innerWidth<766?"none":"flex"
+                display: window.innerWidth < 766 ? "none" : "flex"
             }}>
-
                 <ul className="flex row w-full justify-evenly items-center" style={{
-                    display:window.innerWidth<766?"none":"flex"
+                    display: window.innerWidth < 766 ? "none" : "flex"
                 }}>
-                    <li>
+                    <li className={getActiveClass("/")}>
                         <Link to="/">Home</Link>
                     </li>
-                    <li>
+                    <li className={getActiveClass("/post")}>
                         <Link to="/post">Post</Link>
                     </li>
-                    <li>
+                    <li className={getActiveClass("/feed")}>
                         <Link to="/feed">Feed</Link>
                     </li>
-                    <li>
+                    <li className={getActiveClass("/people")}>
                         <Link to="/people">People</Link>
                     </li>
                     <li>
-                        <div className="relative" ref={dropdownRef}>
+                        <div className="relactive" ref={dropdownRef}>
                             <button onClick={handleToggle} className="flex items-center">
                                 {auth ? (
                                     <div className="flex flex-row w-20 justify-evenly items-center ">
@@ -185,20 +147,18 @@ const Nav = () => {
                             </button>
                             {isOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                                    {
-                                        auth&&(
+                                    {auth && (
                                         <li>
                                             <Link to={`/profile/${getCookie('socio-user')}/${uid}`}>
                                                 <button
                                                     onClick={() => setIsOpen(false)}
-                                                    className=" flex flex-row w-full justify-between items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    className="flex flex-row w-full justify-between items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
                                                     Profile <UserSettings02Icon size={17} />
                                                 </button>
                                             </Link>
                                         </li>
-                                        )
-                                    }
+                                    )}
                                     <button
                                         onClick={() => {
                                             setIsOpen(false);
@@ -206,13 +166,13 @@ const Nav = () => {
                                         }}
                                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
-                                        {auth ? 
+                                        {auth ?
                                             <button
-                                            className=" flex flex-row w-full justify-between items-center w-full text-left text-red-600"
-                                        >
-                                            Log Out <BiExit size={17}  />
-                                        </button>
-                                        : "Login"}
+                                                className="flex flex-row w-full justify-between items-center w-full text-left text-red-600"
+                                            >
+                                                Log Out <BiExit size={17} />
+                                            </button>
+                                            : "Login"}
                                     </button>
                                 </div>
                             )}

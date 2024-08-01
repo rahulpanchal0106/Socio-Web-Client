@@ -6,21 +6,22 @@ import getCookie from "../../utils/getCookie";
 import DelPost from "../Post_actions/DelPost";
 import LikePost from "../Post_actions/LikePost";
 
-import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
+import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiLogOutCircle, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
 import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
 import { FaCommentAlt, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, LeftAngleIcon, LeftToRightListDashIcon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon } from "hugeicons-react";
+import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, LeftAngleIcon, LeftToRightListDashIcon, Logout02Icon, Logout03Icon, Logout04Icon, Logout05Icon, LogoutSquare02Icon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
 import './style.css'
-import { GrClose } from "react-icons/gr";
+import { GrClose, GrLogout } from "react-icons/gr";
 import LogOut from "../Auth/LogOut.js";
 import { useCookies } from "react-cookie";
+import feather from 'feather-icons';
 
 const ProfilePage = () => {
     const { username,uidTo } = useParams(); 
@@ -52,6 +53,9 @@ const ProfilePage = () => {
         }
     };
 
+    useEffect(() => {
+        feather.replace();
+      }, []);
 
     const logout = () => {
         removeCookie('sociotoken');
@@ -300,13 +304,15 @@ const ProfilePage = () => {
 
                         {
                             username == getCookie('socio-user') && (
-                                <div className="flex flex-row justify-evenly w-full itmes-center"> 
-                                    {username === getCookie('socio-user') && (<button className="bg-gray-200 transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}><UserEdit01Icon/></button>)}
+                                <div className="flex flex-row w-full justify-evenly itmes-center"> 
+                                    {username === getCookie('socio-user') && (<button className="bg-gray-200 transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}>
+                                        <UserEdit01Icon/>
+                                    </button>)}
                                     <button
-                                        className=" flex flex-row w-full justify-between items-center w-full text-left text-red-600"
+                                        className=" flex flex-row justify-between items-center text-left text-red-600 hover:drop-shadow-md hover:pb-2 hover:text-red-900"
                                         onClick={()=>logout()}
                                     >
-                                        <BiExit />
+                                        <Logout05Icon/>
                                     </button>
                                 </div>
                             )
