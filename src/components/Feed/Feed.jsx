@@ -9,12 +9,12 @@ import Nav from "../Navbar/Nav";
 import './feed.css';
 import { Link, useNavigate } from "react-router-dom";
 import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaRegCommentDots, FaTrashCan } from "react-icons/fa6";
-import { FaCommentAlt, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
+import { FaCommentAlt, FaPlus, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
 import { BrokenBoneIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
 import Post from "../Post/Post";
-import { GrClose } from "react-icons/gr";
+import { GrClose, GrGooglePlus, GrPlan } from "react-icons/gr";
 import toast, { Toaster } from 'react-hot-toast';
 
 const Feed = () => {
@@ -104,7 +104,13 @@ const Feed = () => {
             <div className="px-10 relative z-10 py-5 bg-white-200 flex flex-col justify-center items-center mb-12">
                 <Nav />
                 <Toaster/>
-                <Post/>
+                {/* <Post/> */}
+                <h1 className="text-6xl mb-4 mt-14">Feed</h1>
+                <Link to='/post' className="drop-shadow-md bg-yellow-100 flex justify-center items-center w-10 h-10 rounded-full border border-black border-solid fixed bottom-16 z-40 right-10 hover:drop-shadow-xl hover:bg-gray-100 hover:rotate-90">
+                    <button>
+                        <FaPlus/>
+                    </button>
+                </Link>
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
                     {feedPosts.length > 0 ? feedPosts.map((post, index) => {
                         const isLiked = post.post.likedBy.some(like => like.username === userData.username);
@@ -284,7 +290,7 @@ const Feed = () => {
                         Something broke
                         {       
                             
-                            toast.error("Failed to load people")
+                            toast.error("Failed to load feed")
                             
                         }
                     </button>
