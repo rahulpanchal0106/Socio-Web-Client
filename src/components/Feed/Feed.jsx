@@ -14,6 +14,7 @@ import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
 import { CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
 import Post from "../Post/Post";
+import { GrClose } from "react-icons/gr";
 
 const Feed = () => {
     const [feedPosts, setFeedPosts] = useState([]);
@@ -120,9 +121,9 @@ const Feed = () => {
                         return (
                             <div key={index} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                 <div className="top-bar author flex flex-row justify-between items-center">
-                                    <div className="left flex flex-row items-center justify-evenly w-11">
-                                        <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-evenly w-11">
-                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
+                                    <div className="left flex flex-row items-center justify-evenly w-full">
+                                        <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
+                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid mr-2" />
                                             <b>{post.metaData.author}</b>
                                         </Link>
                                     </div>
@@ -173,6 +174,7 @@ const Feed = () => {
                                         zIndex:10
                                     }}>
                                     <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
+                                    <button onClick={()=>toggleOpenPostLike(post._id)} className="absolute right-2" ><GrClose/></button>
                                     <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                     <div className="max-h-50 overflow-y-scroll">
                                         {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
@@ -211,8 +213,8 @@ const Feed = () => {
                                             <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                 <div className="w-full flex flex-row justify-between ">
                                                     <div className="flex flex-col">
-                                                        <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-evenly w-11">
-                                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
+                                                        <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-start w-full">
+                                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid mr-2 " />
                                                             <b>{el.commentBy || "aiyen?!"}</b>
                                                         </Link>
                                                         <p className="text-xs text-gray-600">
@@ -232,6 +234,7 @@ const Feed = () => {
                                                         <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white px-4 py-2 rounded-lg drop-shadow-lg">
                                                             <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div>
                                                             <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
+                                                            <button onClick={()=>toggleOpenCLike(el.comment_id)} className="absolute right-2" ><GrClose/></button>
                                                             <div className="max-h-50 overflow-y-scroll"> 
                                                                 {el.likedBy.length>0?el.likedBy.map((like, i) => (
                                                                     <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">
@@ -258,7 +261,7 @@ const Feed = () => {
                                             </div>
                                         );
                                     }) : <p className="px-1 py-2" >No comments </p>}
-                                    <p className="text-sm text-gray-500 mb-2">Comments</p>
+                                    <p className="text-sm text-gray-500 mb-2"> {post.post.comments.length} {post.post.comments.length>1?"Comments":"Comment"}</p>
                                     {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                     <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
                                         <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
