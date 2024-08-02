@@ -12,9 +12,10 @@ import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, 
 import { FaCommentAlt, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
+import { BrokenBoneIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
 import Post from "../Post/Post";
 import { GrClose } from "react-icons/gr";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Feed = () => {
     const [feedPosts, setFeedPosts] = useState([]);
@@ -42,8 +43,11 @@ const Feed = () => {
     }, []);
 
     const getData = async () => {
+        toast.loading("Loading feed")
         const data = await fetchData(url + "/feed", null, 'GET');
+        toast.dismiss()
         console.log(data);
+        data.length>0?toast.success("Feed loaded successfully"):toast.error("Failed to load feed")
         setFeedPosts(data);
     };
 
@@ -99,6 +103,7 @@ const Feed = () => {
         <>
             <div className="px-10 relative z-10 py-5 bg-white-200 flex flex-col justify-center items-center mb-12">
                 <Nav />
+                <Toaster/>
                 <Post/>
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
                     {feedPosts.length > 0 ? feedPosts.map((post, index) => {
@@ -272,7 +277,18 @@ const Feed = () => {
                                 </ul>}
                             </div>
                         );
-                    }) : "No data"}
+                    }) : 
+                    <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+
+                        <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
+                        Something broke
+                        {       
+                            
+                            toast.error("Failed to load people")
+                            
+                        }
+                    </button>
+                    }
                 </div>
             </div>
         </>
