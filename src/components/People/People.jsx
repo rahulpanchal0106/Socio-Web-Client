@@ -43,7 +43,7 @@ const People = () => {
             <Nav />
             <Toaster/>
         
-            <h1 className="text-6xl mb-4 mt-5">People</h1>
+            <h1 className="text-6xl mb-4 mt-20">People</h1>
             <div className="lg:mt-20 mb-20 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
                     console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p.username, " = ", userData);

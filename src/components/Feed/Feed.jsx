@@ -105,7 +105,7 @@ const Feed = () => {
                 <Nav />
                 <Toaster/>
                 {/* <Post/> */}
-                <h1 className="text-6xl mb-4 mt-14">Feed</h1>
+                <h1 className="text-6xl mb-4 mt-20">Feed</h1>
                 <Link to='/post' className="drop-shadow-md bg-yellow-100 flex justify-center items-center w-10 h-10 rounded-full border border-black border-solid fixed bottom-16 z-40 right-10 hover:drop-shadow-xl hover:bg-gray-100 hover:rotate-90">
                     <button>
                         <FaPlus/>

@@ -196,7 +196,7 @@ const ProfilePage = () => {
             <Toaster/>
             
             {updateMode ?
-            <form className="flex flex-col justify-between items-center px-4 py-4" onSubmit={handleProfileUpdate}>
+            <form className="flex flex-col justify-between items-center px-4 py-4 lg:mt-20 " onSubmit={handleProfileUpdate}>
                 <div className="flex flex-col lg:flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
                     <img src="/d-prof.jpg" className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" />
                     <div className="flex flex-col">
@@ -229,7 +229,7 @@ const ProfilePage = () => {
                 <button className="bg-pink-200 rounded-lg px-3 py-1" type="submit">Submit</button>
             </form>
             :
-            <div className="flex flex-col justify-between items-center px-4 py-4">
+            <div className="flex flex-col justify-between lg:mt-20 items-center px-4 py-4">
                 
                 <div className="drop-shadow-lg flex flex-row px-5 lg:mt-12 justify-evenly items-start lg:items:center rounded-lg w-2/3">
                     <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" />

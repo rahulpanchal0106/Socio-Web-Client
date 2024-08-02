@@ -68,7 +68,7 @@ const Nav = () => {
     };
 
     return (
-        <div className="navbar z-30 fixed flex w-screen top-0 justify-between items-center px-10 py-5 drop-shadow-2xl bg-transparent" style={{
+        <div className="navbar z-30 fixed flex w-screen bg-white top-0 justify-between items-center px-10 py-5 drop-shadow-2xl bg-transparent" style={{
             bottom: window.innerWidth < 766 ? "0" : "",
             top: window.innerWidth < 766 ? "auto" : "0"
         }}>
