@@ -3,6 +3,9 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import { useCookies  } from "react-cookie";
 import { Link, Navigate, redirect, resolvePath, useNavigate } from "react-router-dom";
+import Nav from "../Navbar/Nav";
+import GetToast from "../Toast";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Login=()=>{
@@ -25,25 +28,39 @@ const Login=()=>{
         e.preventDefault();
         // console.log("OOOOOOOOOOOOOOOO",url)
         setIsLoading(true)
+        toast.loading("Checking Credntials");
         const data = await fetchData(url+"/login",{"username":uname,"password":password},'POST').catch((e)=>{
             alert("Error Logging in, ",e)
             setIsLoading(false)
         });
+        console.log("*********** ",data)
         // console.log("PPPPPPPPPPPPPP ",data)
         const token = data?data.token:null;
         setCookie('sociotoken',token);
         setCookie('socio-user',uname)
+        toast.dismiss()
         if(token){
             // console.log("**********************************")
             // window.location.reload()
+            toast.success("You are logged in!",data)
+        }else{
+            toast.error("Failed to login",data)
         }
+        
+        
         setIsLoading(false)
-        navigate('/')
+        setTimeout(()=>{
+            token?
+            navigate('/'):
+            ""
+        },1000)
     }
 
      
     return(
         <div className="bg-yellow-200 flex flex-col w-full h-screen justify-center items-center">
+            <Nav/>
+            <Toaster/>
             <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center">
             <h1 className="mb-2 px-4 py-2 text-4xl">Log in to <i className="text-shadow">Socio</i></h1>
                 <input type="text" className="input mb-2 px-4 py-2 rounded-lg" onChange={handleInput} placeholder="Username" />
@@ -52,7 +69,7 @@ const Login=()=>{
             </form>  
 
             <div className="flex flex-row">
-                Are you new to this? Consider to <Link className="ml-2 text-shadow" to="/signup">Sign Up</Link>!
+                Are you new to this? <Link className="ml-2 text-shadow" to="/signup">Sign Up</Link>!
 
             </div>
         </div>

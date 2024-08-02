@@ -47,7 +47,7 @@ const Home=()=>{
                         Connect with people that are <b className="flex flex-row justify-evenly w-1/2 text-black"> <i>Just </i> <i>Like </i>  <i><i className="text-shadow">You</i></i></b> 
                     </div>
                     <div className="ml-4 transition-all ease-in duration-100 text-2xl lg:text-6xl hover:ml-12">
-                        <Link to="/people">
+                        <Link to={auth?"/people":"/login"}>
                             <FaRightLong />
                         </Link>
                     </div>
@@ -60,7 +60,8 @@ const Home=()=>{
                     Talk about your day <b className="flex flex-row justify-evenly w-full text-black"> <i >With </i> <i className="text-shadow">Your </i> <i>People</i></b> 
                         </div>
                         <div className="ml-8 transition-all ease-in duration-200 text-6xl hover:rotate-90">
-                            <Link to="/post">
+                            
+                            <Link to={auth?"/feed":"/login"}>
                                 <FaPlus/>
                             </Link>
                         </div>

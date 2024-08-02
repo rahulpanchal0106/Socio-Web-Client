@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import checkAuth from "../../utils/checkAuth";
-import { BiCross, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiPlus } from "react-icons/bi";
+import { BiCross, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiLogInCircle, BiPlus } from "react-icons/bi";
 import getCookie from "../../utils/getCookie";
 import getPerson from "../../utils/getPerson";
-import { BreastPumpIcon, Comet01Icon, Comet02Icon, CommentBlock02Icon, Home01Icon, Home02Icon, Home06Icon, LeavingGeoFenceIcon, Login01Icon, Login02Icon, Login03Icon, LoginSquare01Icon, Menu01Icon, Profile02Icon, ProfileIcon, ScrollIcon, UserIcon, UserSettings01Icon, UserSettings02Icon, VideoReplayIcon } from "hugeicons-react";
-import { FaBurger, FaPeopleGroup, FaPerson, FaScrollTorah } from "react-icons/fa6";
-import { GrAction, GrClose, GrGroup, GrHome, GrLogin, GrMultiple } from "react-icons/gr";
-import { FaHome, FaScroll } from "react-icons/fa";
+import { BreastPumpIcon, Comet01Icon, Comet02Icon, CommentBlock02Icon, EarthIcon, Globe02Icon, GlobeIcon, Home01Icon, Home02Icon, Home06Icon, IdVerifiedIcon, LeavingGeoFenceIcon, Login01Icon, Login02Icon, Login03Icon, LoginCircle01Icon, LoginCircle02Icon, LoginSquare01Icon, LoginSquare02Icon, Menu01Icon, Profile02Icon, ProfileIcon, ScrollIcon, Unlink02Icon, UserAccountIcon, UserIcon, UserIdVerificationIcon, UserSettings01Icon, UserSettings02Icon, UserUnlock01Icon, VideoReplayIcon } from "hugeicons-react";
+import { FaBurger, FaEarthAsia, FaPeopleGroup, FaPerson, FaPlus, FaScrollTorah } from "react-icons/fa6";
+import { GrAction, GrClose, GrDocumentVerified, GrGlobe, GrGroup, GrHome, GrLogin, GrMultiple, GrNew, GrSettingsOption, GrUserAdd, GrUserAdmin, GrUserExpert, GrUserSettings, GrValidate } from "react-icons/gr";
+import { FaGlobeAmericas, FaHome, FaScroll } from "react-icons/fa";
 import feather from 'feather-icons';
 import "./Nav.css"
 
@@ -79,37 +79,38 @@ const Nav = () => {
                 display: window.innerWidth < 766 ? "flex" : "none"
             }}>
                 <li id="nav-links" className={getActiveClass("/")}>
-                    <Link to="/"><i data-feather="home" ></i></Link>
+                    <Link to="/"><GrHome /></Link>
                     <div className="dot"></div>
                 </li>
                 <li id="nav-links" className={getActiveClass("/people")}>
-                    <Link to="/people"><i data-feather="users" ></i></Link>
+                    <Link to={auth?"/people":"/login"}><GrGroup color={auth?"black":"gray"}/></Link>
                     <div className="dot"></div>
                 </li>
                 <li id="nav-links" className={getActiveClass("/post")}>
-                    <Link to="/post"><i data-feather="plus" ></i></Link>
+                    <Link to={auth?"/post":"/login"}><BiPlus color={auth?"black":"gray"}/></Link>
                     <div className="dot"></div>
                 </li>
                 <li id="nav-links" className={getActiveClass("/feed")}>
-                    <Link to="/feed"><i data-feather="globe" ></i></Link>
+                    <Link to={auth?"/feed":"/login"}><GrGlobe color={auth?"black":"gray"}/></Link>
                     <div className="dot"></div>
                 </li>
-                {auth ? (
+                {auth ? <>
                     <li id="nav-links" className={getActiveClass(`/profile/${getCookie('socio-user')}/${uid}`)}>
                         <Link to={`/profile/${getCookie('socio-user')}/${uid}`}>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm text-gray-700"
                             >
-                                <UserSettings01Icon color="black" />
+                                <GrUserSettings color={auth?"black":"gray"}  />
                             </button>
                         </Link>
                         <div className="dot"></div>
                     </li>
-                ) : (
+                </> : (
                     <li id="nav-links" className={getActiveClass("/login")}>
                         <button onClick={() => navigate('/login')} >
-                            <i data-feather="log-in" ></i>
+                            <GrUserAdmin/>
+                            {/* <UserAccountIcon/> */}
                         </button>
                         <div className="dot"></div>
                     </li>

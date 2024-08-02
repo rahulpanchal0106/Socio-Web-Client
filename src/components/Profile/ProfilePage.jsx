@@ -5,7 +5,7 @@ import url from "../../utils/url";
 import getCookie from "../../utils/getCookie";
 import DelPost from "../Post_actions/DelPost";
 import LikePost from "../Post_actions/LikePost";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiLogOutCircle, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
@@ -163,10 +163,22 @@ const ProfilePage = () => {
         const formData = new FormData(form);
         const fields = Object.fromEntries(formData.entries());
         fields.username = username; 
+        toast.loading("Updating profile data");
         const resp = await fetchData(url + '/profile', fields, 'PUT');
+        toast.dismiss();
+        
         console.log(resp);
-        setUpdateMode(!updateMode)
-        getMyData()
+        if(resp.status==200){
+            setUpdateMode(!updateMode)
+            toast.success(resp.message);
+            getMyData()
+        }else{
+            toast.error(resp.message);
+        }
+
+        if(resp==null || resp==undefined){
+            toast.error("failed to update profile");
+        }
     }
 
     const handleChange = (e) => {
@@ -181,6 +193,7 @@ const ProfilePage = () => {
     return (
         <>
             <Nav/>
+            <Toaster/>
             
             {updateMode ?
             <form className="flex flex-col justify-between items-center px-4 py-4" onSubmit={handleProfileUpdate}>
@@ -333,7 +346,7 @@ const ProfilePage = () => {
                         fontWeight: !openMyPosts?"600":'100'
                     }}>My Trash </button>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex flex-row mb-12">
                     <div className="flex flex-col-reverse"  >
                         
                         {
@@ -407,6 +420,7 @@ const ProfilePage = () => {
                                             zIndex:10
                                         }}>
                                         <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
+                                        <button onClick={()=>toggleOpenPostLike(post._id)} className="absolute right-2" ><GrClose/></button>
                                         <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                         <div className="max-h-50 overflow-y-scroll">
                                             {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
@@ -574,6 +588,7 @@ const ProfilePage = () => {
                                             zIndex:10
                                         }}>
                                             <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
+                                            <button onClick={()=>toggleOpenPostLike(post._id)} className="absolute right-2" ><GrClose/></button>
                                             <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                             <div className="max-h-50 overflow-y-scroll">
                                                 {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (

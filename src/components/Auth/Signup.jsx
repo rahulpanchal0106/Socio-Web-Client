@@ -2,6 +2,7 @@ import { useState } from "react";
 import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import { Link, useNavigate } from "react-router-dom";
+import Nav from "../Navbar/Nav";
 
 const SignupForm = () => {
   const [username, setUsername] = useState('');
@@ -37,6 +38,7 @@ const SignupForm = () => {
 
   return (
     <div className="bg-yellow-200 flex flex-col w-full h-screen justify-center items-center">
+      <Nav/>
       <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center" onSubmit={handleSubmit}>
         <h1 className="mb-2 px-4 py-2 text-4xl">Sign Up for <i className="text-shadow">Socio</i></h1>
         <input
@@ -62,7 +64,7 @@ const SignupForm = () => {
         {error && <div className="error">{error}</div>}
       </form>
       <div className="flex flex-row">
-        Are you new to this? Consider to <Link className="ml-2 text-shadow" to="/login">Log In</Link>!
+        Already Have an Account? <Link className="ml-2 text-shadow" to="/login">Log In</Link>!
       </div>
     </div>
   );

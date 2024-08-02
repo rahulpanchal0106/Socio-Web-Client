@@ -3,17 +3,25 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import Nav from "../Navbar/Nav";
 import getData from "../../utils/getData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BrokenBoneIcon, SignalNo01Icon, SignalNo02Icon, Unlink02Icon } from "hugeicons-react";
+import { BiNoEntry, BiNoSignal } from "react-icons/bi";
+import toast, { Toaster } from 'react-hot-toast';
 
 const People = () => {
     const [data, setData] = useState([]);
     const [userData, setuData] = useState({});
+    const navigate = useNavigate();
     
     useEffect(() => {
         const getPeople = async () => {
+            toast.loading("Loading people");
             const resp = await fetchData(url + "/people", null, 'GET');
+            toast.dismiss()
             setData(resp);
+
         };
+        
         getPeople();
 
         const fetchUserData = async () => {
@@ -26,12 +34,17 @@ const People = () => {
     }, []);
 
     console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
-    
+    data&&data.length>0 && (setTimeout(()=>{
+            toast.success("People loaded successfully")
+        },10)
+    )
     return (
-        <>
+        <div className="flex flex-col justify-center items-center">
             <Nav />
-            <div className="lg:mt-20 flex flex-col justify-center items-center bg-white h-12/11 overflow-scroll">
-                <h1 className="text-6xl mb-4 mt-5">People</h1>
+            <Toaster/>
+        
+            <h1 className="text-6xl mb-4 mt-5">People</h1>
+            <div className="lg:mt-20 mb-20 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
                     console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p.username, " = ", userData);
                     return (
@@ -68,9 +81,20 @@ const People = () => {
                             </Link>
                         </div>
                     );
-                }) : "no data"}
+                }) : 
+                <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+
+                    <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
+                    Something broke
+                    {       
+                        setTimeout(()=>{
+                            toast.error("Failed to load people")
+                        },10)
+                    }
+                </button>
+                }
             </div>
-        </>
+        </div>
     );
 };
 

@@ -96,7 +96,7 @@ const Feed = () => {
     
     return (
         <>
-            <div className="px-10 relative z-10 py-5 bg-white-200 flex flex-col justify-center items-center">
+            <div className="px-10 relative z-10 py-5 bg-white-200 flex flex-col justify-center items-center mb-12">
                 <Nav />
                 <Post/>
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
