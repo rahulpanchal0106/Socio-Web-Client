@@ -4,9 +4,10 @@ import url from "../../utils/url";
 import Nav from "../Navbar/Nav";
 import getData from "../../utils/getData";
 import { Link, useNavigate } from "react-router-dom";
-import { BrokenBoneIcon, SignalNo01Icon, SignalNo02Icon, Unlink02Icon } from "hugeicons-react";
+import { BrokenBoneIcon, SignalNo01Icon, SignalNo02Icon, Tag01Icon, Unlink02Icon } from "hugeicons-react";
 import { BiNoEntry, BiNoSignal } from "react-icons/bi";
 import toast, { Toaster } from 'react-hot-toast';
+import { FaTag } from "react-icons/fa";
 
 const People = () => {
     const [data, setData] = useState([]);
@@ -49,6 +50,9 @@ const People = () => {
                     console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p.username, " = ", userData);
                     return (
                         <div key={i} className="bg-gray-100 flex flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly">
+                            <div className="absolute top-0 right-0 flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-0 ">
+                                <FaTag/> {p.category_pref}
+                            </div>
                             <Link to={`/profile/${p.username}/${p.uid}`}>
                                             
                                 <div className="flex flex-row w-full justify-evenly itmes-center" >

@@ -12,9 +12,9 @@ import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, 
 import { FaCommentAlt, FaPlus, FaRegComment, FaRegComments, FaRemoveFormat } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { BrokenBoneIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreviousIcon } from "hugeicons-react";
+import { BrokenBoneIcon, CheckListIcon, CheckmarkCircle04Icon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, LeftAngleIcon, PreferenceHorizontalIcon, PreferenceVerticalIcon, PreviousIcon, Select01Icon, Tag01Icon } from "hugeicons-react";
 import Post from "../Post/Post";
-import { GrClose, GrGooglePlus, GrPlan } from "react-icons/gr";
+import { GrClose, GrGooglePlus, GrPlan, GrTag } from "react-icons/gr";
 import toast, { Toaster } from 'react-hot-toast';
 
 const Feed = () => {
@@ -112,7 +112,7 @@ const Feed = () => {
                     </button>
                 </Link>
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
-                    {feedPosts.length > 0 ? feedPosts.map((post, index) => {
+                    {feedPosts.length > 0 &&  feedPosts[0]!=0 ? feedPosts.map((post, index) => {
                         const isLiked = post.post.likedBy.some(like => like.username === userData.username);
 
                         const handleAddComment = async (e) => {
@@ -155,26 +155,33 @@ const Feed = () => {
                                 <div className="middle-section flex flex-row w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
                                     {post.post.content}
                                 </div>
-                                <div className="bottom-bar mb-2 flex flex-row  justify-end">
-                                    <div className="flex py-2 flex-row items-center justify-center">
-                                        <button
-                                            onClick={() => handleLike(post._id)}
-                                            className="likes flex flex-row items-center justify-center"
-                                        >
-                                            {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
-                                        </button>
-                                        <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
-                                            <b>{post.post.likes}</b>
+                                <div className="bottom-bar mb-2 flex flex-row  justify-between">
+                                    {
+                                        post.category&&<div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-0 ">
+                                            <GrTag/> <b>{post.category}</b> 
+                                        </div>
+                                    }
+                                    <div className="flex flex-row justify-evenly items-center">
+                                        <div className="flex py-2 flex-row items-center justify-center">
+                                            <button
+                                                onClick={() => handleLike(post._id)}
+                                                className="likes flex flex-row items-center justify-center"
+                                            >
+                                                {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
+                                            </button>
+                                            <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
+                                                <b>{post.post.likes}</b>
+                                            </button>
+                                        </div>
+                                        <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
+                                            <button className="" >
+                                                {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
+                                            </button>
+                                            <p className="px-2">
+                                                {post.post.comments.length}
+                                            </p>
                                         </button>
                                     </div>
-                                    <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
-                                        <button className="" >
-                                            {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
-                                        </button>
-                                        <p className="px-2">
-                                            {post.post.comments.length}
-                                        </p>
-                                    </button>
                                     
                                 </div>
 
@@ -283,8 +290,18 @@ const Feed = () => {
                                 </ul>}
                             </div>
                         );
-                    }) : 
-                    <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                    }) :
+                    
+                    feedPosts[0]==0?
+                    <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+
+                        <PreferenceHorizontalIcon size={100} color="lightgray" className="mb-2"/>
+                        Set your preferences
+                        {                                   
+                            toast.loading("Need to select your preferences")
+                        }
+                    </div>   
+                    :<button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
                         <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
                         Something broke

@@ -9,16 +9,16 @@ import toast, { Toaster } from 'react-hot-toast';
 import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiLogOutCircle, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
-import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
-import { FaCommentAlt, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
+import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTag, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
+import { FaCommentAlt, FaHeartbeat, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, LeftAngleIcon, LeftToRightListDashIcon, Logout02Icon, Logout03Icon, Logout04Icon, Logout05Icon, LogoutSquare02Icon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon } from "hugeicons-react";
+import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, InLoveIcon, LeftAngleIcon, LeftToRightListDashIcon, Logout02Icon, Logout03Icon, Logout04Icon, Logout05Icon, LogoutSquare02Icon, LoveKoreanFingerIcon, MaskLoveIcon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon, UserLove01Icon, UserLove02Icon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
 import './style.css'
-import { GrClose, GrLogout } from "react-icons/gr";
+import { GrClose, GrLike, GrLogout } from "react-icons/gr";
 import LogOut from "../Auth/LogOut.js";
 import { useCookies } from "react-cookie";
 import feather from 'feather-icons';
@@ -235,7 +235,12 @@ const ProfilePage = () => {
                     <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" />
                     <div className="px-2 py-3 flex flex-col justify-center items-start">
                         <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
-                        <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-5 py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >{bio}</p>
+                        <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-5 py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >
+                            {bio}
+                        </p>
+                        <div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-1 ">
+                            <UserLove01Icon size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
+                        </div>
                         <div className="flex flex-row w-full justify-between items-center my-4">
                             <button className="flex flex-col-reverse justify-evenly items-center w-1/3 text-sm" >
                                 {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:0}</p>
@@ -345,6 +350,7 @@ const ProfilePage = () => {
                         background: !openMyPosts?"#fbcfe8":'white',
                         fontWeight: !openMyPosts?"600":'100'
                     }}>My Trash </button>
+                    
                 </div>
                 <div className="flex flex-row mb-12">
                     <div className="flex flex-col-reverse"  >
