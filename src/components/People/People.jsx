@@ -8,7 +8,9 @@ import { BrokenBoneIcon, SignalNo01Icon, SignalNo02Icon, Tag01Icon, Unlink02Icon
 import { BiNoEntry, BiNoSignal } from "react-icons/bi";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaTag } from "react-icons/fa";
-
+import getPerson from "../../utils/getPerson";
+import getCookie from "../../utils/getCookie";
+import "./people.css"
 const People = () => {
     const [data, setData] = useState([]);
     const [userData, setuData] = useState({});
@@ -25,13 +27,20 @@ const People = () => {
         
         getPeople();
 
-        const fetchUserData = async () => {
-            const user = await getData();
-            // console.log("🔴💥💥💥💥 ", user);
-            setuData(user);
-            return user;
-        };
-        fetchUserData();
+        // const fetchUserData = async () => {
+        //     const user = await getData();
+        //     console.log("🔴💥💥💥💥 ", user);
+        //     setuData(user);
+        //     return user;
+        // };
+        // fetchUserData();
+
+        const fetchUserDoc = async()=>{
+            const doc = await getPerson(getCookie('socio-user'));
+            console.log("🦧🦧🦧🦧🦧 ",doc)
+            setuData(doc);
+        }
+        fetchUserDoc()
     }, []);
 
     console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
@@ -44,46 +53,78 @@ const People = () => {
             <Nav />
             <Toaster/>
         
-            <h1 className="text-6xl mb-4 mt-20">People</h1>
+            <h1 className="text-6xl mb-15 mt-20 mb-20">People</h1>
             <div className="lg:mt-20 mb-20 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
-                    console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p.username, " = ", userData);
+                    console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
-                        <div key={i} className="bg-gray-100 flex flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly">
-                            <div className="absolute top-0 right-0 flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-0 ">
-                                <FaTag/> {p.category_pref}
+                      <div
+                        key={i}
+                        className="bg-gray-100 flex flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
+                      >
+                        <Link to={`/profile/${p.username}/${p.uid}`}>
+                        {p.category_pref[0] &&
+                        p.category_pref[0] == userData.category_pref[0] ? (
+                          <div className="jlu relative flex flex-row mb-2 text-xs justify-evenly items-center rounded-lg bg-yellow-200 text-gray-500 px-2 py-1 ">
+                            <abbr className="w-full flex flex-row justify-evenly abbr" title={p.category_pref[0]}>
+                              <b className="jlub flex flex-row justify-evenly text-black">
+                                
+                                {
+                                    p.username == userData.username?<>
+                                        <i>Its</i> 
+                                    </>:<>
+                                        <i>Just </i> 
+                                        <i>Like </i>
+                                    </>
+                                }
+                                <i className="you">You</i><i>!</i>
+                                
+                              </b>
+                            </abbr>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                          <div className="flex flex-row w-full justify-evenly itmes-center">
+                            <div className="img">
+                              <img
+                                src="/d-prof.jpg"
+                                alt="profile"
+                                className="rounded-full w-10 h-10"
+                              />
                             </div>
-                            <Link to={`/profile/${p.username}/${p.uid}`}>
-                                            
-                                <div className="flex flex-row w-full justify-evenly itmes-center" >
-                                    <div className="img">
-                                        <img src="/d-prof.jpg" alt="profile" className="rounded-full w-10 h-10" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="username">
-                                            <b>
-                                                <Link to={`/profile/${p.username}/${p.uid}`}>
-                                                    {p.username}    
-                                                </Link>
-                                            </b>
-                                        </div>
-                                        <div className="about text-xs text-color-800 w-20 max-h-40 overflow-hidden break-words" style={{whiteSpace:"pre-wrap"}}>{p.bio?p.bio:"No bio"}</div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-row w-full justify-evenly items-center px-2 py-1">
-                                    <p className="flex flex-row justify-evenly items-center w-1/2 text-xs">
-                                        Followers <p className="text-lg">{p.followers.length}</p>
-                                    </p>
-                                    <p className="text-xs" >|</p>
-                                    <p className="flex flex-row justify-evenly items-center w-1/2 text-xs">
-                                        Following <p className="text-lg" >{p.following.length}</p>
-                                    </p>
-                                    {/* <button className=" bg-pink-200 px-2 py-1 rounded-lg text-xs border border-solid border-pink-300">
+                            <div className="info">
+                              <div className="username">
+                                <b>
+                                  <Link to={`/profile/${p.username}/${p.uid}`}>
+                                    {p.username}
+                                  </Link>
+                                </b>
+                              </div>
+                              <div
+                                className="about text-xs text-color-800 w-20 max-h-40 overflow-hidden break-words"
+                                style={{ whiteSpace: "pre-wrap" }}
+                              >
+                                {p.bio ? p.bio : "No bio"}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-row w-full justify-evenly items-center px-2 py-1">
+                            <p className="flex flex-row justify-evenly items-center w-1/2 text-xs">
+                              Followers{" "}
+                              <p className="text-lg">{p.followers.length}</p>
+                            </p>
+                            <p className="text-xs">|</p>
+                            <p className="flex flex-row justify-evenly items-center w-1/2 text-xs">
+                              Following{" "}
+                              <p className="text-lg">{p.following.length}</p>
+                            </p>
+                            {/* <button className=" bg-pink-200 px-2 py-1 rounded-lg text-xs border border-solid border-pink-300">
                                         
                                         </button> */}
-                                </div>
-                            </Link>
-                        </div>
+                          </div>
+                        </Link>
+                      </div>
                     );
                 }) : 
                 <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >

@@ -71,7 +71,7 @@ const Home=()=>{
                 <h1 className="text-6xl lg:text-9xl text-shadow">Watch Feed!</h1>
                 <div  className={`flex flex-row justify-center items-center  py-4 w-full transition-all ease-in duration-700 ${isVisible3 ? "opacity-100 h-1/2" : "opacity-0 h-0"}`}>
                         <div ref={ref3} className="text-xl lg:text-6xl flex flex-col justify-center items-center ">
-                            Let's See What's going on with <b className="flex flex-row justify-evenly w-full text-black"> <i className="text-shadow">Your </i> <i >Friends</i> <i>&</i> <i>The World</i></b> 
+                            Watch what <b className="flex flex-row justify-evenly w-full text-black"> <i className="text-shadow">You </i> <i >Like</i></b> 
                         </div>
                     
                 </div>
