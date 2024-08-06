@@ -53,8 +53,8 @@ const People = () => {
             <Nav />
             <Toaster/>
         
-            <h1 className="text-6xl mb-15   mt-20 mb-20">People</h1>
-            <div className="lg:mt-20 mb-20 lg:w-64 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
+            <h1 className="text-6xl  lg:mb-0  mt-24 mb-20">People</h1>
+            <div className="lg:mt-20 mb-20  lg:w-64 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
                     // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
