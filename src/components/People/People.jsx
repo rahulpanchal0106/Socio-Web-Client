@@ -53,14 +53,14 @@ const People = () => {
             <Nav />
             <Toaster/>
         
-            <h1 className="text-6xl mb-15 mt-20 mb-20">People</h1>
-            <div className="lg:mt-20 mb-20 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
+            <h1 className="text-6xl mb-15   mt-20 mb-20">People</h1>
+            <div className="lg:mt-20 mb-20 lg:w-64 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
-                    console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
+                    // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
                       <div
                         key={i}
-                        className="bg-gray-100 flex flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
+                        className="bg-gray-100 flex lg:w-full flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
                       >
                         <Link to={`/profile/${p.username}/${p.uid}`}>
                         {p.category_pref[0] &&
