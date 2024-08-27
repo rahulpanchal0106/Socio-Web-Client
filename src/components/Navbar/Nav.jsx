@@ -84,7 +84,7 @@ const Nav = () => {
 
     return (
       <div
-        className={`navbar z-30 fixed flex w-screen top-0 justify-between items-center px-10 py-5 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} transition-colors`}
+        className={`navbar z-30 fixed flex w-screen  top-0 justify-between  items-center px-10 py-5 ${darkMode ? 'lg:bg-gray-800 text-white' : 'lg:bg-white text-black'} transition-colors`}
         style={{
           bottom: window.innerWidth < 766 ? "0" : "",
           top: window.innerWidth < 766 ? "auto" : "0",
@@ -94,7 +94,7 @@ const Nav = () => {
           {window.innerWidth < 766 ? "" : "SOCIO"}
         </div>
         <ul
-          className={`flex flex-row w-full justify-evenly items-center fixed bottom-0 left-0 h-full ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors`}
+          className={`flex flex-row w-full justify-evenly items-center fixed bottom-0 left-0 h-10 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors`}
           style={{
             display: window.innerWidth < 766 ? "flex" : "none",
           }}
@@ -111,18 +111,28 @@ const Nav = () => {
             </Link>
             <div className="dot"></div>
           </li>
-          <li id="nav-links" className={getActiveClass("/post")}>
+          {/* <li id="nav-links" className={getActiveClass("/post")}>
             <Link to={auth ? "/post" : "/login"}>
               <BiPlus color={auth ? (darkMode ? "white" : "black") : "gray"} />
             </Link>
             <div className="dot"></div>
-          </li>
+          </li> */}
           <li id="nav-links" className={getActiveClass("/feed")}>
             <Link to={auth ? "/feed" : "/login"}>
               <GrGlobe color={auth ? (darkMode ? "white" : "black") : "gray"} />
             </Link>
             <div className="dot"></div>
           </li>
+          <button
+            onClick={toggleDarkMode}
+            className="text-white-900  dark:text-white-500 rounded p-0 flex items-center"
+          >
+            {darkMode ? (
+              <Moon02Icon size={20}/>
+            ) : (
+              <Sun01Icon size={20}/>
+            ) }
+          </button>
           {auth ? (
             <li
               id="nav-links"
@@ -173,7 +183,7 @@ const Nav = () => {
             </li>
             <button
               onClick={toggleDarkMode}
-              className="text-white-900 dark:text-white-500 rounded p-0 flex items-center"
+              className="text-white-900  dark:text-white-500 rounded p-0 flex items-center"
             >
               {darkMode ? (
                 <Moon02Icon/>

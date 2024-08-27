@@ -11,6 +11,9 @@
     transition: all 0.9s ease-in-out;
     position: absolute;
 }
+.dark .dot{
+    background-color:#475569 ;
+}
 
 .active .dot {
     opacity: 1;
