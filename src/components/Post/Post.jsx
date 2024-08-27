@@ -4,6 +4,7 @@ import url from "../../utils/url";
 import getData from "../../utils/getData";
 import Nav from "../Navbar/Nav";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
+import getCookie from "../../utils/getCookie";
 
 const Post = () => {
     const [content, setContent] = useState('');
@@ -38,6 +39,7 @@ const Post = () => {
             },
             metaData: {
                 author: userData.username,
+                profilePicture: getCookie('socio-pf'),
                 date: new Date().toISOString()
             },
             comments:[]

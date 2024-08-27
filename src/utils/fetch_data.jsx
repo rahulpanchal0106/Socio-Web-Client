@@ -21,7 +21,7 @@ const fetchData = async (url, body, method) => {
             body: method !== 'GET' ? JSON.stringify(body) : null
         });
 
-        console.log(`Response Status: ${response.status}`);
+        console.log(`Response Status: ${response.status} | ${url}`);
         
         
         const feedData = await response.json();

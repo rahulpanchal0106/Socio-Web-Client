@@ -22,6 +22,7 @@ import { GrClose, GrLike, GrLogout } from "react-icons/gr";
 import LogOut from "../Auth/LogOut.js";
 import { useCookies } from "react-cookie";
 import feather from 'feather-icons';
+import FileUpload from "./FileUpload.jsx";
 
 const ProfilePage = () => {
     const { username,uidTo } = useParams(); 
@@ -29,6 +30,7 @@ const ProfilePage = () => {
     const [formData, setFormData] = useState({ bio: "" });
     const [uname, setUname] = useState('');
     const [bio, setBio] = useState('');
+    const [pf, setPf] = useState(null);
     const [myPosts, setMyPosts] = useState([]);
     const [myTrash, setMyTrash] = useState([]);
     const [openMyPosts, setOpenMyPosts] = useState(true)
@@ -44,6 +46,7 @@ const ProfilePage = () => {
     const [isFollowing, setisFollowing] = useState(false);
     const [openFollowers,setOpenFollowers] = useState(false);
     const [openFollowing,setOpenFollowing] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null)
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const [cookie, setCookie, removeCookie] = useCookies(['sociotoken']);
@@ -55,10 +58,12 @@ const ProfilePage = () => {
 
     useEffect(() => {
         feather.replace();
+        setPf(profile_data.profilePicture?"https://drive.google.com/file/d/"+profile_data.profilePicture+"/preview":"/d-prof.jpg");
       }, []);
 
     const logout = () => {
         removeCookie('sociotoken');
+        removeCookie('socio-pf')
         window.location.pathname = "/";
     };
 
@@ -151,6 +156,7 @@ const ProfilePage = () => {
         setMyPosts(resp1);
         setUname(resp.username ? resp.username : "nouname");
         setBio(resp.bio ? resp.bio : "no bio :(");
+
     };
 
     useEffect(() => {
@@ -167,7 +173,7 @@ const ProfilePage = () => {
         const resp = await fetchData(url + '/profile', fields, 'PUT');
         toast.dismiss();
         
-        console.log(resp);
+        
         if(resp.status==200){
             setUpdateMode(!updateMode)
             toast.success(resp.message);
@@ -196,9 +202,13 @@ const ProfilePage = () => {
             <Toaster/>
             
             {updateMode ?
+            (
+            <>
             <form className="flex flex-col justify-between items-center px-4 py-4 lg:mt-20 " onSubmit={handleProfileUpdate}>
                 <div className="flex flex-col lg:flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" />
+                    {/* <img src={profile_data.profilePicture?"https://drive.google.com/uc?export=view&id="+profile_data.profilePicture:"/d-prof.jpg"} className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" /> */}
+                    <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                    
                     <div className="flex flex-col">
                         <label htmlFor="username">Username</label>
                         <input 
@@ -216,7 +226,7 @@ const ProfilePage = () => {
                             className="bg-gray-100 dark:bg-gray-900 dark:text-white px-3 py-1 rounded-lg resize-none"
                             name="bio" 
                             id="bio" 
-                            
+                            maxLength={36}
                             placeholder="Enter your Bio"
                             value={formData.bio} 
                             onChange={handleChange}
@@ -228,11 +238,46 @@ const ProfilePage = () => {
                 </div>
                 <button className="bg-pink-200 dark:bg-slate-600 dark:text-white rounded-lg px-3 py-1" type="submit">Submit</button>
             </form>
+            <FileUpload username={getCookie('socio-user')}/>
+            </>
+            )
             :
             <div className="flex flex-col justify-between lg:mt-20 items-center px-4 py-4">
                 
                 <div className="drop-shadow-lg flex flex-row px-5 lg:mt-12 justify-evenly items-start lg:items:center rounded-lg w-2/3">
-                    <img src="/d-prof.jpg" className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" />
+                    {/* <div className="w-48 h-48 rounded-3xl overflow-hidden relative">
+                        <iframe
+                            className="absolute inset-0 w-48 h-48 rounded-3xl"
+                            src={
+                            profile_data.profilePicture
+                                ? `https://drive.google.com/file/d/${profile_data.profilePicture}/preview`
+                                : '/d-prof.jpg'
+                            }
+                            style={{
+                            width: '100%',
+                            transform: 'scale(1.25)',
+                            border: 'none',
+                            // pointerEvents: 'none',
+                            }}
+                            frameBorder="0"
+                            title="Profile Picture"
+                        ></iframe>
+                    </div> */}
+
+
+                    {/* <iframe className="rounded-full w-36 h-36 border border-none" 
+                        style={{
+                            // pointerEvents: 'none', 
+                            color:"red",
+                            border:"none"
+                        }}
+                        frameBorder="0"
+                        allow="autoplay; fullscreen" 
+                    src={pf}>
+                        hhhh
+                    </iframe> */}
+                    {/* <img src={profile_data.profilePicture?"https://drive.google.com/thumbnail?id=1PT7UxITAVN6EsruZqwhhmojoz6g6p84H":"/d-prof.jpg"} className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" /> */}
+                    <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                     <div className="px-2 py-3 flex flex-col justify-center items-start">
                         <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
                         <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-5 py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >

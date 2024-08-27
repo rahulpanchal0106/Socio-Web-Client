@@ -56,6 +56,7 @@ const Nav = () => {
 
     const LogOut = () => {
         removeCookie('sociotoken');
+        removeCookie('socio-pf')
         window.location.pathname = "/";
     };
 
@@ -63,6 +64,7 @@ const Nav = () => {
         const checkAuthentication = async () => {
             const person = await getPerson(getCookie('socio-user'));
             setUID(person.uid);
+            setCookie('socio-pf',person.profilePicture)
 
             if (await checkAuth()) {
                 setAuth(true);
@@ -143,7 +145,7 @@ const Nav = () => {
                   onClick={() => setIsOpen(false)}
                   className="flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm hover:bg-gray-100"
                 >
-                  <GrUserSettings color={auth ? (darkMode ? "white" : "black") : "gray"} />
+                  <img className="rounded-full w-6 h-6 border-3 border-white border-solid mr-2 object-cover" src={getCookie('socio-pf')?`https://lh3.googleusercontent.com/d/${getCookie('socio-pf')}`:"/d-prof.jpg"} alt="Profile" />
                 </button>
               </Link>
               <div className="dot"></div>
@@ -196,13 +198,7 @@ const Nav = () => {
                 <button onClick={handleToggle} className="flex items-center">
                   {auth ? (
                     <div className="flex flex-row w-20 justify-evenly items-center ">
-                      <img
-                        src="/d-prof.jpg"
-                        alt="profile"
-                        width="30"
-                        height="30"
-                        className="rounded-full"
-                      />
+                      <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={getCookie('socio-pf')?`https://lh3.googleusercontent.com/d/${getCookie('socio-pf')}`:"/d-prof.jpg"} alt="Profile" />
                       {getCookie("socio-user")}
                     </div>
                   ) : (

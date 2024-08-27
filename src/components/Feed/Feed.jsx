@@ -16,6 +16,7 @@ import { BrokenBoneIcon, CheckListIcon, CheckmarkCircle04Icon, CommentAdd01Icon,
 import Post from "../Post/Post";
 import { GrClose, GrGooglePlus, GrPlan, GrTag } from "react-icons/gr";
 import toast, { Toaster } from 'react-hot-toast';
+import getCookie from "../../utils/getCookie";
 
 const Feed = () => {
     const [feedPosts, setFeedPosts] = useState([]);
@@ -120,7 +121,8 @@ const Feed = () => {
                             await fetchData(url + '/comment', {
                                 comment: comment,
                                 id: post._id,
-                                post: post
+                                post: post,
+                                profilePicC: getCookie('socio-pf')
                             }, "PUT");
                             getData();
                             setComment(null)
@@ -134,7 +136,7 @@ const Feed = () => {
                                 <div className="top-bar author flex flex-row justify-between items-center">
                                     <div className="left flex flex-row items-center justify-evenly w-full">
                                         <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
-                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid mr-2" />
+                                            <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={post.metaData.profilePicture?`https://lh3.googleusercontent.com/d/${post.metaData.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                                             <b>{post.metaData.author}</b>
                                         </Link>
                                     </div>
@@ -227,12 +229,15 @@ const Feed = () => {
                                             getData();
                                         }
 
+                                        console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
+
                                         return (
                                             <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-800 w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                 <div className="w-full flex flex-row justify-between ">
                                                     <div className="flex flex-col">
                                                         <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-start w-full">
-                                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid mr-2 " />
+                                                            
+                                                            <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={el.profilePicC?`https://lh3.googleusercontent.com/d/${el.profilePicC}`:"/d-prof.jpg"} alt="Profile" />
                                                             <b>{el.commentBy || "aiyen?!"}</b>
                                                         </Link>
                                                         <p className="text-xs text-gray-600">
@@ -282,7 +287,7 @@ const Feed = () => {
                                     <p className="text-sm text-gray-500 mb-2"> {post.post.comments.length} {post.post.comments.length>1?"Comments":"Comment"}</p>
                                     {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                     <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
-                                        <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
+                                        <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center dark:text-black" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
                                         <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>
                                             <CommentAdd01Icon />
                                         </button>

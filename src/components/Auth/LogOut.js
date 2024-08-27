@@ -11,6 +11,7 @@ const LogOut = () => {
         if (checkAuth()) {
             removeCookie('sociotoken');
             removeCookie('socio-user');
+            removeCookie('socio-pf');
             console.log("NO TOKEN");
             navigate("/");
         }

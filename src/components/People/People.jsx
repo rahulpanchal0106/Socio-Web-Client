@@ -87,11 +87,8 @@ const People = () => {
                         )}
                           <div className="flex flex-row w-full justify-evenly itmes-center">
                             <div className="img">
-                              <img
-                                src="/d-prof.jpg"
-                                alt="profile"
-                                className="rounded-full w-10 h-10"
-                              />
+                            
+                              <img className="rounded-full w-20 h-20 object-cover" src={p.profilePicture?`https://lh3.googleusercontent.com/d/${p.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                             </div>
                             <div className="info">
                               <div className="username">
