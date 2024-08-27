@@ -11,6 +11,11 @@
   transition: all 0.3s ease !important;
 }
 
+.dark{
+  background-color: #1f2937;
+  color:white;
+}
+
 /* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

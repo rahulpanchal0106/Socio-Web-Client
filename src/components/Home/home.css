@@ -1,6 +1,9 @@
 .text-shadow{
     text-shadow: 10px 10px aliceblue;
 }
+.dark .text-shadow{
+    text-shadow: 10px 10px #10151d;
+}
 #bg{
     /* background-image: url('../../../public/bg.svg'); */
     /* background-size: cover; */

@@ -5,7 +5,7 @@ import checkAuth from "../../utils/checkAuth";
 import { BiCross, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiLogInCircle, BiPlus } from "react-icons/bi";
 import getCookie from "../../utils/getCookie";
 import getPerson from "../../utils/getPerson";
-import { UserSettings02Icon } from "hugeicons-react";
+import { Moon01Icon, Moon02Icon, MoonAngledRainZapIcon, Sun01Icon, Sun02Icon, UserSettings02Icon } from "hugeicons-react";
 import { GrGlobe, GrHome, GrGroup, GrUserSettings, GrUserAdmin } from "react-icons/gr";
 import feather from 'feather-icons';
 import "./Nav.css";
@@ -31,15 +31,20 @@ const Nav = () => {
     };
 
     const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
+      const newTheme = !darkMode;
+      setDarkMode(newTheme);
+      localStorage.setItem('theme',newTheme)
     };
 
     useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme==='true') {
+        setDarkMode(true);
+        document.documentElement.classList.add('dark');
+      } else {
+        setDarkMode(false)
+        document.documentElement.classList.remove('dark');
+      }
     }, [darkMode]);
 
     useEffect(() => {
@@ -79,7 +84,7 @@ const Nav = () => {
 
     return (
       <div
-        className={`navbar z-30 fixed flex w-screen top-0 justify-between items-center px-10 py-5 drop-shadow-2xl ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} transition-colors`}
+        className={`navbar z-30 fixed flex w-screen top-0 justify-between items-center px-10 py-5 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} transition-colors`}
         style={{
           bottom: window.innerWidth < 766 ? "0" : "",
           top: window.innerWidth < 766 ? "auto" : "0",
@@ -171,35 +176,10 @@ const Nav = () => {
               className="text-white-900 dark:text-white-500 rounded p-0 flex items-center"
             >
               {darkMode ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                  />
-                </svg>
+                <Moon02Icon/>
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) 
-}
+                <Sun01Icon/>
+              ) }
             </button>
             <li>
               <div className="relactive" ref={dropdownRef}>

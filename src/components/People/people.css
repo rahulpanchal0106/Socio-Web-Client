@@ -5,6 +5,13 @@
 .you{
     text-shadow: 2px 2px rgb(255, 255, 255);
 }
+.dark .you{
+    color:white;
+    text-shadow: 2px 2px #0e1319;
+}
 .jlu:hover abbr .jlub .you{
     text-shadow: 5px 5px rgb(255, 255, 255);
+}
+.dark .jlu:hover abbr .jlub .you{
+    text-shadow: 5px 5px #0e1319;
 }

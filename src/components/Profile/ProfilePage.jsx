@@ -203,7 +203,7 @@ const ProfilePage = () => {
                         <label htmlFor="username">Username</label>
                         <input 
                             type="text-5xl" 
-                            className="bg-gray-100 px-3 py-1 rounded-lg"
+                            className="bg-gray-100 dark:bg-gray-900 dark:text-white px-3 py-1 rounded-lg"
                             placeholder="Username" 
                             id="username" 
                             name="username" 
@@ -213,7 +213,7 @@ const ProfilePage = () => {
                         />
                         <label htmlFor="bio">Bio</label>
                         <textarea 
-                            className="bg-gray-100 px-3 py-1 rounded-lg resize-none"
+                            className="bg-gray-100 dark:bg-gray-900 dark:text-white px-3 py-1 rounded-lg resize-none"
                             name="bio" 
                             id="bio" 
                             
@@ -226,7 +226,7 @@ const ProfilePage = () => {
                         <button className="text-red-800 px-2 py-4 align-center flex items-center justify-center" onClick={() => setUpdateMode(!updateMode)}> <EditOffIcon/></button>
                     )}
                 </div>
-                <button className="bg-pink-200 rounded-lg px-3 py-1" type="submit">Submit</button>
+                <button className="bg-pink-200 dark:bg-slate-600 dark:text-white rounded-lg px-3 py-1" type="submit">Submit</button>
             </form>
             :
             <div className="flex flex-col justify-between lg:mt-20 items-center px-4 py-4">
@@ -238,7 +238,7 @@ const ProfilePage = () => {
                         <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="px-5 py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >
                             {bio}
                         </p>
-                        <div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-1 ">
+                        <div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 dark:bg-gray-600 dark:text-white text-gray-500 px-2 py-1 ">
                             <UserLove01Icon size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
                         </div>
                         <div className="flex flex-row w-full justify-between items-center my-4">
@@ -252,7 +252,7 @@ const ProfilePage = () => {
                             }} >
                                 {profile_data.followers&&profile_data.followers.length>1?"Followers":"Follower"} <p className="text-xl">{profile_data.followers?profile_data.followers.length:0}</p>
                             </button>
-                            <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                            <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowers ? "flex" : "none",
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%"
@@ -262,7 +262,7 @@ const ProfilePage = () => {
                                 <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                 <div className="max-h-50 overflow-y-scroll">
                                     {openFollowers && profile_data.followers.length > 0 ? profile_data.followers.map((el, i) => (
-                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>
                                             <Link to={`/profile/${el.username}/${el.uid}`}>
                                                 @ {el.username}    
                                             </Link>
@@ -277,7 +277,7 @@ const ProfilePage = () => {
                             }}>
                                 {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:0}</p>
                             </button>
-                            <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                            <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowing ? "flex" : "none",
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%",
@@ -288,7 +288,7 @@ const ProfilePage = () => {
                                 <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                 <div className="max-h-50 overflow-y-scroll">
                                     {openFollowing && profile_data.following.length > 0 ? profile_data.following.map((el, i) => (
-                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                        <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>
                                             <Link to={`/profile/${el.username}/${el.uid}`}>
                                                 @ {el.username}    
                                             </Link>
@@ -301,7 +301,7 @@ const ProfilePage = () => {
                         </div>
                         
                         
-                        {username != getCookie('socio-user') && ( <button className="px-3 w-36 bg-blue-200 rounded-lg py-2 transition-all duration-300 hover:rounded-2xl hover:drop-shadow-lg" id="follow_btn" style={{
+                        {username != getCookie('socio-user') && ( <button className="px-3 w-36 bg-blue-200 dark:bg-gray-600 dark:text-white rounded-lg py-2 transition-all duration-300 hover:rounded-2xl hover:drop-shadow-lg" id="follow_btn" style={{
                                 backgroundColor:isFollowing?"rgb(59 130 246 / 0.5)":"rgb(59, 130, 246)",
                                 color:isFollowing?"black":"white"
                                 // transition:"all 0.3s ease"
@@ -323,7 +323,7 @@ const ProfilePage = () => {
                         {
                             username == getCookie('socio-user') && (
                                 <div className="flex flex-row w-full justify-evenly itmes-center"> 
-                                    {username === getCookie('socio-user') && (<button className="bg-gray-200 transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}>
+                                    {username === getCookie('socio-user') && (<button className="bg-gray-200 dark:bg-gray-600 dark:text-white transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}>
                                         <UserEdit01Icon/>
                                     </button>)}
                                     <button
@@ -342,12 +342,10 @@ const ProfilePage = () => {
                 
                 <div className="flex flex-row justify-evenly items-center w-1/2 px-2 py-4">
 
-                    <button className="px-2 py-2 hover:text-gray-500 text-xs lg:text-md transition transition-all duration-300 rounded-lg" onClick={()=>setOpenMyPosts(true)} style={{
-                        background: openMyPosts?"#fbcfe8":'white',
+                    <button className={`px-2 py-2   text-xs lg:text-md transition transition-all duration-300 rounded-lg ${openMyPosts?"tracking-widest":'text-gray-500'}`} onClick={()=>setOpenMyPosts(true)} style={{
                         fontWeight: openMyPosts?"600":'100'
                     }} >Posts by {username==getCookie('socio-user')?"you":username}</button>
-                    <button className="px-2 py-2 hover:text-gray-500 text-xs lg:text-md rounded-lg transition-all duration-300" onClick={()=>setOpenMyPosts(false)} style={{
-                        background: !openMyPosts?"#fbcfe8":'white',
+                    <button className={`px-2 py-2  text-xs lg:text-md rounded-lg transition-all duration-300 ${openMyPosts?"text-gray-500":'tracking-widest'}`} onClick={()=>setOpenMyPosts(false)} style={{
                         fontWeight: !openMyPosts?"600":'100'
                     }}>My Trash </button>
                     
@@ -373,7 +371,7 @@ const ProfilePage = () => {
                             const showPostComments = showComments[post._id] || false;
                                 // console.log("))))))))))0 ",post)
                                 return(
-                                    <div key={i} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                                    <div key={i} className="post bg-gray-100 dark:bg-gray-600 dark:text-white mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
                                         <div className="left flex flex-row items-center justify-evenly w-11">
                                             <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
@@ -419,7 +417,7 @@ const ProfilePage = () => {
                                         
                                     </div>
 
-                                    <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                    <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%",
@@ -430,12 +428,12 @@ const ProfilePage = () => {
                                         <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                         <div className="max-h-50 overflow-y-scroll">
                                             {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
-                                                <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>@{el.username}</li>
+                                                <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>@{el.username}</li>
                                             )) : <p className="px-1 py-2" >No one :(</p>}
                                         </div>
                                     </ul>
 
-                                    {showPostComments && <ul className="bg-white flex flex-col-reverse drop-shadow-lg px-2  rounded-xl" style={{paddingTop:"10px", paddingBottom:"10px"}}>
+                                    {showPostComments && <ul className="bg-white dark:bg-gray-600 dark:text-white flex flex-col-reverse drop-shadow-lg px-2  rounded-xl" style={{paddingTop:"10px", paddingBottom:"10px"}}>
                                         
                                         {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                             const openCLike = openCLikeStates[el.comment_id] || false;
@@ -455,7 +453,7 @@ const ProfilePage = () => {
                                             }
 
                                             return (
-                                                <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                                <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-600 dark:text-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                     <div className="w-full flex flex-row justify-between">
                                                         <div className="flex flex-col">
                                                             <b>@{el.commentBy || "aiyen?!"}</b>
@@ -478,7 +476,7 @@ const ProfilePage = () => {
                                                                 <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
                                                                 <div className="max-h-50 overflow-y-scroll"> 
                                                                     {el.likedBy.length>0?el.likedBy.map((like, i) => (
-                                                                        <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">@{like.username}</li>
+                                                                        <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white">@{like.username}</li>
                                                                     )):<p className="px-1 py-2" >No one :(</p>}
                                                                 </div>
                                                             </ul>
@@ -513,7 +511,7 @@ const ProfilePage = () => {
                         }
                         {
                             openMyPosts&&!myPosts.length>0?
-                            <div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                            <div className=" rounded-2xl bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
                                     <CancelCircleIcon size={100} color="lightgray" className="mb-2"/>
                                     No Posts Yet
                                 </div>
@@ -541,7 +539,7 @@ const ProfilePage = () => {
                                 const showPostComments = showComments[post._id] || false;
                                     // console.log("))))))))))0 ",post)
                                     return(
-                                        <div key={i} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                                        <div key={i} className="post bg-gray-100 dark:bg-gray-900 dark:text-white mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                         <div className="top-bar author flex flex-row justify-between items-center">
                                             <div className="left flex flex-row items-center justify-evenly w-11">
                                                 <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
@@ -587,7 +585,7 @@ const ProfilePage = () => {
                                             
                                         </div>
 
-                                        <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                        <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%",
@@ -598,7 +596,7 @@ const ProfilePage = () => {
                                             <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                             <div className="max-h-50 overflow-y-scroll">
                                                 {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
-                                                    <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                                    <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>
                                                         <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-evenly w-11">
                                                             <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
                                                             {el.username}
@@ -632,7 +630,7 @@ const ProfilePage = () => {
                                                 }
 
                                                 return (
-                                                    <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                                    <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-600 dark:text-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                         <div className="w-full flex flex-row justify-between">
                                                             <div className="flex flex-col">
                                                                 <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-evenly w-11">
@@ -658,7 +656,7 @@ const ProfilePage = () => {
                                                                     <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
                                                                     <div className="max-h-50 overflow-y-scroll"> 
                                                                         {el.likedBy.length>0?el.likedBy.map((like, i) => (
-                                                                            <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">@{like.username}</li>
+                                                                            <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white">@{like.username}</li>
                                                                         )):<p className="px-1 py-2" >No one :(</p>}
                                                                     </div>
                                                                 </ul>
@@ -693,7 +691,7 @@ const ProfilePage = () => {
                             }
                             {
                                 !openMyPosts&&!myTrash.length>0?
-                                <div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                                <div className=" rounded-2xl bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
                                     <FaRegTrashCan size={100} color="lightgray" className="mb-2"/>
                                     
                                     No Trash Yet
@@ -702,7 +700,7 @@ const ProfilePage = () => {
                             }
                         </div>
                     :
-                    !openMyPosts&&<div className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                    !openMyPosts&&<div className=" rounded-2xl bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
                         <BiShieldX size={100} color="lightgray" className="mb-2"/>
                         Private
                     </div>

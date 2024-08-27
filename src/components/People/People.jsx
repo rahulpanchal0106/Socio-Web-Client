@@ -49,25 +49,25 @@ const People = () => {
         },10)
     )
     return (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center dark:bg-gray-800 dark:text-white">
             <Nav />
             <Toaster/>
         
-            <h1 className="text-6xl  lg:mb-0  mt-24 mb-20">People</h1>
-            <div className="lg:mt-20 mb-20  lg:w-64 flex flex-col-reverse justify-center items-center bg-white h-12/11 overflow-scroll">
+            <h1 className="text-6xl  lg:mb-0  mt-24 mb-20 ">People</h1>
+            <div className="lg:mt-20 mb-20  lg:w-64 flex flex-col-reverse justify-center items-center bg-white dark:bg-gray-800 dark:text-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
                     // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
                       <div
                         key={i}
-                        className="bg-gray-100 flex lg:w-full flex-col w-52 border border-solid border-gray-200 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
+                        className="bg-gray-100 dark:bg-gray-900 flex lg:w-full flex-col w-52 border border-solid border-gray-200 dark:border-gray-800 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
                       >
                         <Link to={`/profile/${p.username}/${p.uid}`}>
                         {p.category_pref[0] &&
                         p.category_pref[0] == userData.category_pref[0] ? (
-                          <div className="jlu relative flex flex-row mb-2 text-xs justify-evenly items-center rounded-lg bg-yellow-200 text-gray-500 px-2 py-1 ">
+                          <div className="jlu relative flex flex-row mb-2 text-xs justify-evenly items-center rounded-lg bg-yellow-200 dark:bg-slate-600 text-gray-500 dark:text-white px-2 py-1 ">
                             <abbr className="w-full flex flex-row justify-evenly abbr" title={p.category_pref[0]}>
-                              <b className="jlub flex flex-row justify-evenly text-black">
+                              <b className="jlub flex flex-row justify-evenly text-black dark:text-white">
                                 
                                 {
                                     p.username == userData.username?<>

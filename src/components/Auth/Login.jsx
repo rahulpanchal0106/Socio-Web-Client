@@ -58,14 +58,14 @@ const Login=()=>{
 
      
     return(
-        <div className="bg-yellow-200 flex flex-col w-full h-screen justify-center items-center">
+        <div className="bg-yellow-200 dark:bg-gray-600 dark:text-white flex flex-col w-full h-screen justify-center items-center">
             <Nav/>
             <Toaster/>
             <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center">
             <h1 className="mb-2 px-4 py-2 text-4xl">Log in to <i className="text-shadow">Socio</i></h1>
-                <input type="text" className="input mb-2 px-4 py-2 rounded-lg" onChange={handleInput} placeholder="Username" />
-                <input type="password" className="input mb-2  px-4 py-2 rounded-lg" onChange={handlePassword} placeholder="password" />
-                <button type="submit" className="bg-pink-200 px-4 py-2 rounded-lg hover:bg-pink-400 transition-all duration-300" onClick={handleSubmit}>Login</button> {isLoading?"Loading...":""}
+                <input type="text" className="input mb-2 px-4 py-2 rounded-lg dark:text-black" onChange={handleInput} placeholder="Username" />
+                <input type="password" className="input mb-2  px-4 py-2 rounded-lg dark:text-black" onChange={handlePassword} placeholder="password" />
+                <button type="submit" className="bg-pink-200 dark:bg-slate-900 px-4 py-2 rounded-lg dark:hover:bg-slate-800 hover:bg-pink-400 transition-all duration-300" onClick={handleSubmit}>Login</button> {isLoading?"Loading...":""}
             </form>  
 
             <div className="flex flex-row">

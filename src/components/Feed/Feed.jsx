@@ -101,12 +101,12 @@ const Feed = () => {
     
     return (
         <>
-            <div className="px-10 relative z-10 py-5 bg-white-200 flex flex-col justify-center items-center mb-12">
+            <div className="px-10 relative z-10 py-5 bg-white-200 dark:bg-gray-800 flex flex-col justify-center items-center mb-12">
                 <Nav />
                 <Toaster/>
                 {/* <Post/> */}
                 <h1 className="text-6xl mb-4 mt-20">Feed</h1>
-                <Link to='/post' className="drop-shadow-md bg-yellow-100 flex justify-center items-center w-10 h-10 rounded-full border border-black border-solid fixed bottom-16 z-40 right-10 hover:drop-shadow-xl hover:bg-gray-100 hover:rotate-90">
+                <Link to='/post' className="drop-shadow-md bg-yellow-100  dark:bg-slate-600 dark:text-white flex justify-center items-center w-10 h-10 rounded-full border border-black border-solid fixed bottom-16 z-40 right-10 hover:drop-shadow-xl hover:bg-gray-100 hover:rotate-90">
                     <button>
                         <FaPlus/>
                     </button>
@@ -130,7 +130,7 @@ const Feed = () => {
                         const showPostComments = showComments[post._id] || false;
 
                         return (
-                            <div key={index} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                            <div key={index} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                 <div className="top-bar author flex flex-row justify-between items-center">
                                     <div className="left flex flex-row items-center justify-evenly w-full">
                                         <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
@@ -157,7 +157,7 @@ const Feed = () => {
                                 </div>
                                 <div className="bottom-bar mb-2 flex flex-row  justify-between">
                                     {
-                                        post.category&&<div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 text-gray-500 px-2 py-0 ">
+                                        post.category&&<div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-500 px-2 py-0 ">
                                             <GrTag/> <b>{post.category}</b> 
                                         </div>
                                     }
@@ -185,7 +185,7 @@ const Feed = () => {
                                     
                                 </div>
 
-                                <ul className="flex flex-col absolute w-40  right-full bg-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg:gray-800 px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                         display: openPostLike ? "flex" : "none",
                                         top:"70px",  
                                         right: window.innerWidth<766?"30%":"100%",
@@ -196,7 +196,7 @@ const Feed = () => {
                                     <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                     <div className="max-h-50 overflow-y-scroll">
                                         {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
-                                            <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200" key={i}>
+                                            <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800" key={i}>
                                                 <Link to={`/profile/${el.username}/${el.uid}`}>
                                                     @ {el.username}    
                                                 </Link>
@@ -228,7 +228,7 @@ const Feed = () => {
                                         }
 
                                         return (
-                                            <div className="flex flex-col mb-4 drop-shadow-lg bg-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                            <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-800 w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
                                                 <div className="w-full flex flex-row justify-between ">
                                                     <div className="flex flex-col">
                                                         <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-start w-full">
@@ -249,13 +249,13 @@ const Feed = () => {
                                                             </button>
                                                             
                                                         </div>
-                                                        <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white px-4 py-2 rounded-lg drop-shadow-lg">
+                                                        <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white dark:bg-gray-800 px-4 py-2 rounded-lg drop-shadow-lg">
                                                             <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div>
                                                             <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
                                                             <button onClick={()=>toggleOpenCLike(el.comment_id)} className="absolute right-2" ><GrClose/></button>
                                                             <div className="max-h-50 overflow-y-scroll"> 
                                                                 {el.likedBy.length>0?el.likedBy.map((like, i) => (
-                                                                    <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200">
+                                                                    <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800">
                                                                         <Link to={`/profile/${like.username}/${like.uid}`}>
                                                                             @ {like.username}    
                                                                         </Link>
@@ -293,7 +293,7 @@ const Feed = () => {
                     }) :
                     
                     feedPosts[0]==0?
-                    <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                    <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
                         <PreferenceHorizontalIcon size={100} color="lightgray" className="mb-2"/>
                         Set your preferences
@@ -301,7 +301,7 @@ const Feed = () => {
                             toast.loading("Need to select your preferences")
                         }
                     </div>   
-                    :<button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                    :<button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
                         <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
                         Something broke
