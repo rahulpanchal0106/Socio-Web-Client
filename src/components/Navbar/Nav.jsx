@@ -91,7 +91,7 @@ const Nav = () => {
         }}
       >
         <div className="logo text-4xl none lg:flex">
-          {window.innerWidth < 766 ? "" : "SOCIO"}
+          {window.innerWidth < 766?"":<img src="/likeminded.svg" width={40}/>}{window.innerWidth < 766 ? "" : "SOCIO"}
         </div>
         <ul
           className={`flex flex-row w-full justify-evenly items-center fixed bottom-0 left-0 h-10 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors`}
