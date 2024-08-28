@@ -204,9 +204,9 @@ const ProfilePage = () => {
             {updateMode ?
             (
             <div className="flex flex-col justify-center items-center">
-                    <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                    <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 object-cover lg:mt-20" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                     <FileUpload username={getCookie('socio-user')} />
-            <form className="flex flex-col justify-between items-center px-4 py-4 lg:mt-20 " onSubmit={handleProfileUpdate}>
+            <form className="flex flex-col justify-between items-center px-4 py-4  " onSubmit={handleProfileUpdate}>
                 <div className="flex flex-col lg:flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
                     {/* <img src={profile_data.profilePicture?"https://drive.google.com/uc?export=view&id="+profile_data.profilePicture:"/d-prof.jpg"} className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" /> */}
                     <div className="flex flex-col">
