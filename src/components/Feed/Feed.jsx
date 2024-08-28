@@ -161,7 +161,7 @@ const Feed = () => {
                                         {post.post.content}
                                     </div>
                                     {   post.postImg
-                                        ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, try again later" />
+                                        ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, Can't show the image for now" />
                                         :""
                                     }
                                         
