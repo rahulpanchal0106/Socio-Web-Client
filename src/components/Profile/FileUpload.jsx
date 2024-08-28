@@ -21,6 +21,13 @@ function FileUpload({username}) {
       return;
     }
 
+    const allowedMimeTypes = ["image/jpeg","image/png","image/svg"]
+    if(!allowedMimeTypes.includes(selectedFile.type)){
+        alert("Only .jpeg, .png and .svg are allowed");
+        return;
+    }
+
+
     // Create FormData object to send the file as multipart/form-data
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -51,8 +58,8 @@ function FileUpload({username}) {
   return (
     <div>
       <h1>Upload File to Google Drive</h1>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <input type="file" onChange={handleFileChange} accept='.jpg,.jpeg,.png,.svg' />
+      <button onClick={handleUpload} className="button">Upload</button>
       <p>{uploadStatus}</p>
     </div>
   );
