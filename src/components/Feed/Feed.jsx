@@ -128,6 +128,10 @@ const Feed = () => {
                             setComment(null)
                         }
 
+                        if(post.postImg){
+                            console.log("POSTSSSSSS ",post.postImg, post)
+                        }
+
                         const openPostLike = openPostLikeStates[post._id] || false;
                         const showPostComments = showComments[post._id] || false;
 
@@ -154,8 +158,15 @@ const Feed = () => {
                                 <p className="text-xs text-gray-600">
                                     <TimeAgo date={post.metaData.date} />
                                 </p>
-                                <div className="middle-section flex flex-row w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
-                                    {post.post.content}
+                                <div className="middle-section flex flex-col w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
+                                    <div>
+                                        {post.post.content}
+                                    </div>
+                                    {   post.postImg!=='none'
+                                        ?<img className="rounded-2xl w-full h-full object-cover" src={post.postImg!=='none'?`https://lh3.googleusercontent.com/d/${post.postImg}`:"/d-prof.jpg"} alt="Profile" />
+                                        :""
+                                    }
+                                        
                                 </div>
                                 <div className="bottom-bar mb-2 flex flex-row  justify-between">
                                     {

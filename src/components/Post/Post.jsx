@@ -3,35 +3,46 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import getData from "../../utils/getData";
 import Nav from "../Navbar/Nav";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import getCookie from "../../utils/getCookie";
+import generate_UID from "../../utils/uid_generator";
+import PostImgUpload from "./PostImage";
 
 const Post = () => {
     const [content, setContent] = useState('');
     const [userData, setUserData] = useState(null);
+    const [upid, setUpid] = useState(''); // Initialize `upid` state
     const navigator = useNavigate();
-    const fetchUserData = async () => {
-        const user = await getData();
-        setUserData(user);
 
-    };
+    // Generate unique post ID when the component mounts
+    useEffect(() => {
+        const newUpid = generate_UID();
+        console.log("🕹️🕹️🕹️🕹️🕹️🕹️🕹️ ",newUpid)
+        setUpid(newUpid); // Properly set `upid` state
+    }, []); // Empty dependency array ensures this runs only once
 
     useEffect(() => {
+        const fetchUserData = async () => {
+            const user = await getData();
+            setUserData(user);
+        };
+        console.log("🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻 ",upid)
         fetchUserData();
-    }, []);
+    }, []); // Fetch user data only once when the component mounts
 
     const handleContent = (e) => {
         setContent(e.target.value);
         console.log(e.target.value);
     };
-
+    console.log("🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻 ",upid)
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         if (!userData) {
             console.error("User data is not loaded yet");
             return;
         }
-        
+
         const body = {
             post: {
                 content: content,
@@ -42,26 +53,40 @@ const Post = () => {
                 profilePicture: getCookie('socio-pf'),
                 date: new Date().toISOString()
             },
-            comments:[]
+            upid: upid,
+            postImg:'none',
+            comments: []
         };
         
         const resp = await fetchData(url + '/post', body, 'POST');
         console.log(resp);
-        navigator('/feed')
+        navigator('/feed'); // Navigate to the feed after submitting the post
     };
 
     return (
         <>
-        <Nav/>
-        <div className=" flex flex-col w-screen lg:w-full h-fit md:mt-20 justify-center items-center">
-            <h1 className="mb-2 px-4 py-2 text-4xl mb-4">Make a <i className="text-shadow">POST!</i></h1>
-            <form onSubmit={handleSubmit} className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-between items-center">
-                <textarea required type="text" rows={2} style={{resize:"none"}} className=" h-60 textarea w-48 lg:w-full flex justify-center items-center px-4 py-2 rounded-lg dark:text-black drop-shadow-lg" 
-placeholder="So...
-What you wanna say?" onChange={handleContent} ></textarea>
-                <button className="button px-4 py-2 rounded-lg drop-shadow-lg bg-yellow-200 dark:bg-slate-600 dark:text-white hover:drop-shadow-lg mt-5 hover:bg-yellow-500 dark:hover:bg-slate-500 transition-all duration-300 hover:text-white ml-4 " type="submit">Post</button>
-            </form>
-        </div>
+            <Nav />
+            <div className="flex flex-col w-screen lg:w-full h-fit md:mt-20 justify-center items-center">
+                <h1 className="mb-2 px-4 py-2 text-4xl mb-4">Make a <i className="text-shadow">POST!</i></h1>
+                <form onSubmit={handleSubmit} className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-between items-center">
+                    <textarea
+                        required
+                        type="text"
+                        rows={2}
+                        style={{ resize: "none" }}
+                        className="h-60 textarea w-48 lg:w-full flex justify-center items-center px-4 py-2 rounded-lg dark:text-black drop-shadow-lg"
+                        placeholder="So... What you wanna say?"
+                        onChange={handleContent}
+                    ></textarea>
+                    <button
+                        className="button px-4 py-2 rounded-lg drop-shadow-lg bg-yellow-200 dark:bg-slate-600 dark:text-white hover:drop-shadow-lg mt-5 hover:bg-yellow-500 dark:hover:bg-slate-500 transition-all duration-300 hover:text-white ml-4"
+                        type="submit"
+                    >
+                        Post
+                    </button>
+                </form>
+                <PostImgUpload postId={upid} /> {/* Use `upid` for PostImgUpload */}
+            </div>
         </>
     );
 };
