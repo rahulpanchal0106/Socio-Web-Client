@@ -58,7 +58,7 @@ function PostImgUpload({postId}) {
 
   return (
     <div>
-      <h1>Upload File to Google Drive</h1>
+      <h1>Post Image</h1>
       <input type="file" onChange={handleFileChange} accept='.jpg,.jpeg,.png,.svg' />
       <button onClick={handleUpload} className="button">Upload</button>
       <p>{uploadStatus}</p>
