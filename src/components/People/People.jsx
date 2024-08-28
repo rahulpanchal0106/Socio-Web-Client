@@ -37,7 +37,6 @@ const People = () => {
 
         const fetchUserDoc = async()=>{
             const doc = await getPerson(getCookie('socio-user'));
-            console.log("🦧🦧🦧🦧🦧 ",doc)
             setuData(doc);
         }
         fetchUserDoc()
@@ -54,19 +53,18 @@ const People = () => {
             <Toaster/>
         
             <h1 className="text-6xl  lg:mb-0  mt-24 mb-20 ">People</h1>
-            <div className="lg:mt-20 mb-20  lg:w-64 flex flex-col-reverse justify-center items-center bg-white dark:bg-gray-800 dark:text-white h-12/11 overflow-scroll">
+            <div className="lg:mt-20 mb-20  lg:w-80 w-3/4 flex flex-col-reverse justify-center items-center bg-white dark:bg-gray-800 dark:text-white h-12/11 overflow-scroll">
                 {data ? data.map((p, i) => {
                     // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
                       <div
                         key={i}
-                        className="bg-gray-100 dark:bg-gray-900 flex lg:w-full flex-col w-52 border border-solid border-gray-200 dark:border-gray-800 drop-shadow rounded-lg mb-4 px-4 py-2 justify-evenly"
+                        className="bg-gray-100 dark:bg-gray-900 flex lg:w-full flex-col w-full border border-solid border-gray-200 dark:border-gray-800 drop-shadow rounded-lg mb-4 px-4 py-2 justify-centre"
                       >
-                        <Link to={`/profile/${p.username}/${p.uid}`}>
-                        {p.category_pref[0] &&
-                        p.category_pref[0] == userData.category_pref[0] ? (
-                          <div className="jlu relative flex flex-row mb-2 text-xs justify-evenly items-center rounded-lg bg-yellow-200 dark:bg-slate-600 text-gray-500 dark:text-white px-2 py-1 ">
-                            <abbr className="w-full flex flex-row justify-evenly abbr" title={p.category_pref[0]}>
+                        <Link to={`/profile/${p.username}/${p.uid}`} className="flex flex-col justify-center items-center">
+                        {p.category_pref[0] && p.category_pref[0] == userData.category_pref[0] ? (
+                          <div className="jlu w-fit relative flex flex-row mb-2 text-xs justify-center items-center rounded-lg bg-yellow-200 dark:bg-slate-600 text-gray-500 dark:text-white px-2 py-1 ">
+                            <abbr className="w-fit flex flex-row justify-center abbr" title={p.category_pref[0]}>
                               <b className="jlub flex flex-row justify-evenly text-black dark:text-white">
                                 
                                 {

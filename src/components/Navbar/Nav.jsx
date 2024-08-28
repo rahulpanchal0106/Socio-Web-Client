@@ -86,7 +86,7 @@ const Nav = () => {
 
     return (
       <div
-        className={`navbar z-30 fixed flex w-screen  top-0 justify-between  items-center px-10 py-5 ${darkMode ? 'lg:bg-gray-800 text-white' : 'lg:bg-white text-black'} transition-colors`}
+        className={`navbar z-30 fixed flex w-screen items-center top-0 justify-between  items-center px-10 py-5 ${darkMode ? 'lg:bg-gray-800 text-white' : 'lg:bg-white text-black'} transition-colors`}
         style={{
           bottom: window.innerWidth < 766 ? "0" : "",
           top: window.innerWidth < 766 ? "auto" : "0",
@@ -160,7 +160,7 @@ const Nav = () => {
           )}
         </ul>
         <div
-          className="navlinks w-1/2"
+          className="navlinks w-2/3"
           style={{
             display: window.innerWidth < 766 ? "none" : "flex",
           }}

@@ -128,9 +128,7 @@ const Feed = () => {
                             setComment(null)
                         }
 
-                        if(post.postImg){
-                            console.log("POSTSSSSSS ",post.postImg, post)
-                        }
+                      
 
                         const openPostLike = openPostLikeStates[post._id] || false;
                         const showPostComments = showComments[post._id] || false;
@@ -162,8 +160,8 @@ const Feed = () => {
                                     <div>
                                         {post.post.content}
                                     </div>
-                                    {   post.postImg!=='none'
-                                        ?<img className="rounded-2xl w-full h-full object-cover" src={post.postImg!=='none'?`https://lh3.googleusercontent.com/d/${post.postImg}`:"/d-prof.jpg"} alt="Profile" />
+                                    {   post.postImg
+                                        ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, try again later" />
                                         :""
                                     }
                                         
