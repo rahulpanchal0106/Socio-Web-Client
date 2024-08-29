@@ -138,7 +138,7 @@ const Feed = () => {
                                 <div className="top-bar author flex flex-row justify-between items-center">
                                     <div className="left flex flex-row items-center justify-evenly w-full">
                                         <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
-                                            <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={post.metaData.profilePicture?`https://lh3.googleusercontent.com/d/${post.metaData.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                                            <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={post.metaData.profilePicture && post.metaData.profilePicture!=undefined?`https://lh3.googleusercontent.com/d/${post.metaData.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                                             <b>{post.metaData.author}</b>
                                         </Link>
                                     </div>
