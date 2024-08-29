@@ -160,7 +160,7 @@ const Feed = () => {
                                     <div>
                                         {post.post.content}
                                     </div>
-                                    {   post.postImg
+                                    {   post.postImg && post.postImg!="none"
                                         ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, Can't show the image for now" />
                                         :""
                                     }

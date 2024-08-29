@@ -204,9 +204,9 @@ const ProfilePage = () => {
             {updateMode ?
             (
             <div className="flex flex-col justify-center items-center">
-                    <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 object-cover lg:mt-20" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
-                    <FileUpload username={getCookie('socio-user')} />
+                    
             <form className="flex flex-col justify-between items-center px-4 py-4  " onSubmit={handleProfileUpdate}>
+                    <FileUpload username={getCookie('socio-user')} src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} />
                 <div className="flex flex-col lg:flex-row px-5 py-4 justify-evenly   rounded-lg w-2/3">
                     {/* <img src={profile_data.profilePicture?"https://drive.google.com/uc?export=view&id="+profile_data.profilePicture:"/d-prof.jpg"} className="rounded-full" width={window.innerWidth<766?100:150} height={window.innerWidth<766?100:150} alt="Profile" /> */}
                     <div className="flex flex-col">
@@ -279,7 +279,7 @@ const ProfilePage = () => {
                     {/* <img src={profile_data.profilePicture?"https://drive.google.com/thumbnail?id=1PT7UxITAVN6EsruZqwhhmojoz6g6p84H":"/d-prof.jpg"} className="rounded-full" width={ window.innerWidth<766?80:150} height={window.innerWidth<766?100:150} alt="Profile" /> */}
                     <div className="px-0 py-3 flex flex-col justify-center items-center ">
                         <div className="flex flex-row justify-center items-center w-screen">
-                            <img className="rounded-full lg:w-48 lg:h-48 w-40 h-40 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                            <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 overflow-hidden border border-solid border-gray-400 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                             <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
                         </div>
                         <div className="px-2 py-1 ">

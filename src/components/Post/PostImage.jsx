@@ -2,29 +2,37 @@ import React, { useState } from 'react';
 import url from '../../utils/url';
 import { useCookies } from 'react-cookie';
 import toast, { Toaster } from 'react-hot-toast';
-import { Add01Icon } from 'hugeicons-react';
+import { Add01Icon, ImageAdd02Icon } from 'hugeicons-react';
+import { FaRegImages } from 'react-icons/fa';
+import { BiImageAdd, BiSolidFileImage, BiSolidImageAdd } from 'react-icons/bi';
+import { GrImage } from 'react-icons/gr';
 
 function PostImgUpload({ postId }) {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(''); // State to store the image preview URL
   const [uploadStatus, setUploadStatus] = useState('');
   const [cookies, setCookie] = useCookies(['socio-pf']);
 
   // Handle file selection
   const handleFileChange = (event) => {
+    event.preventDefault(); 
     const file = event.target.files[0];
     if (file) {
       setSelectedFile(file);
-      toast.loading("Uploading image");
-      setTimeout(handleUpload, 1000);  // Directly call handleUpload after delay
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL for preview
     }
   };
 
   // Handle file upload
   const handleUpload = async () => {
+    event.preventDefault(); 
     if (!selectedFile) {
       toast.dismiss();
       toast.error("No file selected");
-
       return;
     }
 
@@ -39,6 +47,7 @@ function PostImgUpload({ postId }) {
     formData.append('postId', postId);
 
     try {
+      toast.loading("Uploading the image")
       const response = await fetch(url + '/upload_pi', {
         method: 'POST',
         body: formData,
@@ -62,7 +71,7 @@ function PostImgUpload({ postId }) {
   };
 
   return (
-    <div>
+    <div className='flex flex-col w-full justify-end items-end'>
       <Toaster />
       <input
         type="file"
@@ -71,9 +80,26 @@ function PostImgUpload({ postId }) {
         className='hidden'
         accept='.jpg,.jpeg,.png,.svg'
       />
-      <label htmlFor="fileInput" className="cursor-pointer p-2 rounded-full text-white">
-        <Add01Icon />
+      <label htmlFor="fileInput" className="cursor-pointer p-2 dark:text-white rounded-full text-black">
+        <BiImageAdd />
       </label>
+      
+      {/* Image preview */}
+      {previewUrl && (
+        <div className="mt-4">
+          <img src={previewUrl} alt="Preview" className="max-w-full h-auto rounded" />
+        </div>
+      )}
+
+      {/* Submit button for upload */}
+      {selectedFile && (
+        <button onClick={handleUpload} className="mt-2 p-2 dark:bg-slate-500 dark:hover:bg-slate-700 bg-yellow-100 hover:bg-yellow-400 text-black dark:text-white  rounded">
+          Upload Image
+        </button>
+      )}
+
+      {/* Optional: Display upload status message */}
+      {uploadStatus && <p>{uploadStatus}</p>}
     </div>
   );
 }

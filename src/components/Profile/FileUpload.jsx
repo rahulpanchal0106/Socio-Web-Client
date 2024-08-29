@@ -2,25 +2,40 @@ import React, { useState } from 'react';
 import url from '../../utils/url';
 import { useCookies } from 'react-cookie';
 import toast, { Toaster } from 'react-hot-toast';
-import { Edit01Icon, Edit02Icon, ImageAdd01Icon } from 'hugeicons-react';
+import { Edit01Icon, Edit02Icon, EditUser02Icon, FileEditIcon, ImageAdd01Icon, ImageUpload01Icon } from 'hugeicons-react';
+import { BiImageAdd } from 'react-icons/bi';
+import { FaEdit, FaRegEdit } from 'react-icons/fa';
+import { GrEdit } from 'react-icons/gr';
 
 
-function FileUpload({username}) {
+function FileUpload({username,src}) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
   const [cookies,setCookie] = useCookies(['socio-pf'])
+  const [previewUrl, setPreviewUrl] = useState();
 
   console.log(")))))))))))))))) 000000000000",username)
   // Handle file selection
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    toast.loading("Uploading new profile picture")
-    setTimeout(()=>handleUpload(),100)
+    event.preventDefault();
+    const file = event.target.files[0];
+    if(file){
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        setPreviewUrl(reader.result);
+      }
+      reader.readAsDataURL(file)
+    }
+    
+    // setTimeout(()=>handleUpload(),100)
       
   };
 
   // Handle file upload
-  const handleUpload = async () => {
+  const handleUpload = async (e) => {
+    e.preventDefault()
+    toast.loading("Uploading new profile picture")
     if (!selectedFile) {
       toast.error("No file selected")
       setTimeout(()=>toast.dismiss(),1000)
@@ -68,11 +83,24 @@ function FileUpload({username}) {
   return (
     <div>
       <Toaster/>
-      <input type="file" onChange={handleFileChange} id="fileInput" className='hidden' accept='.jpg,.jpeg,.png,.svg' />
-      <label htmlFor="fileInput" className="cursor-pointer  p-2 rounded-full text-white">
-        <Edit02Icon/>
-      </label>
-      {/* <button onClick={handleUpload} className="button">Change Profile Picture</button> */}
+      <div className='flex flex-row justify-end items-center '>
+        <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 overflow-hidden border border-solid border-white object-cover lg:mt-20" src={previewUrl?previewUrl:src} alt="Profile" />
+        <input type="file" onChange={handleFileChange} id="fileInput" className='hidden' accept='.jpg,.jpeg,.png,.svg' />
+        <label htmlFor="fileInput" className="border border-solid border-white cursor-pointer bg-white dark:bg-slate-800 absolute   p-2 rounded-full text-black dark:text-white">
+          <FaRegEdit />
+        </label>
+      </div>
+
+      {/* {previewUrl && (
+        <div className="mt-4">
+          <img src={previewUrl} alt="Preview" className="max-w-full h-auto rounded" />
+        </div>
+      )} */}
+      {selectedFile && (
+        <button onClick={handleUpload} className="mt-2 p-2 dark:bg-slate-500 dark:hover:bg-slate-700 bg-yellow-100 hover:bg-yellow-400 text-black dark:text-white  rounded">
+          Stage changes
+        </button>
+      )}
       {/* <p>{uploadStatus}</p> */}
     </div>
   );

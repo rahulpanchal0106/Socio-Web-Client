@@ -11,33 +11,37 @@ import PostImgUpload from "./PostImage";
 const Post = () => {
     const [content, setContent] = useState('');
     const [userData, setUserData] = useState(null);
-    const [upid, setUpid] = useState(''); // Initialize `upid` state
-    const navigator = useNavigate();
+    const [upid, setUpid] = useState('');
+    const [uploadedImgUrl, setUploadedImgUrl] = useState('none'); // State to store the uploaded image URL
+    const navigate = useNavigate();
 
     // Generate unique post ID when the component mounts
     useEffect(() => {
         const newUpid = generate_UID();
-        console.log("🕹️🕹️🕹️🕹️🕹️🕹️🕹️ ",newUpid)
-        setUpid(newUpid); // Properly set `upid` state
-    }, []); // Empty dependency array ensures this runs only once
+        setUpid(newUpid);
+    }, []);
 
+    // Fetch user data when the component mounts
     useEffect(() => {
         const fetchUserData = async () => {
             const user = await getData();
             setUserData(user);
         };
-        console.log("🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻 ",upid)
         fetchUserData();
-    }, []); // Fetch user data only once when the component mounts
+    }, []);
 
     const handleContent = (e) => {
         setContent(e.target.value);
-        console.log(e.target.value);
     };
-    console.log("🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻🍻 ",upid)
+
+    const handleImageUpload = (imageUrl) => {
+        // Callback function to handle image upload success
+        setUploadedImgUrl(imageUrl);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!userData) {
             console.error("User data is not loaded yet");
             return;
@@ -46,21 +50,21 @@ const Post = () => {
         const body = {
             post: {
                 content: content,
-                likes: 0
+                likes: 0,
             },
             metaData: {
                 author: userData.username,
                 profilePicture: getCookie('socio-pf'),
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
             },
             upid: upid,
-            postImg:'none',
-            comments: []
+            postImg: uploadedImgUrl,  // Use the uploaded image URL
+            comments: [],
         };
-        
+
         const resp = await fetchData(url + '/post', body, 'POST');
         console.log(resp);
-        navigator('/feed'); // Navigate to the feed after submitting the post
+        navigate('/feed'); // Navigate to the feed after submitting the post
     };
 
     return (
@@ -78,6 +82,7 @@ const Post = () => {
                         placeholder="So... What you wanna say?"
                         onChange={handleContent}
                     ></textarea>
+                    <PostImgUpload postId={upid} onUploadSuccess={handleImageUpload} /> {/* Pass callback to handle image upload success */}
                     <button
                         className="button px-4 py-2 rounded-lg drop-shadow-lg bg-yellow-200 dark:bg-slate-600 dark:text-white hover:drop-shadow-lg mt-5 hover:bg-yellow-500 dark:hover:bg-slate-500 transition-all duration-300 hover:text-white ml-4"
                         type="submit"
@@ -85,7 +90,6 @@ const Post = () => {
                         Post
                     </button>
                 </form>
-                <PostImgUpload postId={upid} /> {/* Use `upid` for PostImgUpload */}
             </div>
         </>
     );
