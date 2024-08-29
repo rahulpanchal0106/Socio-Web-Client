@@ -5,17 +5,17 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Add01Icon, Edit01Icon, Edit02Icon, ImageAdd01Icon } from 'hugeicons-react';
 
 
-function PostImgUpload({username}) {
+function PostImgUpload({postId}) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
   const [cookies,setCookie] = useCookies(['socio-pf'])
 
-  console.log(")))))))))))))))) 000000000000",username)
+  console.log(")))))))))))))))) 000000000000",postId)
   // Handle file selection
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
     toast.loading("Uploading image")
-    setTimeout(()=>handleUpload(),100)
+    setTimeout(()=>handleUpload(),700)
       
   };
 
@@ -37,7 +37,7 @@ function PostImgUpload({username}) {
     // Create FormData object to send the file as multipart/form-data
     const formData = new FormData();
     formData.append('file', selectedFile);
-    formData.append('username', username); 
+    formData.append('postId', postId); 
 
     try {
       // Send a POST request to your server using fetch
