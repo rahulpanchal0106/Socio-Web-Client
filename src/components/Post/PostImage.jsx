@@ -80,14 +80,14 @@ function PostImgUpload({ postId }) {
         className='hidden'
         accept='.jpg,.jpeg,.png,.svg'
       />
-      <label htmlFor="fileInput" className="cursor-pointer p-2 dark:text-white rounded-full text-black">
-        <BiImageAdd />
+      <label htmlFor="fileInput" className="cursor-pointer p-2 dark:text-white rounded-full text-black ">
+        <BiImageAdd size={25}/>
       </label>
       
       {/* Image preview */}
       {previewUrl && (
         <div className="mt-4">
-          <img src={previewUrl} alt="Preview" className="max-w-full h-auto rounded" />
+          <img src={previewUrl} alt="Preview" className="max-w-full h-auto rounded-lg" />
         </div>
       )}
 

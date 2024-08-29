@@ -77,8 +77,8 @@ const Post = () => {
                         required
                         type="text"
                         rows={2}
-                        style={{ resize: "none" }}
-                        className="h-60 textarea w-48 lg:w-full flex justify-center items-center px-4 py-2 rounded-lg dark:text-black drop-shadow-lg"
+                        style={{ resize: "vertical" }}
+                        className=" textarea w-48 lg:w-full flex justify-center items-center px-4 py-2 rounded-lg dark:text-black drop-shadow-lg"
                         placeholder="So... What you wanna say?"
                         onChange={handleContent}
                     ></textarea>

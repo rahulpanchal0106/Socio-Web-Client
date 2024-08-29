@@ -233,10 +233,10 @@ const ProfilePage = () => {
                         ></textarea>
                     </div>
                     {username === getCookie('socio-user') && (
-                        <button className="text-red-800 px-2 py-4 align-center flex items-center justify-center" onClick={() => setUpdateMode(!updateMode)}> <EditOffIcon/></button>
+                        <button className="text-red-500 hover:text-xl hover:text-red-200 px-2 py-4 align-center flex items-center justify-center absolute right-20 top-20" onClick={() => setUpdateMode(!updateMode)}> <GrClose/></button>
                     )}
                 </div>
-                <button className="bg-pink-200 dark:bg-slate-600 dark:text-white rounded-lg px-3 py-1" type="submit">Submit</button>
+                <button className="bg-pink-200 dark:bg-slate-600 dark:text-white dark:hover:bg-slate-700 hover:bg-pink-500 rounded-lg px-3 py-1" type="submit">Update profile</button>
             </form>
             
             </div>
