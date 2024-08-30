@@ -68,25 +68,25 @@ const Home=()=>{
                 </div>
             </div>
             <div className="h-screen w-full bg-red-200 dark:bg-slate-800 dark:text-white text-black flex flex-col justify-center items-center px-12 py-0">
-                <h1 className="text-6xl lg:text-9xl text-shadow">Watch Feed!</h1>
+                <h1 className="text-6xl lg:text-9xl text-shadow lg:mt-20">Watch Feed!</h1>
                 <div  className={`flex flex-row justify-center items-center  py-4 w-full transition-all ease-in duration-700 ${isVisible3 ? "opacity-100 h-1/2" : "opacity-0 h-0"}`}>
                         <div ref={ref3} className="text-xl lg:text-6xl flex flex-col justify-center items-center ">
                             Watch what <b className="flex flex-row justify-evenly w-full text-black dark:text-white"> <i className="text-shadow">You </i> <i >Like</i></b> 
                         </div>
+                        {
+                            auth?
+                            <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/feed">
+                                <GrDown style={{rotate:"-90deg"}}/>
+                            </Link>
+                            :
+                            <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/login">
+                                <GrDown style={{rotate:"-90deg"}}/>
+                            </Link>
+                        }
                     
                 </div>
-                <div >
-                    {
-                        auth?
-                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/feed">
-                            <GrDown style={{rotate:"-90deg"}}/>
-                        </Link>
-                        :
-                        <Link className="ml-8 transition-all ease-in duration-300 text-6xl hover:ml-12" to="/login">
-                            <GrDown style={{rotate:"-90deg"}}/>
-                        </Link>
-                    }
-                </div>
+                
+                
                 
             </div>
         </div>
