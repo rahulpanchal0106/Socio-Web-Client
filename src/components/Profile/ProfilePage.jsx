@@ -6,19 +6,19 @@ import getCookie from "../../utils/getCookie";
 import DelPost from "../Post_actions/DelPost";
 import LikePost from "../Post_actions/LikePost";
 import toast, { Toaster } from 'react-hot-toast';
-import { BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiEdit, BiExit, BiHeart, BiLeftArrow, BiLogOutCircle, BiPlus, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
+import { BiBall, BiCloset, BiComment, BiCommentAdd, BiDotsVertical, BiDotsVerticalRounded, BiDownArrow, BiDownArrowAlt, BiEdit, BiExit, BiHeart, BiLeftArrow, BiLogOutCircle, BiPlus, BiPointer, BiShare, BiShield, BiShieldX, BiSolidComment, BiSolidHeart, BiSolidLeftArrow, BiSolidPointer, BiSolidRightArrow, BiTrash, BiTrashAlt, BiWind } from "react-icons/bi";
 import Nav from "../Navbar/Nav";
 import { useNavigate } from "react-router-dom";
 import { FaComment, FaComments, FaCommentsDollar, FaCommentSlash, FaCommentSms, FaDeleteLeft, FaLinkSlash, FaRegCommentDots, FaRegTrashCan, FaShieldCat, FaSlash, FaTag, FaTextSlash, FaTrashArrowUp, FaTrashCan } from "react-icons/fa6";
-import { FaCommentAlt, FaHeartbeat, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
+import { FaCommentAlt, FaDotCircle, FaHeartbeat, FaInfo, FaLeaf, FaRegComment, FaRegComments, FaRemoveFormat, FaStoreSlash, FaTintSlash, FaToiletPaperSlash, FaUserShield } from "react-icons/fa";
 import TimeAgo from 'react-timeago';
 import 'hugeicons-react';
-import { CancelCircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, InLoveIcon, LeftAngleIcon, LeftToRightListDashIcon, Logout02Icon, Logout03Icon, Logout04Icon, Logout05Icon, LogoutSquare02Icon, LoveKoreanFingerIcon, MaskLoveIcon, MessageCancel02Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon, UserLove01Icon, UserLove02Icon } from "hugeicons-react";
+import { CancelCircleIcon, CircleIcon, CloudSlowWindIcon, CommentAdd01Icon, CommentRemove01Icon, CommentRemove02Icon, Edit01Icon, Edit02Icon, EditOffIcon, EditUser02Icon, InLoveIcon, LeftAngleIcon, LeftToRightListDashIcon, Logout02Icon, Logout03Icon, Logout04Icon, Logout05Icon, LogoutSquare02Icon, LoveKoreanFingerIcon, MaskLoveIcon, MessageCancel02Icon, ParagraphBulletsPoint01Icon, PreviousIcon, Share08Icon, UserAdd01Icon, UserCheck01Icon, UserEdit01Icon, UserLove01Icon, UserLove02Icon } from "hugeicons-react";
 import getUserData from "../../utils/getData";
 import DelPerm from "../Post_actions/DelePerm";
 import AddFollower from "../Post_actions/addFollower.js"
 import './style.css'
-import { GrClose, GrLike, GrLogout } from "react-icons/gr";
+import { GrClose, GrDown, GrLike, GrLogout, GrTag } from "react-icons/gr";
 import LogOut from "../Auth/LogOut.js";
 import { useCookies } from "react-cookie";
 import feather from 'feather-icons';
@@ -282,12 +282,15 @@ const ProfilePage = () => {
                             <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 overflow-hidden border border-solid border-gray-400 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
                             <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
                         </div>
-                        <div className="px-2 py-1 ">
-                            <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="py-4 text-xs text-color-800 w-60 max-h-40 overflow-hidden break-words" >
-                                {bio}
-                            </p>
+                        <div className="px-2 py-1 flex flex-row justify-evenly items-center ">
+                            
+                                <FaDotCircle className="mr-5"/>
+                                <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="py-4 text-s text-color-800 w-60 mr-5 max-h-40 overflow-hidden break-words flex flex-col justify-left items-left" >
+                                    {bio}
+                                </p>
+                            
                             <div className="flex flex-row text-xs justify-evenly items-center w-fit rounded-lg bg-gray-200 dark:bg-gray-600 dark:text-white text-gray-500 px-2 py-1 ">
-                                <UserLove01Icon size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
+                                <BiSolidHeart size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
                             </div>
                         </div>
                         <div className="flex flex-row w-3/4 lg:w-64 justify-between items-center my-4">
@@ -371,7 +374,7 @@ const ProfilePage = () => {
 
                         {
                             username == getCookie('socio-user') && (
-                                <div className="flex flex-row w-full justify-evenly itmes-center"> 
+                                <div className="flex flex-row w-1/2 justify-evenly itmes-center"> 
                                     {username === getCookie('socio-user') && (<button className="bg-gray-200 dark:bg-gray-600 dark:text-white transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}>
                                         <UserEdit01Icon/>
                                     </button>)}
@@ -420,11 +423,13 @@ const ProfilePage = () => {
                             const showPostComments = showComments[post._id] || false;
                                 // console.log("))))))))))0 ",post)
                                 return(
-                                    <div key={i} className="post bg-gray-100 dark:bg-gray-600 dark:text-white mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                                    <div key={i} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
-                                        <div className="left flex flex-row items-center justify-evenly w-11">
-                                            <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
-                                            <b>{post.metaData.author}</b>
+                                        <div className="left flex flex-row items-center justify-evenly w-full">
+                                            <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
+                                                <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={post.metaData.profilePicture && post.metaData.profilePicture!=undefined?`https://lh3.googleusercontent.com/d/${post.metaData.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                                                <b>{post.metaData.author}</b>
+                                            </Link>
                                         </div>
                                         <div className="right flex flex-row">
                                             {post.metaData.author === userData.username ? (
@@ -440,33 +445,47 @@ const ProfilePage = () => {
                                     <p className="text-xs text-gray-600">
                                         <TimeAgo date={post.metaData.date} />
                                     </p>
-                                    <div className="middle-section flex flex-row w-80 break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:"anywhere"}}>
-                                        {post.post.content}
+                                    <div className="middle-section flex flex-col w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
+                                        <div>
+                                            {post.post.content}
+                                        </div>
+                                        {   post.postImg && post.postImg!="none"
+                                            ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, Can't show the image for now" />
+                                            :""
+                                        }
+                                            
                                     </div>
-                                    <div className="bottom-bar mb-2 flex flex-row  justify-end">
-                                        <div className="flex py-2 flex-row items-center justify-center">
-                                            <button
-                                                onClick={() => handleLike(post._id)}
-                                                className="likes flex flex-row items-center justify-center"
-                                            >
-                                                {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
-                                            </button>
-                                            <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
-                                                <b>{post.post.likes}</b>
+                                    <div className="bottom-bar mb-2 flex flex-row  justify-between">
+                                        {
+                                            post.category&&<div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-500 px-2 py-0 ">
+                                                <GrTag/> <b>{post.category}</b> 
+                                            </div>
+                                        }
+                                        <div className="flex flex-row justify-evenly items-center">
+                                            <div className="flex py-2 flex-row items-center justify-center">
+                                                <button
+                                                    onClick={() => handleLike(post._id,isLiked)}
+                                                    className="likes flex flex-row items-center justify-center"
+                                                >
+                                                    {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
+                                                </button>
+                                                <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
+                                                    <b>{post.post.likes}</b>
+                                                </button>
+                                            </div>
+                                            <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
+                                                <button className="" >
+                                                    {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
+                                                </button>
+                                                <p className="px-2">
+                                                    {post.post.comments.length}
+                                                </p>
                                             </button>
                                         </div>
-                                        <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
-                                            <button className="" >
-                                                {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
-                                            </button>
-                                            <p className="px-2">
-                                                {post.post.comments.length}
-                                            </p>
-                                        </button>
                                         
                                     </div>
 
-                                    <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                    <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg:gray-800 px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
                                             top:"70px",  
                                             right: window.innerWidth<766?"30%":"100%",
@@ -477,12 +496,19 @@ const ProfilePage = () => {
                                         <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
                                         <div className="max-h-50 overflow-y-scroll">
                                             {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
-                                                <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>@{el.username}</li>
+                                                <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800" key={i}>
+                                                    <Link to={`/profile/${el.username}/${el.uid}`}>
+                                                        @ {el.username}    
+                                                    </Link>
+                                                </li>
                                             )) : <p className="px-1 py-2" >No one :(</p>}
                                         </div>
                                     </ul>
 
-                                    {showPostComments && <ul className="bg-white dark:bg-gray-600 dark:text-white flex flex-col-reverse drop-shadow-lg px-2  rounded-xl" style={{paddingTop:"10px", paddingBottom:"10px"}}>
+                                    {showPostComments && <ul className=" flex flex-col-reverse  px-2  rounded-xl " style={{
+                                            paddingTop:"10px", 
+                                            paddingBottom:"10px",
+                                        }}>
                                         
                                         {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                             const openCLike = openCLikeStates[el.comment_id] || false;
@@ -501,11 +527,17 @@ const ProfilePage = () => {
                                                 getData();
                                             }
 
+                                            console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
+
                                             return (
-                                                <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-600 dark:text-white w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
-                                                    <div className="w-full flex flex-row justify-between">
+                                                <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-800 w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
+                                                    <div className="w-full flex flex-row justify-between ">
                                                         <div className="flex flex-col">
-                                                            <b>@{el.commentBy || "aiyen?!"}</b>
+                                                            <Link to={`/profile/${el.commentBy}/👋`} className="left flex flex-row items-center justify-start w-full">
+                                                                
+                                                                <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={el.profilePicC?`https://lh3.googleusercontent.com/d/${el.profilePicC}`:"/d-prof.jpg"} alt="Profile" />
+                                                                <b>{el.commentBy || "aiyen?!"}</b>
+                                                            </Link>
                                                             <p className="text-xs text-gray-600">
                                                                 <TimeAgo date={el.date} />
                                                             </p>
@@ -513,31 +545,36 @@ const ProfilePage = () => {
                                                         <div className="flex flex-col justify-center items-center">
                                                             <div className="flex flex-row justify-center items-center">
                                                                 <button className="flex flex-row" onClick={handleCLike}>
-                                                                    {cisLiked ? <BiSolidHeart color="red"/> : <BiHeart />}
+                                                                    {cisLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
                                                                 </button>
                                                                 <button onClick={() => toggleOpenCLike(el.comment_id)} className="px-2">
                                                                     <b>{el.likedBy.length}</b>
                                                                 </button>
                                                                 
                                                             </div>
-                                                            <ul style={{ display: openCLike ? "flex" : "none" }} className="flex flex-col w-1/2 absolute left-full bg-white px-4 py-2 rounded-lg drop-shadow-sm">
+                                                            <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white dark:bg-gray-800 px-4 py-2 rounded-lg drop-shadow-lg">
                                                                 <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div>
                                                                 <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
+                                                                <button onClick={()=>toggleOpenCLike(el.comment_id)} className="absolute right-2" ><GrClose/></button>
                                                                 <div className="max-h-50 overflow-y-scroll"> 
                                                                     {el.likedBy.length>0?el.likedBy.map((like, i) => (
-                                                                        <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white">@{like.username}</li>
+                                                                        <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800">
+                                                                            <Link to={`/profile/${like.username}/${like.uid}`}>
+                                                                                @ {like.username}    
+                                                                            </Link>
+                                                                        </li>
                                                                     )):<p className="px-1 py-2" >No one :(</p>}
                                                                 </div>
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div className="flex w-3/4 py-2 break-words" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} >
+                                                    <div className="flex w-3/4 px-2 py-3 break-words" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} >
                                                         {el.comment}
                                                     </div>
                                                     {(el.commentBy || "aiyen?!") === userData.username ? (
                                                         <button
                                                             onClick={handleCommentDel}
-                                                            className="text-red-700 border w-fit border-transparent transition-all duration-300 hover:border-red-700 rounded-full border-solid"
+                                                            className="text-red-700 border w-fit p-1 border-transparent transition-all duration-300 hover:border-red-700 rounded-full border-solid"
                                                         >
                                                             <CommentRemove01Icon size={15} />
                                                         </button>
@@ -545,10 +582,10 @@ const ProfilePage = () => {
                                                 </div>
                                             );
                                         }) : <p className="px-1 py-2" >No comments </p>}
-                                        <p className="text-sm text-gray-300 mb-2">Comments</p>
+                                        <p className="text-sm text-gray-500 mb-2"> {post.post.comments.length} {post.post.comments.length>1?"Comments":"Comment"}</p>
                                         {/* <div className="relative left-20  " style={{ bottom:"22px" }}><BiSolidLeftArrow style={{rotate:"90deg"}} color="white" /></div> */}
                                         <form action="" className="flex flex-row justify-between drop-shadow-lg items-center py-3 px-2">
-                                            <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
+                                            <textarea required rows={1} style={{resize:"none", whiteSpace:'pre-wrap'}} className="input w-10/12 px-4 py-2 rounded-full flex flex-row items-center dark:text-black" type="text" placeholder="Make a Comment" onChange={handleCommentChange} ></textarea>
                                             <button type="submit" className="button px-2 py-2 text-lg bg-transparent hover:bg-gray-200 rounded-full transition-all duration-300" onClick={handleAddComment}>
                                                 <CommentAdd01Icon />
                                             </button>
@@ -590,9 +627,11 @@ const ProfilePage = () => {
                                     return(
                                         <div key={i} className="post bg-gray-100 dark:bg-gray-900 dark:text-white mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                         <div className="top-bar author flex flex-row justify-between items-center">
-                                            <div className="left flex flex-row items-center justify-evenly w-11">
-                                                <img src="/d-prof.jpg" alt="Profile" className="rounded-full w-3 h-3 border-3 border-white border-solid" />
-                                                <b>{post.metaData.author}</b>
+                                            <div className="left flex flex-row items-center justify-evenly w-full">
+                                                <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
+                                                    <img className="rounded-full w-8 h-8 border-3 border-white border-solid mr-2 object-cover" src={post.metaData.profilePicture && post.metaData.profilePicture!=undefined?`https://lh3.googleusercontent.com/d/${post.metaData.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                                                    <b>{post.metaData.author}</b>
+                                                </Link>
                                             </div>
                                             <div className="right flex flex-row">
                                                 {post.metaData.author === userData.username ? (
@@ -608,30 +647,44 @@ const ProfilePage = () => {
                                         <p className="text-xs text-gray-600">
                                             <TimeAgo date={post.metaData.date} />
                                         </p>
-                                        <div className="middle-section flex flex-row w-80 break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:"anywhere"}}>
-                                            {post.post.content}
+                                        <div className="middle-section flex flex-col w-full break-words px-0 py-4" style={{whiteSpace:'pre-wrap',overflowWrap:' anywhere'}}>
+                                            <div>
+                                                {post.post.content}
+                                            </div>
+                                            {   post.postImg && post.postImg!="none"
+                                                ?<img className="rounded-2xl w-full h-full object-cover mt-1" src={post.postImg?`https://lh3.googleusercontent.com/d/${post.postImg}`:""} alt="Too many requests, Can't show the image for now" />
+                                                :""
+                                            }
+                                                
                                         </div>
-                                        <div className="bottom-bar mb-2 flex flex-row  justify-end">
-                                            <div className="flex py-2 flex-row items-center justify-center">
-                                                <button
-                                                    onClick={() => handleLike(post._id)}
-                                                    className="likes flex flex-row items-center justify-center"
-                                                >
-                                                    {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
-                                                </button>
-                                                <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
-                                                    <b>{post.post.likes}</b>
+                                        <div className="bottom-bar mb-2 flex flex-row  justify-between">
+                                            {
+                                                post.category&&<div className="flex flex-row text-xs justify-evenly items-center rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-500 px-2 py-0 ">
+                                                    <GrTag/> <b>{post.category}</b> 
+                                                </div>
+                                            }
+                                            <div className="flex flex-row justify-evenly items-center">
+                                                <div className="flex py-2 flex-row items-center justify-center">
+                                                    <button
+                                                        onClick={() => handleLike(post._id,isLiked)}
+                                                        className="likes flex flex-row items-center justify-center"
+                                                    >
+                                                        {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
+                                                    </button>
+                                                    <button className="px-2" onClick={() => toggleOpenPostLike(post._id)}>
+                                                        <b>{post.post.likes}</b>
+                                                    </button>
+                                                </div>
+                                                <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
+                                                    <button className="" >
+                                                        {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
+                                                    </button>
+                                                    <p className="px-2">
+                                                        {post.post.comments.length}
+                                                    </p>
                                                 </button>
                                             </div>
-                                            <button className="flex flex-row items-center justify-center transition-all duration-300" onClick={() => toggleComments(post._id)}>
-                                                <button className="" >
-                                                    {showPostComments ? <FaCommentSlash size={14}/> : <FaRegComment size={14}/>} 
-                                                </button>
-                                                <p className="px-2">
-                                                    {post.post.comments?post.post.comments.length:"0"}
-                                                </p>
-                                            </button>
-                                            
+                                        
                                         </div>
 
                                         <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
