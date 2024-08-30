@@ -197,7 +197,7 @@ const Feed = () => {
                     }
                     endMessage={
                         <p style={{ textAlign: 'center' }}>
-                            <b>Yay! You have seen it all</b>
+                            <light>You've reached the End</light>
                         </p>
                     }
                 >
@@ -396,7 +396,7 @@ const Feed = () => {
                             );
                         }) :
 
-                        <Loading/>
+                        ""
                         
                         // !feedPosts?
                         // <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
