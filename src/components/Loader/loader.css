@@ -17,6 +17,9 @@
     border-radius: 100px;
     background: #00ffff;
   }
+  .dark .loader:before{
+    background: #000;
+  }
   .loader:after {
     content: "";
     grid-area: 1/1;
@@ -27,6 +30,9 @@
     background: #00ffff;
     animation: l5 2s infinite linear;
   }
+  .dark .loader:after{
+    background: #000;
+  }
   @keyframes l5{
     0%   {transform: translate(30px)}
     25%  {transform: translate(0)}
@@ -34,3 +40,4 @@
     75%  {transform: translate(0)}
     100% {transform: translate(30px)}
   }
+
