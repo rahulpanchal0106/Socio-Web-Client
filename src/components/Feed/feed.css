@@ -5,3 +5,33 @@
 #DontOpenLikes{
     display: none;
 }
+
+h2 {
+    width: 100vw; 
+    position: relative;
+    text-align: center; 
+    border-bottom: 1px solid #000; 
+    line-height: 2em;
+    margin: 10px 0 20px; 
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+ } 
+ 
+ span { 
+    background:#fff; 
+    padding:0 10px; 
+    overflow: visible;
+ }
+ .dark h2{
+    border-bottom: #fff;
+    border-bottom: 1px solid #ffffff; 
+ }
+ .dark  span{
+    background-color: #1f2937;
+ }
+ span{
+    z-index: 10;
+ }
