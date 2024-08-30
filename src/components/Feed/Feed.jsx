@@ -97,15 +97,45 @@ const Feed = () => {
     }
 
     const handleDel = async (postId) => {
+
+        setFeedPosts((prevPosts) =>
+            prevPosts.filter((post)=>post._id!=postId)
+        );
+
         await DelPost(postId);
         // getData();
     };
 
-    const handleLike = async (postId) => {
-        // isLiked!=isLiked
+    const handleLike = async (postId,isLiked) => {
         // setPostLikeClicked(!postLikeClicked)
-        const resp = await LikePost(postId);
-        console.log("🐸🐸🐸 ", resp);
+        try {
+            // Optimistically update the UI first
+            setFeedPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post._id === postId
+                        ? {
+                              ...post,
+                              post: {
+                                  ...post.post,
+                                  likes: isLiked
+                                      ? post.post.likes - 1
+                                      : post.post.likes + 1,
+                                  likedBy: isLiked
+                                      ? post.post.likedBy.filter(
+                                            (like) => like.username !== userData.username
+                                        )
+                                      : [...post.post.likedBy, { username: userData.username }],
+                              },
+                          }
+                        : post
+                )
+            );
+            const resp = await LikePost(postId);
+            // isLiked!=isLiked
+            console.log("🐸🐸🐸 ", resp);
+        }catch(e){
+            console.log("Error liking post, ",e)
+        }
         // getData();
     };
 
@@ -162,7 +192,7 @@ const Feed = () => {
                 >
 
                         {feedPosts.length > 0 &&  feedPosts[0]!=0 ? feedPosts.map((post, index) => {
-                            const isLiked = post.post.likedBy.some(like => like.username === userData.username);
+                            var isLiked = post.post.likedBy.some(like => like.username === userData.username);
 
 
                             const handleAddComment = async (e) => {
@@ -224,7 +254,7 @@ const Feed = () => {
                                         <div className="flex flex-row justify-evenly items-center">
                                             <div className="flex py-2 flex-row items-center justify-center">
                                                 <button
-                                                    onClick={() => handleLike(post._id)}
+                                                    onClick={() => handleLike(post._id,isLiked)}
                                                     className="likes flex flex-row items-center justify-center"
                                                 >
                                                     {isLiked ? <BiSolidHeart color="red" /> : <BiHeart />}
