@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import checkAuth from "../../utils/checkAuth";
-import { BiCross, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiLogInCircle, BiPlus } from "react-icons/bi";
+import { BiCross, BiDotsHorizontal, BiDotsHorizontalRounded, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiLogInCircle, BiMenu, BiPlus } from "react-icons/bi";
 import getCookie from "../../utils/getCookie";
 import getPerson from "../../utils/getPerson";
-import { Moon01Icon, Moon02Icon, MoonAngledRainZapIcon, Sun01Icon, Sun02Icon, UserSettings02Icon } from "hugeicons-react";
+import { Menu01Icon, Menu06Icon, MenuCircleIcon, MenuSquareIcon, Moon01Icon, Moon02Icon, MoonAngledRainZapIcon, NextIcon, StartUp02Icon, Sun01Icon, Sun02Icon, UserSettings02Icon } from "hugeicons-react";
 import { GrGlobe, GrHome, GrGroup, GrUserSettings, GrUserAdmin } from "react-icons/gr";
 import feather from 'feather-icons';
 import "./Nav.css";
+import { FaHourglassStart } from "react-icons/fa";
+import { FaCircleNodes, FaHandDots } from "react-icons/fa6";
 
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -92,9 +94,12 @@ const Nav = () => {
           top: window.innerWidth < 766 ? "auto" : "0",
         }}
       >
-        <div className="logo text-4xl none lg:flex">
-          {window.innerWidth < 766?"":<img src="/likeminded.svg" width={40}/>}{window.innerWidth < 766 ? "" : "SOCIO"}
-        </div>
+        <Link to="/">
+          <div className="logo text-4xl none lg:flex">
+            {window.innerWidth < 766 ? "" : "SOCI"}
+            {window.innerWidth < 766?"":<img src={darkMode?"/socio(5).svg":"/socio(4).svg"} width={40}/>}
+          </div>
+        </Link>
         <ul
           className={`flex flex-row w-full justify-evenly items-center fixed bottom-0 left-0 h-10 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors`}
           style={{
@@ -172,16 +177,16 @@ const Nav = () => {
             }}
           >
             <li className={getActiveClass("/")}>
-              <Link to="/">Home</Link>
+              <Link to="/"><GrHome size={20}/></Link>
             </li>
             <li className={getActiveClass("/post")}>
-              <Link to="/post">Post</Link>
+              <Link to={auth?"/post":"/login"}><BiPlus size={30}/></Link>
             </li>
             <li className={getActiveClass("/feed")}>
-              <Link to="/feed">Feed</Link>
+              <Link to={auth?"/feed":"/login"}><GrGlobe size={20} /></Link>
             </li>
             <li className={getActiveClass("/people")}>
-              <Link to="/people">People</Link>
+              <Link to={auth?"/people":"/login"}><GrGroup size={20}/></Link>
             </li>
             <button
               onClick={toggleDarkMode}
@@ -202,7 +207,7 @@ const Nav = () => {
                       {getCookie("socio-user")}
                     </div>
                   ) : (
-                    <BiDotsVerticalRounded color={darkMode ? "white" : "black"} />
+                    <BiDotsVerticalRounded size={30} color={darkMode ? "white" : "black"} />
                   )}
                 </button>
                 {isOpen && (

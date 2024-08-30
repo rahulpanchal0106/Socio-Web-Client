@@ -18,9 +18,11 @@ import { GrClose, GrGooglePlus, GrPlan, GrTag } from "react-icons/gr";
 import toast, { Toaster } from 'react-hot-toast';
 import getCookie from "../../utils/getCookie";
 import InfiniteScroll from "react-infinite-scroll-component"
+import Loading from "../Loader/Loading";
 
 const Feed = () => {
     const [feedPosts, setFeedPosts] = useState([]);
+    const [feedLoading, setFeedLoading] = useState(false);
     const [userData, setUserData] = useState({});
     const [comment, setComment] = useState('');
     const [openCLikeStates, setOpenCLikeStates] = useState({});
@@ -51,11 +53,13 @@ const Feed = () => {
     }, []);
 
     const getData = async (limit,offset) => {
-        toast.loading("Loading feed")
+        // toast.loading("Loading feed")
+        setFeedLoading(true)
         const data = await fetchData(url + `/feed?limit=${limit}&offset=${offset}`, null, 'GET');
-        toast.dismiss()
+        setFeedLoading(false)
+        // toast.dismiss()
         console.log(data);
-        data.length>0?toast.success("Feed loaded successfully"):toast.error("Failed to load feed")
+        
         setFeedPosts(prevPosts => [...prevPosts, ...data.paginatedFeed]);
         setTotal(data.total);
         console.log("HASMORE!!! ",hasMore)
@@ -85,6 +89,7 @@ const Feed = () => {
         };
 
         loadData();
+        // feedPosts.length>0?toast.success("Feed loaded successfully"):toast.error("Failed to load feed")
 
         return () => {
             isMounted = false;
@@ -167,23 +172,29 @@ const Feed = () => {
                 <Toaster/>
                 {/* <Post/> */}
                 <h1 className="text-6xl mb-4 mt-20">Feed</h1>
+                <div className="w-full flex justify-center items-center" >
+                    {/* <Loading/> */}
+                </div>
                 <Link to='/post' className="drop-shadow-md bg-yellow-100  dark:bg-slate-600 dark:text-white flex justify-center items-center w-10 h-10 rounded-full border border-black border-solid fixed bottom-16 z-40 right-10 hover:drop-shadow-xl hover:bg-gray-100 hover:rotate-90">
                     <button>
                         <FaPlus/>
                     </button>
                 </Link>
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
+                    
                 <InfiniteScroll
                     dataLength={feedPosts.length    } // This is important field to render the next data
                     next={() => {
-                        console.log("🦧🦧🦧🦧🦧🦧🦧🦧🦧 ",offset)
                         setOffset(prevOffset => prevOffset + limit)
-                        console.log("🦧🦧🦧🦧🦧🦧🦧🦧🦧 ",offset)
                     }} 
                     // style={{ display: 'flex', flexDirection: 'column' }} //To put endMessage and loader to the top.
                     // inverse={true}
                     hasMore={hasMore}
-                    loader={<h4>Loading...</h4>}
+                    loader={
+                        <div className="w-full flex justify-center">
+                            <Loading/>
+                        </div>
+                    }
                     endMessage={
                         <p style={{ textAlign: 'center' }}>
                             <b>Yay! You have seen it all</b>
@@ -384,29 +395,32 @@ const Feed = () => {
                                 </div>
                             );
                         }) :
+
+                        <Loading/>
                         
-                        feedPosts[0]==0?
-                        <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                        // !feedPosts?
+                        // <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
-                            <PreferenceHorizontalIcon size={100} color="lightgray" className="mb-2"/>
-                            Set your preferences
-                            {                                   
-                                toast.loading("Need to select your preferences")
-                            }
-                        </div>   
-                        :<button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                        //     <PreferenceHorizontalIcon size={100} color="lightgray" className="mb-2"/>
+                        //     Set your preferences
+                        //     {                                   
+                        //         toast.loading("Need to select your preferences")
+                        //     }
+                        // </div>   
+                        // :<button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
-                            <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
-                            Something broke
-                            {       
+                        //     <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
+                        //     Something broke
+                        //     {       
                                 
-                                toast.error("Failed to load feed")
+                        //         toast.error("Failed to load feed")
                                 
-                            }
-                        </button>
+                        //     }
+                        // </button>
                         }
                     </InfiniteScroll>
                 </div>
+                
             </div>
         </>
     );

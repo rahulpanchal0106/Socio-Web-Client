@@ -6,6 +6,7 @@ import { Link, Navigate, redirect, resolvePath, useNavigate } from "react-router
 import Nav from "../Navbar/Nav";
 import GetToast from "../Toast";
 import toast, { Toaster } from 'react-hot-toast';
+import Loading from "../Loader/Loading";
 
 
 const Login=()=>{
@@ -65,7 +66,7 @@ const Login=()=>{
             <h1 className="mb-2 px-4 py-2 text-4xl">Log in to <i className="text-shadow">Socio</i></h1>
                 <input type="text" className="input mb-2 px-4 py-2 rounded-lg dark:text-black" onChange={handleInput} placeholder="Username" />
                 <input type="password" className="input mb-2  px-4 py-2 rounded-lg dark:text-black" onChange={handlePassword} placeholder="password" />
-                <button type="submit" className="bg-pink-200 dark:bg-slate-900 px-4 py-2 rounded-lg dark:hover:bg-slate-800 hover:bg-pink-400 transition-all duration-300" onClick={handleSubmit}>Login</button> {isLoading?"Loading...":""}
+                <button type="submit" className="bg-pink-200 dark:bg-slate-900 px-4 py-2 rounded-lg dark:hover:bg-slate-800 hover:bg-pink-400 transition-all duration-300" onClick={handleSubmit}>Login</button> {isLoading?<Loading/>:""}
             </form>  
 
             <div className="flex flex-row">
