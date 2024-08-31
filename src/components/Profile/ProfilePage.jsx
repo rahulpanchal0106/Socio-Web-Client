@@ -285,7 +285,7 @@ const ProfilePage = () => {
                         <div className="px-2 py-1 flex flex-row justify-evenly items-center ">
                             
                                 <FaDotCircle className="mr-5"/>
-                                <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="py-4 text-s text-color-800 w-60 mr-5 max-h-40 overflow-hidden break-words flex flex-col justify-left items-left" >
+                                <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="py-4 text-s text-color-800 w-40 mr-5 max-h-40 overflow-hidden break-words flex flex-col justify-left items-left" >
                                     {bio}
                                 </p>
                             
@@ -293,7 +293,7 @@ const ProfilePage = () => {
                                 <BiSolidHeart size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
                             </div>
                         </div>
-                        <div className="flex flex-row w-3/4 lg:w-64 justify-between items-center my-4">
+                        <div className="flex flex-row w-3/4 lg:w-64 justify-between items-center my-5">
                             <button className="flex flex-col-reverse justify-evenly items-center w-1/3 text-sm" >
                                 {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:0}</p>
                             </button>
@@ -353,7 +353,7 @@ const ProfilePage = () => {
                         </div>
                         
                         
-                        {username != getCookie('socio-user') && ( <button className="px-3 w-36 bg-blue-200 dark:bg-gray-600 dark:text-white rounded-lg py-2 transition-all duration-300 hover:rounded-2xl hover:drop-shadow-lg" id="follow_btn" style={{
+                        {username != getCookie('socio-user') && ( <button className="px-3 w-36 my-5 bg-blue-200 dark:bg-gray-600 dark:text-white rounded-lg py-2 transition-all duration-300 hover:rounded-2xl hover:drop-shadow-lg" id="follow_btn" style={{
                                 backgroundColor:isFollowing?"rgb(59 130 246 / 0.5)":"rgb(59, 130, 246)",
                                 color:isFollowing?"black":"white"
                                 // transition:"all 0.3s ease"
@@ -374,7 +374,7 @@ const ProfilePage = () => {
 
                         {
                             username == getCookie('socio-user') && (
-                                <div className="flex flex-row w-1/2 justify-evenly itmes-center"> 
+                                <div className="flex flex-row w-1/2 my-5 justify-evenly itmes-center"> 
                                     {username === getCookie('socio-user') && (<button className="bg-gray-200 dark:bg-gray-600 dark:text-white transition transition-all duration-300 hover:bg-gray-300 hover:drop-shadow-xlg rounded-lg px-3 py-1 text-xs lg:text-lg  " onClick={() => setUpdateMode(!updateMode)}>
                                         <UserEdit01Icon/>
                                     </button>)}

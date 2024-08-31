@@ -30,7 +30,7 @@ const Feed = () => {
     const [showComments, setShowComments] = useState({});
     const [total,setTotal] = useState(0);
     var [offset, setOffset] = useState(0);
-    const limit = 10;
+    const limit = 15;
     const [hasMore, setHasMore] = useState(true);
     const [postLikeClicked, setPostLikeClicked] = useState(false);
 
@@ -197,7 +197,7 @@ const Feed = () => {
                     endMessage={
                         
                         
-                        <div className="flex justify-center items-center " >
+                        <div className="flex justify-center items-center mb-50  " >
                             <h2 className="absolute"></h2>
                             <span className="relative">The End </span>
 
