@@ -38,18 +38,25 @@ const SignupForm = () => {
       const data = await fetchData(url + "/signup", {"username":username,"password":password}, 'POST');
       toast.dismiss()
       // const resp = await data.json();
-      data.status<300?toast.success("Sign up suceesfull"):toast.error(data.message==11000?`username ${username} already exists`:"Faild to signup")
       
+      data.message>1000?toast.error(data.message==11000?`username ${username} already exists`:"Faild to signup"):toast.success("Sign up suceesfull")
+      data.message>1000?setTimeout(()=>{
+        navigate('/signup');
+      },1000):setTimeout(()=>{
+        navigate('/login');
+      },1000)
+
     } catch (error) {
       toast.error(error.message||"Signup failed")
       setError(error.message);
+      setTimeout(()=>{
+        navigate('/signup');
+      },1000)
     } finally {
       setIsLoading(false);
     }
 
-    setTimeout(()=>{
-      navigate(error?'/login':'/signup');
-    },1000)
+    
   };
 
   return (
