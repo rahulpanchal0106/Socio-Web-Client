@@ -87,7 +87,7 @@ const Post_skel = (props) => (
     <>
         <ContentLoader 
             speed={1}
-            width={400}
+            width={300}
             height={460}
             viewBox="0 0 400 460"
             backgroundColor="#111827"

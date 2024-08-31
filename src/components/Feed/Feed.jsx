@@ -183,6 +183,7 @@ const Feed = () => {
                 <div className="mt-10 flex flex-col-reverse justify-center items-center">
                     
                 <InfiniteScroll
+                    className="w-screen flex flex-col items-center"
                     dataLength={feedPosts.length    } // This is important field to render the next data
                     next={() => {
                         setOffset(prevOffset => prevOffset + limit)
@@ -229,7 +230,8 @@ const Feed = () => {
                             const showPostComments = showComments[post._id] || false;
 
                             return (
-                                <div key={index} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                                // <div key={index} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
+                                <div key={index} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg  " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
                                         <div className="left flex flex-row items-center justify-evenly w-full">
                                             <Link to={`/profile/${post.metaData.author}/👋`} className="left flex flex-row items-center justify-start w-full">
@@ -291,15 +293,15 @@ const Feed = () => {
                                         
                                     </div>
 
-                                    <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg:gray-800 px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                                    <ul className="flex flex-col fixed w-full h-full top-0 left-0   bg-white dark:bg:gray-800 px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openPostLike ? "flex" : "none",
-                                            top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%",
-                                            zIndex:10
+                                            // top:"70px",  
+                                            // right: window.innerWidth<766?"30%":"100%",
+                                            zIndex:50
                                         }}>
                                         <p className="text-xs text-gray-400 py-2 ">Post Liked by</p>
-                                        <button onClick={()=>toggleOpenPostLike(post._id)} className="absolute right-2" ><GrClose/></button>
-                                        <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
+                                        <button onClick={()=>toggleOpenPostLike(post._id)} className="absolute right-2" ><GrClose color="red"/></button>
+                                        {/* <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div> */}
                                         <div className="max-h-50 overflow-y-scroll">
                                             {post.post.likedBy && post.post.likedBy.length > 0 ? post.post.likedBy.map((el, i) => (
                                                 <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800" key={i}>
@@ -358,10 +360,11 @@ const Feed = () => {
                                                                 </button>
                                                                 
                                                             </div>
-                                                            <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white dark:bg-gray-800 px-4 py-2 rounded-lg drop-shadow-lg">
-                                                                <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div>
+                                                            {/* <ul style={{ display: openCLike ? "flex" : "none",left: window.innerWidth<766?"30%":"100%" }} className="flex flex-col w-1/2 absolute left-full bg-white dark:bg-gray-800 px-4 py-2 rounded-lg drop-shadow-lg"> */}
+                                                            <ul style={{ display: openCLike ? "flex" : "none" }} className="flex flex-col w-full h-full absolute left-0 top-0 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg drop-shadow-lg">
+                                                                {/* <div className="absolute top-1/2" style={{ left: "-10px" }}><BiSolidLeftArrow color="white" /></div> */}
                                                                 <p className="text-xs text-gray-400 py-2 ">Comment Liked by</p>
-                                                                <button onClick={()=>toggleOpenCLike(el.comment_id)} className="absolute right-2" ><GrClose/></button>
+                                                                <button onClick={()=>toggleOpenCLike(el.comment_id)} className="absolute right-2" ><GrClose color="red"/></button>
                                                                 <div className="max-h-50 overflow-y-scroll"> 
                                                                     {el.likedBy.length>0?el.likedBy.map((like, i) => (
                                                                         <li key={i} className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-800">
