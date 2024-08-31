@@ -23,7 +23,7 @@ const Profile_Skel = (props) => (
 const Username_skell = (props) => (
   <ContentLoader 
     speed={1}
-    
+    width={100}
     height={80}
     viewBox="0 0 476 124"
     backgroundColor="#111827"

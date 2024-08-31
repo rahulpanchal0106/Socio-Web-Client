@@ -43,7 +43,7 @@ const People = () => {
         fetchUserDoc()
     }, []);
 
-    console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
+    // console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
     data&&data.length>0 && (setTimeout(()=>{
             toast.success("People loaded successfully")
         },10)
