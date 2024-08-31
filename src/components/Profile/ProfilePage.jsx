@@ -23,6 +23,7 @@ import LogOut from "../Auth/LogOut.js";
 import { useCookies } from "react-cookie";
 import feather from 'feather-icons';
 import FileUpload from "./FileUpload.jsx";
+import {Bio_skel, Cat_skel, Pff_skel, Username_skell} from "../Loader/Profile_Skel.jsx";
 
 const ProfilePage = () => {
     const { username,uidTo } = useParams(); 
@@ -47,6 +48,7 @@ const ProfilePage = () => {
     const [openFollowers,setOpenFollowers] = useState(false);
     const [openFollowing,setOpenFollowing] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null)
+    const [pisLoading,setPIsLoading] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const [cookie, setCookie, removeCookie] = useCookies(['sociotoken']);
@@ -75,7 +77,9 @@ const ProfilePage = () => {
     }, []);
 
     const getData = async () => {
+        setPIsLoading(true);
         const data = await fetchData(url + "/feed", null, 'GET');
+        setPIsLoading(false);
         console.log(data);
         setFeedPosts(data);
         getMyData()
@@ -200,8 +204,13 @@ const ProfilePage = () => {
         <>
             <Nav/>
             <Toaster/>
-            
-            {updateMode ?
+            {/* {!pisLoading?
+            <div className="flex justify-center items-center">
+                <Profile_Skel/>
+            </div>
+            : */}
+            {
+            (updateMode ?
             (
             <div className="flex flex-col justify-center items-center">
                     
@@ -280,29 +289,41 @@ const ProfilePage = () => {
                     <div className="px-0 py-3 flex flex-col justify-center items-center ">
                         <div className="flex flex-row justify-center items-center w-screen">
                             <img className="rounded-full lg:w-48 lg:h-48 w-24 h-24 overflow-hidden border border-solid border-gray-400 object-cover" src={profile_data.profilePicture?`https://lh3.googleusercontent.com/d/${profile_data.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
-                            <p className="px-5 text-2xl lg:text-5xl"><b>{uname}</b></p>
+                            <p className="px-5 text-2xl lg:text-5xl"><b>{!uname? <Username_skell/> :uname}</b></p>
                         </div>
                         <div className="px-2 py-1 flex flex-row justify-evenly items-center ">
                             
                                 <FaDotCircle className="mr-5"/>
                                 <p style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}} className="py-4 text-s text-color-800 w-40 mr-5 max-h-40 overflow-hidden break-words flex flex-col justify-left items-left" >
-                                    {bio}
+                                    {!bio?<Bio_skel/>:bio}
                                 </p>
                             
                             <div className="flex flex-row text-xs justify-evenly items-center w-fit rounded-lg bg-gray-200 dark:bg-gray-600 dark:text-white text-gray-500 px-2 py-1 ">
-                                <BiSolidHeart size={17}/>{profile_data.category_pref?profile_data.category_pref[0]:""}
+                                <BiSolidHeart size={17} className="mr-2"/>{
+                                profile_data.category_pref?
+                                
+                                    !profile_data.category_pref[0]?
+                                    <Cat_skel/>
+                                :profile_data.category_pref[0]
+                                
+                                :<Cat_skel/>}
                             </div>
                         </div>
                         <div className="flex flex-row w-3/4 lg:w-64 justify-between items-center my-5">
                             <button className="flex flex-col-reverse justify-evenly items-center w-1/3 text-sm" >
-                                {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:0}</p>
+                                {myPosts&&myPosts.length>1?"Posts":"Post"} <p className="text-xl">{myPosts?myPosts.length:<Pff_skel/>}</p>
                             </button>
                             <p className="text-xs" >|</p>
                             <button className="flex flex-col-reverse justify-evenly items-center w-1/2 text-sm" onClick={()=>{
                                 setOpenFollowers(!openFollowers)
                                 setOpenFollowing(false)
                             }} >
-                                {profile_data.followers&&profile_data.followers.length>1?"Followers":"Follower"} <p className="text-xl">{profile_data.followers?profile_data.followers.length:0}</p>
+                                {profile_data.followers&&profile_data.followers.length>1?"Followers":"Follower"} <p className="text-xl">{
+                                !profile_data.followers?
+                                <Pff_skel/>
+                                :profile_data.followers.length
+                                
+                                }</p>
                             </button>
                             <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowers ? "flex" : "none",
@@ -327,7 +348,7 @@ const ProfilePage = () => {
                                 setOpenFollowing(!openFollowing)
                                 setOpenFollowers(false)
                             }}>
-                                {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:0}</p>
+                                {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:<Pff_skel/>}</p>
                             </button>
                             <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowing ? "flex" : "none",
@@ -809,6 +830,7 @@ const ProfilePage = () => {
                     } 
                 </div>
             </div>
+            )
             }
         </>
     );

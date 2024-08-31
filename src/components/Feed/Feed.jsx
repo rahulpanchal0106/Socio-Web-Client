@@ -19,6 +19,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import getCookie from "../../utils/getCookie";
 import InfiniteScroll from "react-infinite-scroll-component"
 import Loading from "../Loader/Loading";
+import { Post_skel } from "../Loader/Profile_Skel";
 
 const Feed = () => {
     const [feedPosts, setFeedPosts] = useState([]);
@@ -400,7 +401,7 @@ const Feed = () => {
                             );
                         }) :
 
-                        ""
+                        <Post_skel/>
                         
                         // !feedPosts?
                         // <div onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 dark:bg-gray-900 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >

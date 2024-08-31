@@ -11,6 +11,7 @@ import { FaTag } from "react-icons/fa";
 import getPerson from "../../utils/getPerson";
 import getCookie from "../../utils/getCookie";
 import "./people.css"
+import { People_skel } from "../Loader/Profile_Skel";
 const People = () => {
     const [data, setData] = useState([]);
     const [userData, setuData] = useState({});
@@ -54,7 +55,7 @@ const People = () => {
         
             <h1 className="text-6xl  lg:mb-0  mt-24 mb-20 ">People</h1>
             <div className="lg:mt-20 mb-20  lg:w-80 w-3/4 flex flex-col-reverse justify-center items-center bg-white dark:bg-gray-800 dark:text-white h-12/11 overflow-scroll">
-                {data ? data.map((p, i) => {
+                {data && data.length>0 ? data.map((p, i) => {
                     // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
                       <div
@@ -121,17 +122,24 @@ const People = () => {
                         </Link>
                       </div>
                     );
-                }) : 
-                <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
+                }) : <>
+                <People_skel/>
+                <People_skel/>
+                <People_skel/>
+                <People_skel/>
+                </>
+                
+                
+                // <button onClick={()=>navigate('/login')} className=" rounded-2xl bg-gray-100 text-gray-400 w-72 h-72 flex flex-col justify-center items-center" >
 
-                    <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
-                    Something broke
-                    {       
-                        setTimeout(()=>{
-                            toast.error("Failed to load people")
-                        },10)
-                    }
-                </button>
+                //     <BrokenBoneIcon size={100} color="lightgray" className="mb-2"/>
+                //     Something broke
+                //     {       
+                //         setTimeout(()=>{
+                //             toast.error("Failed to load people")
+                //         },10)
+                //     }
+                // </button>
                 }
             </div>
         </div>
