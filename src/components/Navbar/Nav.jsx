@@ -148,7 +148,7 @@ const Nav = () => {
               <Link to={`/profile/${getCookie("socio-user")}/${uid}`}>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row w-full justify-between items-center w-full text-left py-2 text-sm "
                 >
                   <img className="aspect-square rounded-full w-6 h-6 border-3 border-white border-solid mr-2 object-cover" src={getCookie('socio-pf') && getCookie('socio-pf')!="undefined"?`https://lh3.googleusercontent.com/d/${getCookie('socio-pf')}`:"/d-prof.jpg"} alt="Profile" />
                 </button>
