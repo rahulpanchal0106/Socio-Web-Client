@@ -64,7 +64,7 @@ const SignupForm = () => {
       <Nav/>
       <Toaster/>
       <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center" onSubmit={agrees?handleSubmit:didntAgree}>
-        <h1 className="mb-2 px-4 py-2 text-4xl">Sign Up for <i className="text-shadow">Socio</i></h1>
+        <h1 className="mb-2 px-4 py-2 text-4xl">Sign Up on <i className="text-shadow">Socio</i></h1>
         <input
           type="text"
           name="username"
@@ -94,7 +94,7 @@ const SignupForm = () => {
         {isLoading && <div>Loading...</div>}
         {error && <div className="error">{error}</div>}
       </form>
-      <div className="flex flex-row">
+      <div className="flex flex-row mt-10">
         Already Have an Account? <Link className="ml-2 text-shadow" to="/login">Log In</Link>!
       </div>
     </div>

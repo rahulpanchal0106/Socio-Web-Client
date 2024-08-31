@@ -2,10 +2,12 @@ import { AiBrain04Icon, Github01Icon } from "hugeicons-react"
 import "./info.css"
 import { BiSolidHeart } from "react-icons/bi"
 import { FaGithub } from "react-icons/fa"
+import Nav from "../Navbar/Nav"
 
 const Info = ()=>{
     return (
         <div className="w-screen lg:mt-5 mt-5 overflow-y-scroll absolute top-0 right-0 flex flex-col justify-center items-center ">
+            <Nav/>
             <h1 className="text-6xl mb-5">About Socio</h1>
             <h2 className="mb-5"></h2>
             <h1 className="text-4xl mb-5">Key Features</h1>
