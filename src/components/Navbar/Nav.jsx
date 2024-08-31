@@ -5,7 +5,7 @@ import checkAuth from "../../utils/checkAuth";
 import { BiCross, BiDotsHorizontal, BiDotsHorizontalRounded, BiDotsVerticalRounded, BiExit, BiHome, BiListOl, BiListUl, BiLogIn, BiLogInCircle, BiMenu, BiPlus } from "react-icons/bi";
 import getCookie from "../../utils/getCookie";
 import getPerson from "../../utils/getPerson";
-import { Menu01Icon, Menu06Icon, MenuCircleIcon, MenuSquareIcon, Moon01Icon, Moon02Icon, MoonAngledRainZapIcon, NextIcon, StartUp02Icon, Sun01Icon, Sun02Icon, UserSettings02Icon } from "hugeicons-react";
+import { DoorIcon, InformationCircleIcon, Menu01Icon, Menu06Icon, MenuCircleIcon, MenuSquareIcon, Moon01Icon, Moon02Icon, MoonAngledRainZapIcon, NextIcon, StartUp02Icon, Sun01Icon, Sun02Icon, UserSettings02Icon } from "hugeicons-react";
 import { GrGlobe, GrHome, GrGroup, GrUserSettings, GrUserAdmin } from "react-icons/gr";
 import feather from 'feather-icons';
 import "./Nav.css";
@@ -211,7 +211,7 @@ const Nav = () => {
                   )}
                 </button>
                 {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                  <div className="absolute right-28 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                     {auth && (
                       <li>
                         <Link to={`/profile/${getCookie("socio-user")}/${uid}`}>
@@ -224,6 +224,11 @@ const Nav = () => {
                         </Link>
                       </li>
                     )}
+                    <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={()=>navigate("/info")} >
+                      <button className="flex flex-row w-full justify-between items-center w-full text-left" >
+                        Info <InformationCircleIcon size={17}/>
+                      </button>
+                    </button>
                     <button
                       onClick={() => {
                         setIsOpen(false);
@@ -233,10 +238,12 @@ const Nav = () => {
                     >
                       {auth ? (
                         <button className="flex flex-row w-full justify-between items-center w-full text-left text-red-600">
-                          Log Out <BiExit size={17} />
+                          Log Out <BiExit size={17} color="red" />
                         </button>
                       ) : (
-                        "Login"
+                        <button className="flex flex-row w-full justify-between items-center w-full text-left text-green-600">
+                          Log In <BiExit size={17} color="green" />
+                        </button>
                       )}
                     </button>
                   </div>

@@ -12,6 +12,7 @@ import ProfilePage from './components/Profile/ProfilePage';
 import getData from './utils/getData';
 import getCookie from './utils/getCookie';
 import '../fonts/WEB/css/chillax.css';
+import Info from './components/Info/Info';
 
 function App() {
     const [username, setUsername] = useState('');
@@ -45,6 +46,10 @@ function App() {
         {
             path: '/profile/:username/:uidTo',
             element: <ProfilePage />,
+        },
+        {
+            path: '/info',
+            element: <Info/>,
         },
     ]);
 

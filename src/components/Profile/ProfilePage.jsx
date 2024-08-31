@@ -352,11 +352,11 @@ const ProfilePage = () => {
                                 {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:<Pff_skel/>}</p>
                             </button>
                             {/* <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{  */}
-                            <ul className="flex flex-col absolute w-full h-full  left-0 bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                            <ul className="flex flex-col absolute w-full h-full  left-0 top-0 bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowing ? "flex" : "none",
                                             // top:"70px",  
                                             // right: window.innerWidth<766?"30%":"100%",
-                                            zIndex:10
+                                            // zIndex:50
                                         }}>
                                 <button onClick={()=>setOpenFollowing(false)} className="absolute right-2" ><GrClose/></button>
                                 <p className="text-xs text-gray-400 py-2 ">Following </p>
