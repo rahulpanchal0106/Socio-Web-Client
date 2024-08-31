@@ -3,12 +3,14 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "../Navbar/Nav";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignupForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [agrees, setAgrees] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -20,6 +22,11 @@ const SignupForm = () => {
     }
   };
 
+  const didntAgree = ()=>{
+    toast.error("You have to agree with the Terms & Conditions to proceed further");
+    return;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,19 +34,29 @@ const SignupForm = () => {
     setError(null);
 
     try {
+      toast.loading("Signing you up");
       const data = await fetchData(url + "/signup", {"username":username,"password":password}, 'POST');
-      navigate('/login');
+      toast.dismiss()
+      // const resp = await data.json();
+      data.status<300?toast.success("Sign up suceesfull"):toast.error(data.message==11000?`username ${username} already exists`:"Faild to signup")
+      
     } catch (error) {
+      toast.error(error.message||"Signup failed")
       setError(error.message);
     } finally {
       setIsLoading(false);
     }
+
+    setTimeout(()=>{
+      navigate(error?'/login':'/signup');
+    },1000)
   };
 
   return (
     <div className="bg-yellow-200 dark:bg-gray-600 dark:text-white flex flex-col w-full h-screen justify-center items-center">
       <Nav/>
-      <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+      <Toaster/>
+      <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center" onSubmit={agrees?handleSubmit:didntAgree}>
         <h1 className="mb-2 px-4 py-2 text-4xl">Sign Up for <i className="text-shadow">Socio</i></h1>
         <input
           type="text"
@@ -57,7 +74,14 @@ const SignupForm = () => {
           placeholder="Password"
           required
         />
-        <button type="submit" className="bg-pink-200 dark:bg-slate-900 dark:hover:bg-slate-600 px-4 py-2 rounded-lg hover:bg-pink-400 transition-all duration-300">
+
+          <div className="flex items-center my-5">
+            <input id="link-checkbox" type="checkbox" value="" className="w-4 h-4 text-slate-600 bg-gray-100 border-gray-300 rounded focus:ring-slate-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-700 dark:border-slate-600 " onClick={()=>setAgrees(!agrees)}  />
+            <label htmlFor="link-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="/t&c.pdf" className="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
+          </div>
+        <button type={agrees?"submit":"none"}  style={{
+          background:agrees?"":"",
+        }}  className="bg-pink-200 dark:bg-slate-900 dark:hover:bg-slate-600 px-4 py-2 rounded-lg hover:bg-pink-400 transition-all duration-300">
           Sign Up
         </button>
         {isLoading && <div>Loading...</div>}
