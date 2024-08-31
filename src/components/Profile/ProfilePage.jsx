@@ -325,19 +325,20 @@ const ProfilePage = () => {
                                 
                                 }</p>
                             </button>
-                            <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                            <ul className="flex flex-col absolute w-full h-full  left-0 top-0 bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowers ? "flex" : "none",
-                                            top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%"
+                                            // top:"70px",  
+                                            // right: window.innerWidth<766?"30%":"100%"
                                         }}>
                                 <p className="text-xs text-gray-400 py-2 ">Followed by </p>
                                 <button onClick={()=>setOpenFollowers(false)} className="absolute right-2" ><GrClose/></button>
-                                <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
+                                {/* <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div> */}
                                 <div className="max-h-50 overflow-y-scroll">
                                     {openFollowers && profile_data.followers.length > 0 ? profile_data.followers.map((el, i) => (
                                         <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>
-                                            <Link to={`/profile/${el.username}/${el.uid}`}>
-                                                @ {el.username}    
+                                            <Link to={`/profile/${el.username}/${el.uid}`} className="flex flex-row justify-start items-center">
+                                                <img className="rounded-full w-8 h-8 mr-2 overflow-hidden border border-solid border-gray-400 object-cover" src={el.profilePicture?`https://lh3.googleusercontent.com/d/${el.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                                                {el.username}    
                                             </Link>
                                         </li>
                                     )) : <p className="px-1 py-2" >No one :(</p>}
@@ -350,20 +351,22 @@ const ProfilePage = () => {
                             }}>
                                 {profile_data.following&&profile_data.following.length>1?"Followings":"Following"} <p className="text-xl" >{profile_data.following?profile_data.following.length:<Pff_skel/>}</p>
                             </button>
-                            <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
+                            {/* <ul className="flex flex-col absolute w-40  right-full bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{  */}
+                            <ul className="flex flex-col absolute w-full h-full  left-0 bg-white dark:bg-gray-600 dark:text-white px-4 py-2 rounded-lg drop-shadow-lg  " style={{ 
                                             display: openFollowing ? "flex" : "none",
-                                            top:"70px",  
-                                            right: window.innerWidth<766?"30%":"100%",
+                                            // top:"70px",  
+                                            // right: window.innerWidth<766?"30%":"100%",
                                             zIndex:10
                                         }}>
                                 <button onClick={()=>setOpenFollowing(false)} className="absolute right-2" ><GrClose/></button>
                                 <p className="text-xs text-gray-400 py-2 ">Following </p>
-                                <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div>
+                                {/* <div className="absolute top-12" style={{ right: "-10px" }}><BiSolidRightArrow color="white" /></div> */}
                                 <div className="max-h-50 overflow-y-scroll">
                                     {openFollowing && profile_data.following.length > 0 ? profile_data.following.map((el, i) => (
                                         <li className="rounded-lg mb-2 px-4 py-2 bg-gray-200 dark:bg-gray-600 dark:text-white" key={i}>
-                                            <Link to={`/profile/${el.username}/${el.uid}`}>
-                                                @ {el.username}    
+                                            <Link to={`/profile/${el.username}/${el.uid}`} className="flex flex-row justify-start items-center">
+                                                <img className="rounded-full w-8 h-8 mr-2 overflow-hidden border border-solid border-gray-400 object-cover" src={el.profilePicture?`https://lh3.googleusercontent.com/d/${el.profilePicture}`:"/d-prof.jpg"} alt="Profile" />
+                                                {el.username}    
                                             </Link>
                                         </li>
                                     )) : <p className="px-1 py-2" >No one :(</p>}
