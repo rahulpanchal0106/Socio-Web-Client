@@ -82,10 +82,30 @@ const SignupForm = () => {
           required
         />
 
-          <div className="flex items-center my-5">
-            <input id="link-checkbox" type="checkbox" value="" className="w-4 h-4 text-slate-600 bg-gray-100 border-gray-300 rounded focus:ring-slate-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-700 dark:border-slate-600 " onClick={()=>setAgrees(!agrees)}  />
-            <label htmlFor="link-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="/t&c.pdf" className="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
-          </div>
+        <div className="flex items-center my-5 w-screen justify-center">
+          <input
+            id="link-checkbox"
+            type="checkbox"
+            value=""
+            className="w-4 h-4 text-blue-600 bg-blue-100 border-blue-300 rounded focus:ring-slate-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600"
+            onClick={() => setAgrees(!agrees)}
+          />
+          <label
+            htmlFor="link-checkbox"
+            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            I agree with the{" "}
+            <a
+              href="/t&c.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 dark:text-blue-500 hover:underline"
+            >
+              terms and conditions
+            </a>.
+          </label>
+        </div>
+
         <button type={agrees?"submit":"none"}  style={{
           background:agrees?"":"",
         }}  className="bg-pink-200 dark:bg-slate-900 dark:hover:bg-slate-600 px-4 py-2 rounded-lg hover:bg-pink-400 transition-all duration-300">
