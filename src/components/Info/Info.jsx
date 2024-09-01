@@ -1,6 +1,6 @@
 import { AiBrain04Icon, Github01Icon } from "hugeicons-react"
 import "./info.css"
-import { BiSolidHeart } from "react-icons/bi"
+import { BiRightArrow, BiSolidHeart } from "react-icons/bi"
 import { FaGithub } from "react-icons/fa"
 import Nav from "../Navbar/Nav"
 
@@ -8,16 +8,26 @@ const Info = ()=>{
     return (
         <div className="w-screen lg:mt-5 mt-5 overflow-y-scroll absolute top-0 right-0 flex flex-col justify-center items-center ">
             <Nav/>
-            <h1 className="text-6xl mb-5">About Socio</h1>
-            <h2 className="mb-5"></h2>
-            <h1 className="text-4xl mb-5">Key Features</h1>
+            <h1 className="text-6xl lg:mb-10 mb-20 mt-24">About Socio</h1>
+            <div className="w-full px-5 lg:p-0 lg:w-1/2 text-xs flex flex-col justify-center items-top my-10">
+                <p className="w-full text-sm flex flex-row justify-center items-center">
+                    - In simple words, Socio is an AI powered social media platform. 
+                    <br/>
+                    <br/>
+                    - It is a platform where the user will see what they actually like to see.
+                    <br/>
+                    - The powerful people recommendation system introduces the user with other people who has similar interests, who are more likely to be Friends.
+                </p>
+            </div>  
+            {/* <h2 className="mb-5"></h2> */}
+            <h1 className="text-2xl mb-5">Curious about how this works?</h1>
             <ul className="w-1/2 list-disc" >
                 <li className="flex lg:flex-row flex-col w-full h-fit justify-center items-start py-2">
                     <b className="text-md lg:mt-0 mt-3">
                        AI Powered Categorization
                     </b>
                     <p className="text-5xl lg:mx-5 lg:my-0 mx-0 my-0 ">
-                        -
+                        
                     </p>
                     <p className="text-sm"> 
                         Gemini detects the Category or Emotion of the post being made and tags them with it, Which is used to identify user's interests.
@@ -92,7 +102,10 @@ const Info = ()=>{
             </ul>
             <div className="w-full text-xs flex flex-col justify-center items-top my-10">
                 <p className="w-full text-xs flex flex-row justify-center items-center">
-                    Made with <BiSolidHeart color="red" className="mx-1" />  by <a href="https://github.com/rahulpanchal0106" className="px-1 text-blue-500" >me</a> and <a className="px-1 text-blue-500" href="https://github.com/rahulpanchal0106/Socio-Web-Client/graphs/contributors">contributors</a>
+                    Made with <BiSolidHeart color="red" className="mx-1" /> by 
+                    <a href="https://github.com/rahulpanchal0106" className="px-1 text-blue-500" rel="noopener noreferrer" target="_blank">rho</a> 
+                    and <a className="px-1 text-blue-500" href="https://github.com/rahulpanchal0106/Socio-Web-Client/graphs/contributors" rel="noopener noreferrer" target="_blank">contributors</a>
+
                 </p>
                 <div className="w-full text-xs flex flex-row justify-center items-center my-5">
                     <a href="https://github.com/rahulpanchal0106/Socio-Web-Client"><FaGithub size={17}/></a>

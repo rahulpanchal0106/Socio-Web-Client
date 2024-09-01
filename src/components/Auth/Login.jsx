@@ -7,6 +7,7 @@ import Nav from "../Navbar/Nav";
 import GetToast from "../Toast";
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from "../Loader/Loading";
+import { BiInfoCircle } from "react-icons/bi";
 
 
 const Login=()=>{
@@ -62,6 +63,10 @@ const Login=()=>{
         <div className="bg-yellow-200 dark:bg-gray-600 dark:text-white flex flex-col w-full h-screen justify-center items-center">
             <Nav/>
             <Toaster/>
+            <p className="text-xs flex flex-row items-center justify-center ">
+                <BiInfoCircle className="mr-1" size={17}/> Checkout the <Link to="/info" className="hover:text-blue-500 underline mx-1">Info Page</Link> for a detailed overview of Socio.
+            </p>
+
             <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center">
             <h1 className="mb-2 px-4 py-2 text-4xl">Log in to <i className="text-shadow">Socio</i></h1>
                 <input type="text" className="input mb-2 px-4 py-2 rounded-lg dark:text-black" onChange={handleInput} placeholder="Username" />
@@ -69,6 +74,7 @@ const Login=()=>{
                 <button type="submit" className="bg-pink-200 dark:bg-slate-900 px-4 py-2 rounded-lg dark:hover:bg-slate-800 hover:bg-pink-400 transition-all duration-300" onClick={handleSubmit}>Login</button> {isLoading?<Loading/>:""}
             </form>  
 
+            
             <div className="flex flex-row">
                 Are you new to this? <Link className="ml-2 text-shadow" to="/signup">Sign Up</Link>!
 
