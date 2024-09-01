@@ -64,7 +64,7 @@ const Login=()=>{
             <Nav/>
             <Toaster/>
             <p className="text-xs flex flex-row items-center justify-center ">
-                <BiInfoCircle className="mr-1" size={17}/> Checkout the <Link to="/info" className="hover:text-blue-500 underline mx-1">Info Page</Link> for a detailed overview of Socio.
+                <BiInfoCircle className="mr-1" size={17}/> Check out the <Link to="/info" className="hover:text-blue-500 underline mx-1">Info Page</Link> for a detailed overview of Socio.
             </p>
 
             <form className="w-1/2 h-1/2 px-10 py-5 flex flex-col justify-center items-center">

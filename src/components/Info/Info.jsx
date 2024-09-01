@@ -8,7 +8,7 @@ const Info = ()=>{
     return (
         <div className="w-screen lg:mt-5 mt-5 overflow-y-scroll absolute top-0 right-0 flex flex-col justify-center items-center ">
             <Nav/>
-            <h1 className="text-6xl lg:mb-10 mb-20 mt-24">About Socio</h1>
+            <h1 className="text-6xl lg:mb-10 mb-20 mt-24">About</h1>
             <div className="w-full px-10 lg:p-0 lg:w-1/2 text-xs flex flex-col justify-center items-top my-10">
                 <p className="w-full text-sm flex flex-row justify-center items-center">
                     - In simple words, Socio is an AI powered social media platform. 
@@ -74,7 +74,7 @@ const Info = ()=>{
                         -
                     </p>
                     <p className="text-sm lg:mb-0 mb-10"> 
-                        The platform is connnected to a 15GB of google drive storage, and is capable of storing and delivering high quality data. For both Profile Pictures and Post Images.
+                        The platform is connnected with a 15GB of google drive storage, and is capable of storing and delivering high quality image data. For both Profile Pictures and image Posts.
                     </p>
                 </li>
                 <li className="flex lg:flex-row flex-col w-full h-fit justify-center items-start py-2">
@@ -107,11 +107,13 @@ const Info = ()=>{
                         -
                     </p>
                     <p className="text-sm lg:mb-0 mb-10"> 
-                        If you are that nerd who really wants to know how it works, do checkout the GitHub repositories. 
+                        If you're that nerd who really wants to know and tweak how it works, do check out the GitHub repositories. 
                         <br />
                         - <a className="text-blue-500" target="_blank" href="https://github.com/rahulpanchal0106/Socio-Web-Client">Front-end</a>
                         <br />
                         - <a className="text-blue-500" target="_blank" href="https://github.com/rahulpanchal0106/Socio-server">Back-end</a>
+                        <br />
+                        PRs are welcomed!
 
                     </p>
                 </li>
