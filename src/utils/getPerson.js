@@ -3,7 +3,7 @@ import url from "./url"
 
 const getPerson= async (username)=>{
     const person = await fetchData(url+"/person",{username:username},'POST');
-    console.log("FETCHED PERSON DATA: ",person);
+    // console.log("FETCHED PERSON DATA: ",person);
 
     return person;
 }

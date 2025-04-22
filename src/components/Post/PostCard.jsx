@@ -44,7 +44,7 @@ const PostCard = ()=>{
     
     const getData = async () => {
         const data = await fetchData(url + "/feed", null, 'GET');
-        console.log(data);
+        // console.log(data);
         setFeedPosts(data);
     };
     
@@ -52,7 +52,7 @@ const PostCard = ()=>{
         getData();
         const fetchUserData = async () => {
             const user = await getUserData();
-            console.log("🔴💥💥💥💥 ", user);
+            // console.log("🔴💥💥💥💥 ", user);
             setUserData(user);
             return user;
         };
@@ -61,7 +61,7 @@ const PostCard = ()=>{
     
     const handleCommentChange = (e) => {
         setComment(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
     
     const handleDel = async (postId) => {
@@ -71,7 +71,7 @@ const PostCard = ()=>{
     
     const handleLike = async (postId) => {
         const resp = await LikePost(postId);
-        console.log("🐸🐸🐸 ", resp);
+        // console.log("🐸🐸🐸 ", resp);
         getData();
     };
     
@@ -126,7 +126,7 @@ const PostCard = ()=>{
                             }
                             const openPostLike = openPostLikeStates[post._id] || false;
                             const showPostComments = showComments[post._id] || false;
-                                console.log("))))))))))0 ",post)
+                                // console.log("))))))))))0 ",post)
                                 return(
                                     <div key={i} className="post bg-gray-100 mb-4 rounded-lg px-4 py-2 drop-shadow-lg" style={{width:"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
@@ -188,7 +188,7 @@ const PostCard = ()=>{
                                         
                                         {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                             const openCLike = openCLikeStates[el.comment_id] || false;
-                                            console.log(el);
+                                            // console.log(el);
                                             const cisLiked = el.likedBy.some(like => like.username === userData.username);
                                             
                                             const handleCLike = async (e) => {

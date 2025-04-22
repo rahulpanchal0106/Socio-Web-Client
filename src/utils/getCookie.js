@@ -14,7 +14,7 @@ const getCookie = (cname)=>{
         }
         if (c.indexOf(name) == 0) {
         const final_token=c.substring(name.length, c.length);
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ",final_token)
+        // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ",final_token)
         return final_token;
         }
     }

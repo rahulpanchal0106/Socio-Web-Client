@@ -63,7 +63,7 @@ const Post = () => {
         };
 
         const resp = await fetchData(url + '/post', body, 'POST');
-        console.log(resp);
+        // console.log(resp);
         navigate('/feed'); // Navigate to the feed after submitting the post
     };
 

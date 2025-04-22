@@ -14,7 +14,7 @@ function FileUpload({username,src}) {
   const [cookies,setCookie] = useCookies(['socio-pf'])
   const [previewUrl, setPreviewUrl] = useState();
 
-  console.log(")))))))))))))))) 000000000000",username)
+  // console.log(")))))))))))))))) 000000000000",username)
   // Handle file selection
   const handleFileChange = (event) => {
     event.preventDefault();
@@ -70,7 +70,7 @@ function FileUpload({username,src}) {
       toast.dismiss()
       setTimeout(()=>toast.success("Profile Picture Uploaded"),100)
       setUploadStatus('File uploaded successfully!');
-      console.log('File uploaded:', data);
+      // console.log('File uploaded:', data);
       setCookie('socio-pf',data.data.id)
     } catch (error) {
       console.error('Error uploading file:', error);

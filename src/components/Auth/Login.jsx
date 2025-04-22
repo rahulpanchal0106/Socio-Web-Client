@@ -17,32 +17,32 @@ const Login=()=>{
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const handleInput=(e)=>{
-        console.log(e.target.value);
+        // // console.log(e.target.value);
         setUname(e.target.value);
     }
 
     const handlePassword = (e)=>{
-        console.log(e.target.value);
+        // // console.log(e.target.value);
         setPassword(e.target.value);
     }
 
     const handleSubmit=async (e)=>{
         e.preventDefault();
-        // console.log("OOOOOOOOOOOOOOOO",url)
+        // // console.log("OOOOOOOOOOOOOOOO",url)
         setIsLoading(true)
         toast.loading("Checking Credntials");
         const data = await fetchData(url+"/login",{"username":uname,"password":password},'POST').catch((e)=>{
             alert("Error Logging in, ",e)
             setIsLoading(false)
         });
-        console.log("*********** ",data)
-        // console.log("PPPPPPPPPPPPPP ",data)
+        // // console.log("*********** ",data)
+        // // console.log("PPPPPPPPPPPPPP ",data)
         const token = data?data.token:null;
         setCookie('sociotoken',token);
         setCookie('socio-user',uname)
         toast.dismiss()
         if(token){
-            // console.log("**********************************")
+            // // console.log("**********************************")
             // window.location.reload()
             toast.success("You are logged in!",data)
         }else{

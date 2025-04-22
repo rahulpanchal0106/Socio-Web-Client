@@ -30,7 +30,7 @@ const Home=()=>{
     
     useEffect(()=>{
         if(checkAuth()==true){
-            console.log("IS AUTHENTIC!!!!!!!!")
+            // console.log("IS AUTHENTIC!!!!!!!!")
             setAuth(true);
         }else{
             setAuth(false)

@@ -80,7 +80,7 @@ const ProfilePage = () => {
         setPIsLoading(true);
         const data = await fetchData(url + "/feed", null, 'GET');
         setPIsLoading(false);
-        console.log(data);
+        // console.log(data);
         setFeedPosts(data);
         getMyData()
     };
@@ -89,7 +89,7 @@ const ProfilePage = () => {
         getData();
         const fetchUserData = async () => {
             const user = await getUserData();
-            console.log("🔴💥💥💥💥 ", user);
+            // console.log("🔴💥💥💥💥 ", user);
             setUserData(user);
             return user;
         };
@@ -98,7 +98,7 @@ const ProfilePage = () => {
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
 
     const handleDel = async (postId) => {
@@ -106,14 +106,14 @@ const ProfilePage = () => {
         getMyData();
     };
     const handleDelPermenently = async (postId) => {
-        console.log("♨️♨️♨️♨️ Deleting post permenently")
+        // console.log("♨️♨️♨️♨️ Deleting post permenently")
         await DelPerm(postId);
         getMyData();
     };
 
     const handleLike = async (postId) => {
         const resp = await LikePost(postId);
-        console.log("🐸🐸🐸 ", resp);
+        // console.log("🐸🐸🐸 ", resp);
         getMyData();
     };
 
@@ -140,9 +140,9 @@ const ProfilePage = () => {
 
     const getMyData = async () => {
         const resp = await fetchData(url + '/person', { username: username }, 'POST');
-        console.log("🟡🟡🟡🟡🟡🟡 RESP ", resp, username);
+        // console.log("🟡🟡🟡🟡🟡🟡 RESP ", resp, username);
         setProfileData(resp)
-        // res&&(res.followers.length>0)&&(res.followers)?()=>setFollowers(res.followers.length):console.log("NO FOLLOWER PRM")
+        // res&&(res.followers.length>0)&&(res.followers)?()=>setFollowers(res.followers.length):// console.log("NO FOLLOWER PRM")
         const resp1 = await fetchData(url+'/myPosts',{username:username}, 'POST');
         setMyPosts(resp1);
         var resp2=[];
@@ -445,7 +445,7 @@ const ProfilePage = () => {
                             }
                             const openPostLike = openPostLikeStates[post._id] || false;
                             const showPostComments = showComments[post._id] || false;
-                                // console.log("))))))))))0 ",post)
+                                // // console.log("))))))))))0 ",post)
                                 return(
                                     <div key={i} className="post bg-gray-100 dark:bg-gray-900 mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                     <div className="top-bar author flex flex-row justify-between items-center">
@@ -536,7 +536,7 @@ const ProfilePage = () => {
                                         
                                         {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                             const openCLike = openCLikeStates[el.comment_id] || false;
-                                            console.log(el);
+                                            // console.log(el);
                                             const cisLiked = el.likedBy.some(like => like.username === userData.username);
                                             
                                             const handleCLike = async (e) => {
@@ -551,7 +551,7 @@ const ProfilePage = () => {
                                                 getData();
                                             }
 
-                                            console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
+                                            // console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
 
                                             return (
                                                 <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-800 w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>
@@ -647,7 +647,7 @@ const ProfilePage = () => {
                                 }
                                 const openPostLike = openPostLikeStates[post._id] || false;
                                 const showPostComments = showComments[post._id] || false;
-                                    // console.log("))))))))))0 ",post)
+                                    // // console.log("))))))))))0 ",post)
                                     return(
                                         <div key={i} className="post bg-gray-100 dark:bg-gray-900 dark:text-white mb-4 rounded-lg px-4 py-2 drop-shadow-lg " style={{width:window.innerWidth<766?"343px":"432px"}}>
                                         <div className="top-bar author flex flex-row justify-between items-center">
@@ -740,7 +740,7 @@ const ProfilePage = () => {
                                             
                                             {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                                 const openCLike = openCLikeStates[el.comment_id] || false;
-                                                console.log(el);
+                                                // console.log(el);
                                                 const cisLiked = el.likedBy.some(like => like.username === userData.username);
                                                 
                                                 const handleCLike = async (e) => {

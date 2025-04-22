@@ -59,11 +59,11 @@ const Feed = () => {
         const data = await fetchData(url + `/feed?limit=${limit}&offset=${offset}`, null, 'GET');
         setFeedLoading(false)
         // toast.dismiss()
-        console.log(data);
+        // // console.log(data);
         
         setFeedPosts(prevPosts => [...prevPosts, ...data.paginatedFeed]);
         setTotal(data.total);
-        console.log("HASMORE!!! ",hasMore)
+        // // console.log("HASMORE!!! ",hasMore)
         if(data.paginatedFeed.length < limit){
             setHasMore(false)
         }else{
@@ -72,7 +72,7 @@ const Feed = () => {
     };
     const fetchUserData = async () => {
         const user = await getUserData();
-        console.log("🔴💥💥💥💥 ", user);
+        // // console.log("🔴💥💥💥💥 ", user);
         setUserData(user);
         return user;
     };
@@ -99,7 +99,7 @@ const Feed = () => {
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
 
     const handleDel = async (postId) => {
@@ -138,9 +138,9 @@ const Feed = () => {
             );
             const resp = await LikePost(postId);
             // isLiked!=isLiked
-            console.log("🐸🐸🐸 ", resp);
+            // console.log("🐸🐸🐸 ", resp);
         }catch(e){
-            console.log("Error liking post, ",e)
+            // console.log("Error liking post, ",e)
         }
         // getData();
     };
@@ -320,7 +320,7 @@ const Feed = () => {
                                         
                                         {post.post.comments && post.post.comments.length > 0 ? post.post.comments.map((el, i) => {
                                             const openCLike = openCLikeStates[el.comment_id] || false;
-                                            console.log(el);
+                                            // console.log(el);
                                             const cisLiked = el.likedBy.some(like => like.username === userData.username);
                                             
                                             const handleCLike = async (e) => {
@@ -335,7 +335,7 @@ const Feed = () => {
                                                 getData();
                                             }
 
-                                            console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
+                                            // console.log("{}}{}{}{{}{}{}{}{}{}{}{} ",el)
 
                                             return (
                                                 <div className="flex flex-col mb-4 drop-shadow-lg bg-white dark:bg-gray-800 w-30 lg:96 px-4 py-4 border border-solid border-gray-200 rounded-xl" key={i}>

@@ -30,7 +30,7 @@ const People = () => {
 
         // const fetchUserData = async () => {
         //     const user = await getData();
-        //     console.log("🔴💥💥💥💥 ", user);
+        //     // console.log("🔴💥💥💥💥 ", user);
         //     setuData(user);
         //     return user;
         // };
@@ -43,7 +43,7 @@ const People = () => {
         fetchUserDoc()
     }, []);
 
-    // console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
+    // // console.log("%^%^^^^^^^^^^^^^^^^^^^^ ", data);
     data&&data.length>0 && (setTimeout(()=>{
             toast.success("People loaded successfully")
         },10)
@@ -56,7 +56,7 @@ const People = () => {
             <h1 className="text-6xl  lg:mb-0  mt-24 mb-20 ">People</h1>
             <div className="lg:mt-20 mb-20  lg:w-80 w-3/4 flex flex-col-reverse justify-center items-center bg-white dark:bg-gray-800 dark:text-white h-12/11 overflow-scroll">
                 {data && data.length>0 ? data.map((p, i) => {
-                    // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
+                    // // console.log("🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡 ", p, " = ", userData);
                     return (
                       <div
                         key={i}

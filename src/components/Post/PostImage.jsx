@@ -61,7 +61,7 @@ function PostImgUpload({ postId }) {
       toast.dismiss();
       toast.success("Image Uploaded");
       setUploadStatus('File uploaded successfully!');
-      console.log('File uploaded:', data);
+      // console.log('File uploaded:', data);
     } catch (error) {
       console.error('Error uploading file:', error);
       toast.dismiss();

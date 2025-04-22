@@ -3,11 +3,11 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 
 const UnLike = async(objid)=>{
-    console.log("💗💗💗💗 ",objid);
+    // console.log("💗💗💗💗 ",objid);
     
     const resp=await fetchData(url+"/like",{"id":objid},'DELETE');
     
-    console.log("UNLIKEUNLIKEUNLIKE ",resp);
+    // console.log("UNLIKEUNLIKEUNLIKE ",resp);
 
     
     return resp;

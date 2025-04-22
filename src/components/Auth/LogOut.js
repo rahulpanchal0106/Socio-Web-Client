@@ -12,7 +12,7 @@ const LogOut = () => {
             removeCookie('sociotoken');
             removeCookie('socio-user');
             removeCookie('socio-pf');
-            console.log("NO TOKEN");
+            // console.log("NO TOKEN");
             navigate("/");
         }
     }, [removeCookie, navigate]);

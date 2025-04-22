@@ -14,7 +14,7 @@ const getData = async () => {
     try {
         const userData = await fetchData(url+'/getData',{token:''},'POST') ;
 
-        console.log("🟢🟢🟢🟢🟢🟢 ",userData);
+        // console.log("🟢🟢🟢🟢🟢🟢 ",userData);
 
         
         return userData.data;

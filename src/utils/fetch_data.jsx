@@ -3,13 +3,13 @@ import getCookie from "./getCookie";
 
 const fetchData = async (url, body, method) => {
     
-    console.log("ZZZZZZZZZZZZ: ", url, "\n", body, "\n", method);
+    // console.log("ZZZZZZZZZZZZ: ", url, "\n", body, "\n", method);
     
     const cookie = getCookie('sociotoken');
 
     !cookie?
-      console.log("Token cookie not found")
-    :console.log("Token cookie found")
+      // console.log("Token cookie not found")
+    :// console.log("Token cookie found")
 
     try {
         const response = await fetch(url, {
@@ -21,7 +21,7 @@ const fetchData = async (url, body, method) => {
             body: method !== 'GET' ? JSON.stringify(body) : null
         });
 
-        console.log(`Response Status: ${response.status} | ${url}`);
+        // console.log(`Response Status: ${response.status} | ${url}`);
         
         
         const feedData = await response.json();
@@ -29,7 +29,7 @@ const fetchData = async (url, body, method) => {
             console.error(`Error: ${response.statusText}`);
             return feedData;
         }
-        console.log("Response Data: ", feedData);
+        // console.log("Response Data: ", feedData);
         
         return feedData;
     } catch (e) {

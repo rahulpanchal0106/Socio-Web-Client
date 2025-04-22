@@ -3,11 +3,11 @@ import fetchData from "../../utils/fetch_data";
 import url from "../../utils/url";
 
 const LikePost = async(objid)=>{
-    console.log("❣️❣️❣️❣️ ",objid);
+    // console.log("❣️❣️❣️❣️ ",objid);
     
     const resp=await fetchData(url+"/post",{"id":objid},'PUT');
     
-    console.log("LIKELIKELIKELIKE ",resp);
+    // console.log("LIKELIKELIKELIKE ",resp);
 
     
     return resp;
